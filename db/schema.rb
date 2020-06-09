@@ -36,49 +36,11 @@ ActiveRecord::Schema.define(version: 2020_06_09_212516) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_categories_on_user_id"
-  end
-
   create_table "games", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_games_on_user_id"
-  end
-
-  create_table "post_categories", force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_post_categories_on_category_id"
-    t.index ["post_id"], name: "index_post_categories_on_post_id"
-  end
-
-  create_table "post_types", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "description_template"
-    t.index ["user_id"], name: "index_post_types_on_user_id"
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.date "date", null: false
-    t.text "description"
-    t.text "given_by"
-    t.bigint "post_type_id", null: false
-    t.string "url"
-    t.boolean "bookmarked", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_type_id"], name: "index_posts_on_post_type_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,10 +58,5 @@ ActiveRecord::Schema.define(version: 2020_06_09_212516) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories", "users"
   add_foreign_key "games", "users"
-  add_foreign_key "post_categories", "categories"
-  add_foreign_key "post_categories", "posts"
-  add_foreign_key "post_types", "users"
-  add_foreign_key "posts", "post_types"
 end

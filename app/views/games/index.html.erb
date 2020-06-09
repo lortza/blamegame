@@ -1,0 +1,9 @@
+<% content_for(:title, "Games") %>
+
+<%#= render partial: 'shared/filter_form', locals: { destination_url: games_path } %>
+
+<% @games.each do |game| %>
+  <%= render partial: 'game', locals: { game: game } %>
+<% end %>
+
+<%#= will_paginate @games, :page_links => false %>
