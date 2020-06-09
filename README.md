@@ -1,8 +1,8 @@
 # Starter App
 
-[![CircleCI](https://circleci.com/gh/lortza/starter_app.svg?style=svg)](https://circleci.com/gh/lortza/starter_app)
+[![CircleCI](https://circleci.com/gh/lortza/voting_game.svg?style=svg)](https://circleci.com/gh/lortza/voting_game)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/5900dd05417f73a806a7/maintainability)](https://codeclimate.com/github/lortza/starter_app/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5900dd05417f73a806a7/maintainability)](https://codeclimate.com/github/lortza/voting_game/maintainability)
 
 Description TBD
 

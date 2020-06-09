@@ -7,7 +7,7 @@ module ApplicationHelper
     if content_for?(:title)
       content_for(:title)
     else
-      'StarterApp'
+      'VotingGame'
     end
   end
 
