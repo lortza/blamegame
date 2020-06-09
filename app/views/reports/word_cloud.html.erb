@@ -1,6 +1,0 @@
-<h1>Word Cloud</h1>
-<%= render partial: 'shared/filter_form', locals: { destination_url: word_cloud_path } %>
-
-<% @words.each do |word, count| %>
-  <span style="<%= styler(count) %>"><%= word %></span>
-<% end %>
