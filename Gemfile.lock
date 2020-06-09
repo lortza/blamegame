@@ -1,14 +1,14 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 74e27ffa31bc0bf07c44324e2f95506904e3c015
+  revision: db80858dd048a51bf575d181d8e011ec89e8c7b3
   branch: master
   specs:
-    faker (2.12.0)
+    faker (2.11.0)
       i18n (>= 1.6, < 2)
 
 GIT
   remote: https://github.com/rspec/rspec-core.git
-  revision: ceecf78ccc338c5e1248871c4956ac8717b2b5fb
+  revision: 9f55fafe62ea367a4801ebed2ca19cf6dfdceb39
   branch: master
   specs:
     rspec-core (3.10.0.pre)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-expectations.git
-  revision: eb1787f0e1a5ec2c2650048ee60a45d4c9738d78
+  revision: a7205975dcda3f53466ba5952f7dec8ac452e18c
   branch: master
   specs:
     rspec-expectations (3.10.0.pre)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-rails.git
-  revision: 71c43641759b41ec26e7e8b85d285c20f1eabb14
+  revision: 631a226679f1b5810bdb577626e5af1ce08bec39
   branch: master
   specs:
     rspec-rails (4.1.0.pre)
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-support.git
-  revision: 70fac14799fd32484a96dca10be4b1cb0d7b2a61
+  revision: 6553911974ee93855008f8ff41c26cea6652d74d
   branch: master
   specs:
     rspec-support (3.10.0.pre)
@@ -147,7 +147,7 @@ GEM
     byebug (11.1.3)
     childprocess (3.0.0)
     choice (0.2.0)
-    coderay (1.1.3)
+    coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (5.0.0)
@@ -184,10 +184,10 @@ GEM
       railties (>= 4.2.0)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.13.0)
-    ffi (1.13.0-java)
-    ffi (1.13.0-x64-mingw32)
-    ffi (1.13.0-x86-mingw32)
+    ffi (1.12.2)
+    ffi (1.12.2-java)
+    ffi (1.12.2-x64-mingw32)
+    ffi (1.12.2-x86-mingw32)
     flay (2.12.1)
       erubis (~> 2.7.0)
       path_expander (~> 1.0)
@@ -199,7 +199,7 @@ GEM
       sexp_processor (~> 4.8)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.8.3)
+    i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     image_processing (1.11.0)
@@ -322,28 +322,26 @@ GEM
       parser (>= 2.5.0.0, < 2.8, != 2.5.1.1)
       psych (~> 3.1.0)
       rainbow (>= 2.0, < 4.0)
-    regexp_parser (1.7.1)
-    responders (3.0.1)
+    responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
-    rubocop (0.85.1)
+    rubocop (0.84.0)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.7)
       rexml
       rubocop-ast (>= 0.0.3)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-ast (0.0.3)
       parser (>= 2.7.0.1)
-    rubocop-performance (1.6.1)
+    rubocop-performance (1.6.0)
       rubocop (>= 0.71.0)
-    rubocop-rails (2.6.0)
-      activesupport (>= 4.2.0)
+    rubocop-rails (2.5.2)
+      activesupport
       rack (>= 1.1)
-      rubocop (>= 0.82.0)
+      rubocop (>= 0.72.0)
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.10.1)
@@ -370,9 +368,9 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.4.0)
+    sassc (2.3.0)
       ffi (~> 1.9)
-    sassc (2.4.0-x64-mingw32)
+    sassc (2.3.0-x64-mingw32)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
@@ -398,7 +396,7 @@ GEM
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
-    sprockets (4.0.2)
+    sprockets (4.0.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -430,7 +428,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (4.4.1)
+    webdrivers (4.3.0)
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (>= 3.0, < 4.0)

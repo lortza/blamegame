@@ -1,0 +1,72 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <%= render 'shared/errors', object: post %>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_field :date, class: 'form-control' %>
+  </div>
+
+  <div class='row'>
+    <div class='col-10'>
+      <div class="field">
+        <%= form.label :post_type_id %>
+        <%= form.collection_select :post_type_id, current_user.post_types.by_name, :id, :name, {}, class: 'form-control' %>
+      </div>
+    </div>
+    <div class='col-2'>
+      <div class="field">
+        <%= form.label :bookmarked %>
+        <%= form.check_box :bookmarked, class: 'form-control' %>
+      </div>
+    </div>
+  </div><!-- row -->
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: '10', class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <% if post.image.attached? %>
+      <p>
+        <%= image_tag(post.image.variant(resize_to_limit: [75, 75])) %><br>
+        <%= post.image.filename %>
+      </p>
+      <div class='form-check'>
+        <%= form.check_box :remove_attached_image, class: 'form-check-input' %>
+        <%= form.label 'Check to remove attached image', class: 'form-check-label' %>
+      </div>
+    <% end %>
+    <%= form.file_field :image, class: 'mt-2 file-field' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :with_people %>
+    <%= form.text_field :with_people, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Related Info URL' %>
+    <%= form.text_field :url, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Categories' %>
+    <%= form.collection_check_boxes :category_ids, current_user.categories.by_name, :id, :name do |r| %>
+      <div class='form-check'>
+        <%= r.check_box class: 'form-check-input' %>
+        <%= r.label class: 'form-check-label' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions mt-5">
+    <%= form.submit class: button_class %>
+  </div>
+<% end %>
+
+
+<script type='text/javascript'>
+  populateTemplate();
+</script>

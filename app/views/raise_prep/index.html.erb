@@ -1,0 +1,14 @@
+<% content_for(:title, "Raise Prep") %>
+<%= link_to 'New Post', new_post_path, class: button_class('primary float-right') %>
+
+<h1>Raise Prep</h1>
+
+<% Category.all.each do |category| %>
+  <h3><%= category.name %></h3>
+
+  <% category.posts.in_last_calendar_year.for_merit_and_praise.each do |post| %>
+    <%= render partial: 'posts/post', locals: { post: post } %>
+  <% end %>
+<% end %>
+
+<%#= will_paginate @posts, :page_links => false %>

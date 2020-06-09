@@ -1,0 +1,12 @@
+<%= form_with(model: category, local: true) do |form| %>
+  <%= render 'shared/errors', object: category %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: button_class('primary mt-3') %>
+  </div>
+<% end %>

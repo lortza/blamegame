@@ -1,0 +1,26 @@
+<% content_for(:title, "Post Types") %>
+
+<%= link_to 'New Post Type', new_post_type_path, class: button_class('primary float-right') %>
+
+<h1>Post Types</h1>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style='text-align: center;'>Has Template?</th>
+      <th colspan="2">Manage</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @post_types.each do |post_type| %>
+      <tr>
+        <td><%= link_to post_type.name, post_type %></td>
+        <td style='text-align: center;'><%= template?(post_type) %></td>
+        <td><%= link_to 'Edit', edit_post_type_path(post_type) %></td>
+        <td><%= link_to 'Delete', post_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

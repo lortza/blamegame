@@ -1,0 +1,9 @@
+<% content_for(:title, "Celebrations") %>
+<h1>Happy New Year's Eve!</h1>
+<p>Remember and celebrate all of the good things we've experienced over the past year.</p>
+
+<% @celebrations.each do |celebration| %>
+  <%= render partial: 'posts/post', locals: { post: celebration } %>
+<% end %>
+
+<%= will_paginate @celebrations, :page_links => false %>

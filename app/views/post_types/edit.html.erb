@@ -1,0 +1,8 @@
+<% content_for(:title, "Edit #{@post_type.name}") %>
+
+<h1>Editing Post Type</h1>
+
+<%= render 'form', post_type: @post_type %>
+
+<%= link_to 'Show', @post_type %> |
+<%= link_to 'Back', post_types_path %>
