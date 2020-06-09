@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# run command: lint
+
+echo '==== RUNNING RSPEC ====='
+bundle exec rspec
+
+echo '==== RUNNING RUBOCOP ====='
+bundle exec rubocop -a
+
+echo '==== RUNNING CSS LINT ====='
+bundle exec scss-lint app/assets/stylesheets/**.scss --exclude app/assets/stylesheets/coderay.scss
+
+echo 'DONE'

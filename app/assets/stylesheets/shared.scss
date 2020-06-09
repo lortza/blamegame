@@ -1,0 +1,103 @@
+@import 'variables';
+
+.right { float: right; }
+
+.footer--delete {
+  border-top: 1px solid $gray;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.image {
+  max-width: 600px;
+  width: 100%;
+}
+
+.environment-banner {
+  color: $white;
+  font-family: monospace;
+  font-size: 1.25em;
+  padding: .75em;
+  text-align: center;
+}
+
+// Links
+a { color: $link-color; }
+
+
+// Forms
+.field {
+  label {
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 1rem;
+  }
+
+  .form-check-label {
+    font-weight: normal;
+    margin-top: 0;
+  }
+}
+
+.file-field { color: $medium-gray; }
+
+
+// SEARCH BAR
+.search-icon {
+  color: $medium-gray;
+  float: right;
+  position: relative;
+  right: 14px;
+  top: 25px;
+}
+
+.clear-search {
+  font-size: 90%;
+  margin-bottom: 2em;
+  text-align: center;
+  a { color: $medium-gray; }
+}
+
+.brand-image {
+  height: 25px;
+}
+
+
+// BOOTSTRAP OVERRIDES
+.card {
+  // height: $card-height;
+  .card-img-top {
+    background-color: $gray;
+    height: $card-image-height;
+  }
+}
+
+.card-title {
+  color: $gray;
+  font-style: italic;
+}
+
+.btn-xs {
+  font-size: .4em;
+  padding: 1px 4px;
+}
+
+.dropdown-menu {
+  .gratitude-nav-item {
+    &:hover {background-color: lighten($gratitude, 70%);}
+  }
+
+  .praise-nav-item {
+    &:hover {background-color: lighten($praise, 30%);}
+  }
+
+  .til-nav-item {
+    &:hover {background-color: lighten($til, 20%);}
+  }
+
+  .merit-nav-item,
+  .hype-nav-item,
+  .pdp-nav-item {
+    &:hover {background-color: lighten($merit, 40%);}
+  }
+}

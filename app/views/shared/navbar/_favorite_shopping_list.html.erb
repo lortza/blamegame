@@ -1,0 +1,3 @@
+<% if current_user.favorite_list && current_user.favorite_list != current_user.shopping_lists.default(current_user) %>
+  <%= link_to current_user.favorite_list.name, shopping_list_path(current_user.favorite_list), class: 'dropdown-item' %>
+<% end %>

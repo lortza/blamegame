@@ -1,0 +1,36 @@
+// Dimensions
+$card-image-height: 100px;
+$card-height: $card-image-height * 4;
+$table-thumbnail: 40px;
+
+// Colors: Brand Assignments
+$brand-dark-blue: #2b5f6e;
+$brand-light-blue: #369eba;
+$brand-purple: #7a3c50;
+$brand-brown: #3b3711;
+$brand-yellow: #bab13f;
+$brand-main: $brand-dark-blue;
+$brand-secondary: $brand-light-blue;
+
+// Post Types
+$gratitude: #46185f;
+$til: #fc0;
+$praise: #f65c78;
+$merit: #297ca0;
+
+
+// Colors: Other
+$white: #fff;
+$default-text: $brand-dark-blue;
+$light-gray: #f1f1f1;
+$gray: #808080;
+$medium-gray: #ccc;
+$link-color: $brand-light-blue;
+// $error: ff0000;
+
+// Syntax Highlighting
+$jekyll: #eef;
+$coderay: #ececec;
+$github: #f6f8fa;
+$inline-code: $github;
+$code-block: $github;
