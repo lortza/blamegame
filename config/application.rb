@@ -31,6 +31,12 @@ module VotingGame
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.generators.stylesheets = nil
+
+    config.generators do |g|
+      g.coffees false
+      g.javascripts false
+    end
 
     # Run this in rails c to get the list of time zones:
     # ActiveSupport::TimeZone.all.map(&:name)
