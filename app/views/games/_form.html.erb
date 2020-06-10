@@ -1,67 +1,30 @@
-<%= form_with(model: post, local: true) do |form| %>
-  <%= render 'shared/errors', object: post %>
+<%= form_with(model: game, local: true) do |form| %>
+  <%= render 'shared/errors', object: game %>
+  <table class="table table-players">
+    <thead>
+      <tr>
+        <th>Player Name</th>
+        <th>Delete Player?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form.fields_for :players do |f_player| %>
+      <tr>
+        <td><%= f_player.text_field :name, class: 'form-control' %></td>
+        <td><%= f_player.check_box :_destroy if f_player.object.persisted? %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-  <div class='row'>
-    <div class='col-10'>
-      <div class="field">
-        <%= form.label :post_type_id %>
-        <%= form.collection_select :post_type_id, current_user.post_types.by_name, :id, :name, {}, class: 'form-control' %>
-      </div>
-    </div>
-    <div class='col-2'>
-      <div class="field">
-        <%= form.label :bookmarked %>
-        <%= form.check_box :bookmarked, class: 'form-control' %>
-      </div>
-    </div>
-  </div><!-- row -->
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, rows: '10', class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <% if post.image.attached? %>
-      <p>
-        <%= image_tag(post.image.variant(resize_to_limit: [75, 75])) %><br>
-        <%= post.image.filename %>
-      </p>
-      <div class='form-check'>
-        <%= form.check_box :remove_attached_image, class: 'form-check-input' %>
-        <%= form.label 'Check to remove attached image', class: 'form-check-label' %>
-      </div>
-    <% end %>
-    <%= form.file_field :image, class: 'mt-2 file-field' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :with_people %>
-    <%= form.text_field :with_people, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label 'Related Info URL' %>
-    <%= form.text_field :url, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label 'Categories' %>
-    <%= form.collection_check_boxes :category_ids, current_user.categories.by_name, :id, :name do |r| %>
-      <div class='form-check'>
-        <%= r.check_box class: 'form-check-input' %>
-        <%= r.label class: 'form-check-label' %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="actions mt-5">
-    <%= form.submit class: button_class %>
+  <div class="mt-5 mb-5">
+    <%= form.submit class: 'btn btn-outline-primary btn-block' %>
   </div>
 <% end %>
 
-
-<script type='text/javascript'>
-  populateTemplate();
-</script>
+<% if game.persisted? %>
+  <hr>
+  <h4>Danger Zone</h4>
+  <p>This is the nuclear option. It will delete the whole game, all players, and any rounds.</p>
+  <%= link_to 'Delete Game and All Players', game, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_class('danger')}" %>
+<% end %>

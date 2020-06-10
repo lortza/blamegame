@@ -1,13 +1,14 @@
 <% content_for(:title, "Games") %>
 
-<%= link_to '+ Start New Game', new_game_path, class: button_class %>
-<h1>Games</h1>
+<header>
+  <h1>Games</h1>
+  <%= link_to '+ Start New Game', new_game_path, class: "controls #{button_class}" %>
+</header>
 
-<%#= render partial: 'shared/filter_form', locals: { destination_url: games_path } %>
 <ul>
   <% @games.each do |game| %>
-  <li><%= link_to game.created_at, game %> (players: name1, name2, name3)</li>
+  <li><%= link_to game.date, game %> (players: <%= display_players(game) %>)</li>
   <% end %>
 </ul>
 
-<%#= will_paginate @games, :page_links => false %>
+<%= will_paginate @games, :page_links => false %>

@@ -1,9 +1,8 @@
-<% content_for(:title, "Edit #{@post.date}") %>
+<% content_for(:title, "Edit #{@game.created_at}") %>
 
-<%= link_to 'Back', posts_path, class: button_class('secondary float-right ml-2') %>
+<header>
+  <h1>Editing Game</h1>
+  <%= link_to 'Back', games_path, class: "ml-2 controls #{button_class('secondary')}" %>
+</header>
 
-<h1>Editing Post</h1>
-
-<%= render 'form', post: @post %>
-<hr>
-<%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: button_class('danger float-right ml-2') %>
+<%= render 'form', game: @game %>

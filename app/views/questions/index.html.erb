@@ -1,11 +1,13 @@
 <% content_for(:title, 'Questions') %>
 
-<%= link_to '+ New Question', new_question_path, class: button_class %>
-<h1>Questions</h1>
+<header>
+  <h1>Questions</h1>
+  <%= link_to '+ New Question', new_question_path, class: "controls #{button_class}" %>
+</header>
 
-<%#= render partial: 'shared/filter_form', locals: { destination_url: questions_path } %>
+<%= render partial: 'shared/filter_form', locals: { destination_url: questions_path } %>
 
-<table class='table'>
+<table class='table table-striped'>
   <thead>
     <tr>
       <th></th>
@@ -15,15 +17,18 @@
   </thead>
   <tbody>
     <% @questions.each do |question| %>
-
-    <tr>
-      <td><%= question.text %></td>
-      <td><%= question.family_friendly? %></td>
-      <td><%= link_to 'Edit', question %></td>
-      <td><%= link_to 'Delete', '/' %></td>
-    </tr>
+      <tr>
+        <td><%= question.text %></td>
+        <td><%= question.family_friendly? %></td>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td>
+          <%= link_to 'Delete', question,
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
 
-<%#= will_paginate @questions, :page_links => false %>
+<%= will_paginate @questions, :page_links => false %>

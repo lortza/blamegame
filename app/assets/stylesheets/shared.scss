@@ -24,6 +24,29 @@
 // Links
 a { color: $link-color; }
 
+// Controls
+header, .controls-parent {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.controls {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+
+  a {
+    clear: both;
+    margin-left: 10px;
+
+    &:hover {
+      color: $default-text;
+      text-decoration: none;
+    }
+  }
+}
 
 // Forms
 .field {

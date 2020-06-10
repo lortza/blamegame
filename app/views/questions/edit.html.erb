@@ -1,9 +1,9 @@
-<% content_for(:title, "Edit #{@question.date}") %>
+<% content_for(:title, "Editing #{@question.text}") %>
 
-<%= link_to 'Back', questions_path, class: button_class('secondary float-right ml-2') %>
 
-<h1>Editing Question</h1>
+<header>
+  <h1>Editing Question</h1>
+  <%= link_to 'Back', questions_path, class: "ml-2 #{button_class('secondary')}" %>
+</header>
 
 <%= render 'form', question: @question %>
-<hr>
-<%= link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }, class: button_class('danger float-right ml-2') %>

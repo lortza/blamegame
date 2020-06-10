@@ -4,7 +4,11 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i[edit update destroy]
 
   def index
-    @questions = Question.all.order(:id)
+    search_term = params[:search]
+    questions = search_term.present? ? Question.search(field: 'text', terms: search_term) : Question.all
+
+    @questions = questions.order(:id)
+                          .paginate(page: params[:page], per_page: 30)
   end
 
   def new
@@ -15,7 +19,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = current_user.questions.new(question_params)
+    @question = Question.new(question_params)
 
     if @question.save
       redirect_to questions_url
@@ -34,19 +38,18 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-
-    notice = "#{@question.date} #{@question.created_at} was successfully deleted."
+    notice = "#{@question.text} was successfully deleted."
     redirect_to questions_url, notice: notice
   end
 
   private
 
   def set_question
-    @question = current_user.questions.find(params[:id])
+    @question = Question.find(params[:id])
   end
 
   def question_params
     params.require(:question)
-          .permit(:user_id)
+          .permit(:user_id, :text, :family_friendly)
   end
 end

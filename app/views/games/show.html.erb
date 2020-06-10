@@ -1,24 +1,22 @@
-<% content_for(:title, @post.date) %>
+<% content_for(:title, "Game #{@game.date}") %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+<header>
+  <h1>Game on <%= @game.date %></h1>
+  <%= link_to 'Back', games_path, class: "controls #{button_class}" %>
+</header>
 
-<p>
-  <strong>Post type:</strong>
-  <%= @post.post_type_id %>
-</p>
+<h3>Players</h3>
+<%= link_to '+ Edit Players', edit_game_path(@game) %>
+<p><%= display_players(@game) %></p>
 
-<p>
-  <strong>Url:</strong>
-  <%= @post.url %>
-</p>
+<h3>Rounds</h3>
+<p>WIP</p>
 
-<p>
-  <strong>Bookmarked:</strong>
-  <%= @post.bookmarked %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<h3>TEMP: Questions</h3>
+<ol>
+  <% @game.questions.each do |question| %>
+  <li>
+    <%= question.text %>
+  </li>
+  <% end %>
+</ol>

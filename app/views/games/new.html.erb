@@ -1,7 +1,8 @@
-<% content_for(:title, "New Post") %>
+<% content_for(:title, "New Game") %>
 
-<%= link_to 'Back', posts_path, class: button_class('secondary float-right') %>
+<header>
+  <h1>New Game</h1>
+  <%= link_to 'Back', games_path, class: "controls #{button_class('secondary')}" %>
+</header>
 
-<h1>New Post</h1>
-
-<%= render 'form', post: @post %>
+<%= render 'form', game: @game %>

@@ -3,20 +3,27 @@
 
   <div class='row'>
     <div class='col-10'>
-      <div class="field">
+      <div class='field'>
         <%= form.label 'Question' %>
         <%= form.text_field :text, class: 'form-control' %>
       </div>
     </div>
     <div class='col-2'>
-      <div class="field">
+      <div class='field'>
         <%= form.label :family_friendly %>
         <%= form.check_box :family_friendly, class: 'form-control' %>
       </div>
     </div>
   </div><!-- row -->
 
-  <div class="actions mt-5">
-    <%= form.submit class: button_class %>
+  <div class="mt-5 mb-5">
+    <%= form.submit class: 'btn btn-outline-primary btn-block' %>
   </div>
+<% end %>
+
+<% if question.persisted? %>
+  <hr>
+  <h4>Danger Zone</h4>
+  <p>This is the nuclear option. It will delete the question and no one will be able to use it again.</p>
+  <%= link_to 'Delete Question', question, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_class('danger')}" if question.persisted? %>
 <% end %>

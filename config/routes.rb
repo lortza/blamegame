@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   # Allow users to sign up and automatically populate categories and post types
   # devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :games
+  resources :games, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :questions
 end

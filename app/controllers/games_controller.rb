@@ -1,17 +1,22 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[edit update destroy]
+  before_action :set_game, only: %i[show edit update destroy]
 
   def index
-    @games = Game.all
+    @games = current_user.games.paginate(page: params[:page], per_page: 30)
   end
 
   def new
-    @game = current_user.games.new(date: Time.zone.today)
+    @game = current_user.games.new
+    10.times { @game.players.build }
+  end
+
+  def show
   end
 
   def edit
+    5.times { @game.players.build }
   end
 
   def create
@@ -35,7 +40,7 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
 
-    notice = "#{@game.date} #{@game.created_at} was successfully deleted."
+    notice = "Game at #{@game.date} was successfully deleted."
     redirect_to games_url, notice: notice
   end
 
@@ -46,7 +51,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game)
-          .permit(:user_id)
+    params.require(:game).permit(:user_id,
+                                 players_attributes: [:id, :name, :_destroy])
   end
 end
