@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   # devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :games
+  resources :questions
 end

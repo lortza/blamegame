@@ -1,0 +1,22 @@
+<%= form_with(model: question, local: true) do |form| %>
+  <%= render 'shared/errors', object: question %>
+
+  <div class='row'>
+    <div class='col-10'>
+      <div class="field">
+        <%= form.label 'Question' %>
+        <%= form.text_field :text, class: 'form-control' %>
+      </div>
+    </div>
+    <div class='col-2'>
+      <div class="field">
+        <%= form.label :family_friendly %>
+        <%= form.check_box :family_friendly, class: 'form-control' %>
+      </div>
+    </div>
+  </div><!-- row -->
+
+  <div class="actions mt-5">
+    <%= form.submit class: button_class %>
+  </div>
+<% end %>
