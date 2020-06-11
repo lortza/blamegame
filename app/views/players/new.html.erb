@@ -1,0 +1,12 @@
+<%= form_with(model: [@game, @player], local: true) do |form| %>
+  <%= render 'shared/errors', object: @player %>
+
+  <div class='field'>
+    <%= form.label :name %>
+    <%= form.text_field :name, autofocus: true, placeholder: 'Enter your name', class: 'form-control' %>
+  </div>
+
+  <div class="mt-5 mb-5">
+    <%= form.submit 'Submit', class: 'btn btn-outline-primary btn-block' %>
+  </div>
+<% end %>
