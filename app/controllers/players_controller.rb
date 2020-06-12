@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class PlayersController < ApplicationController
-  before_action :set_game, only: %i[new create]
+  before_action :set_game, only: %i[index new create]
+
+  def index
+    @players = @game.players
+  end
 
   def new
     @player = @game.players.new
@@ -11,7 +15,7 @@ class PlayersController < ApplicationController
     @player = @game.players.new(player_params)
 
     if @player.save
-      redirect_to @game
+      redirect_to game_players_url(@game)
     else
       render :new
     end
