@@ -1,0 +1,7 @@
+submission confirmation page
+
+<p>You submitted</p>
+<h3>Loki</h3>
+<p>for <%= @submission.round.question %></p>
+
+<%= link_to 'Next Question', next_round_submission(@submission), class: button_block %>
