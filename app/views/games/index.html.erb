@@ -2,13 +2,32 @@
 
 <header>
   <h1>Games</h1>
-  <%= link_to '+ Start New Game', new_game_path, class: "controls #{button_class}" %>
+  <%= link_to '+ Create Game', games_path, method: :post, class: "controls #{button_class}" %>
+  <%= link_to '+ New Game With Players', new_game_path, class: "controls #{button_class}" %>
 </header>
 
-<ul>
-  <% @games.each do |game| %>
-  <li><%= link_to game.date, game %> (players: <%= display_players(game) %>)</li>
-  <% end %>
-</ul>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Players</th>
+      <th>Sign Up Link</th>
+      <th>Players Ready?</th>
+      <th colspan='2'>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+    <tr>
+      <td><%= link_to game.code, game %></td>
+      <td><%= display_players(game) %></td>
+      <td><%= root_url %>games/<%= game.id %>/players/new</td>
+      <td><%= game.players_ready? %></td>
+      <td><%= link_to 'Edit', edit_game_path(game) %></td>
+      <td><%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= will_paginate @games, :page_links => false %>

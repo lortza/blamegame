@@ -5,18 +5,32 @@
   <%= link_to 'Back', games_path, class: "controls #{button_class}" %>
 </header>
 
+<h3>Game Code: #<%= @game.code %></h3>
+
 <h3>Players</h3>
 <%= link_to '+ Edit Players', edit_game_path(@game) %>
-<p><%= display_players(@game) %></p>
+<p><%= display_players(@game) if @game.players.any? %></p>
 
 <h3>Rounds</h3>
-<p>WIP</p>
-
-<h3>TEMP: Questions</h3>
+<% if @game.rounds.count < Game::MAX_ROUNDS %>
+  <%= link_to "Start Round X", '/', class: button_class %>
+<% end %>
 <ol>
-  <% @game.questions.each do |question| %>
+  <% @game.rounds.each do |round| %>
   <li>
-    <%= question.text %>
+    <%= round.question.text %>
+    <%# if round.submissions.size == 0 %>
+      | <%= link_to "Start Round #{round.number}", '/' %> ???
+    <%# end %>
   </li>
   <% end %>
 </ol>
+
+<% unless true %>
+  <h3>TEMP: Round Submissions</h3>
+  <ul>
+    <% @game.submissions.each do |submission| %>
+      <li><%= submission.nominee.name %>, nomitated by <%= submission.nominator.name %></li>
+    <% end %>
+  </ul>
+<% end %>

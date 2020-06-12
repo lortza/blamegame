@@ -20,9 +20,10 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = current_user.games.new(game_params)
+    @game = current_user.games.new
 
     if @game.save
+      @game.generate_rounds
       redirect_to @game
     else
       render :new
@@ -52,6 +53,7 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:user_id,
+                                 :players_ready,
                                  players_attributes: [:id, :name, :_destroy])
   end
 end

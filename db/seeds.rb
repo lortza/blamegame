@@ -14,9 +14,7 @@ user = User.create!(
         password_confirmation: 'password',
         admin: true
       )
-puts "Users: #{User.count}"
-
-game = user.games.create!
+puts "User: #{User.count}"
 
 questions = [
   { family_friendly: true, text: "Who would you hire to plan your best friend's wedding?" },
@@ -31,3 +29,8 @@ questions.each do |question|
   next if Question.exists?(text: question[:text])
   Question.create!(question)
 end
+puts "Question: #{Question.count}"
+
+
+game = user.games.create!
+game.generate_rounds

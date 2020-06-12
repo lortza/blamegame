@@ -1,5 +1,9 @@
 <%= form_with(model: game, local: true) do |form| %>
   <%= render 'shared/errors', object: game %>
+  <div class="field">
+    <%= form.label 'Players Ready?' %>
+    <%= form.check_box :players_ready %>
+  </div>
   <table class="table table-players">
     <thead>
       <tr>
@@ -18,7 +22,7 @@
   </table>
 
   <div class="mt-5 mb-5">
-    <%= form.submit class: 'btn btn-outline-primary btn-block' %>
+    <%= form.submit class: button_block %>
   </div>
 <% end %>
 

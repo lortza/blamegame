@@ -39,6 +39,10 @@ module ApplicationHelper
     "btn btn-sm btn-outline-#{style}"
   end
 
+  def button_block(style = 'primary')
+    "btn btn-outline-#{style} btn-block"
+  end
+
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
       language = 'bash' if language.nil?
