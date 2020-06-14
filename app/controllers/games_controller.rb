@@ -4,7 +4,13 @@ class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
 
   def index
-    @games = current_user.games.paginate(page: params[:page], per_page: 30)
+    @current_games = current_user.games
+                                 .current
+                                 .order('created_at DESC')
+    @past_games = current_user.games
+                              .past
+                              .order('created_at DESC')
+                              .paginate(page: params[:page], per_page: 30)
   end
 
   def new
@@ -13,6 +19,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    @game.set_winner
   end
 
   def edit
@@ -23,8 +30,8 @@ class GamesController < ApplicationController
     @game = current_user.games.new
 
     if @game.save
-      @game.generate_rounds
-      redirect_to @game
+      @game.generate_rounds(params[:adult_content_permitted])
+      redirect_to games_url
     else
       render :new
     end
@@ -32,7 +39,7 @@ class GamesController < ApplicationController
 
   def update
     if @game.update(game_params)
-      redirect_to @game
+      redirect_to games_url
     else
       render :edit
     end

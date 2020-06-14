@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_153308) do
+ActiveRecord::Schema.define(version: 2020_06_13_172922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,9 @@ ActiveRecord::Schema.define(version: 2020_06_11_153308) do
     t.boolean "players_ready", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "winner_id"
     t.index ["user_id"], name: "index_games_on_user_id"
+    t.index ["winner_id"], name: "index_games_on_winner_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -55,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_153308) do
 
   create_table "questions", force: :cascade do |t|
     t.string "text"
-    t.boolean "family_friendly"
+    t.boolean "adult_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -70,6 +72,17 @@ ActiveRecord::Schema.define(version: 2020_06_11_153308) do
     t.index ["game_id"], name: "index_rounds_on_game_id"
     t.index ["question_id"], name: "index_rounds_on_question_id"
     t.index ["winner_id"], name: "index_rounds_on_winner_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.bigint "round_id", null: false
+    t.bigint "nominee_id"
+    t.bigint "nominator_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["nominator_id"], name: "index_submissions_on_nominator_id"
+    t.index ["nominee_id"], name: "index_submissions_on_nominee_id"
+    t.index ["round_id"], name: "index_submissions_on_round_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,9 +100,13 @@ ActiveRecord::Schema.define(version: 2020_06_11_153308) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "games", "players", column: "winner_id"
   add_foreign_key "games", "users"
   add_foreign_key "players", "games"
   add_foreign_key "rounds", "games"
   add_foreign_key "rounds", "players", column: "winner_id"
   add_foreign_key "rounds", "questions"
+  add_foreign_key "submissions", "players", column: "nominator_id"
+  add_foreign_key "submissions", "players", column: "nominee_id"
+  add_foreign_key "submissions", "rounds"
 end

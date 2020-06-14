@@ -8,4 +8,8 @@ module GamesHelper
       link_to 'Add Players', edit_game_path(game)
     end
   end
+
+  def shareable_link(game)
+    "#{root_url}games/#{game.id}/players/new"
+  end
 end

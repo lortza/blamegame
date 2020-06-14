@@ -1,36 +1,27 @@
 <% content_for(:title, "Game #{@game.date}") %>
 
 <header>
-  <h1>Game on <%= @game.date %></h1>
-  <%= link_to 'Back', games_path, class: "controls #{button_class}" %>
+  <%= link_to 'Back to Games Index', games_path, class: "controls mb-5 #{button_class}" if current_user.present? %>
 </header>
 
-<h3>Game Code: #<%= @game.code %></h3>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <p class="lead">and the winner is...</p>
+    <h1 class="display-4"><%= display_winner(@game) %></h1>
+  </div>
+</div>
 
-<h3>Players</h3>
-<%= link_to '+ Edit Players', edit_game_path(@game) %>
-<p><%= display_players(@game) if @game.players.any? %></p>
 
-<h3>Rounds</h3>
-<% if @game.rounds.count < Game::MAX_ROUNDS %>
-  <%= link_to "Start Round X", '/', class: button_class %>
+<h3>a recap of winners by round:</h3>
+<% @game.rounds.each do |round| %>
+  <h4><%= round.number %>. <%= round.question.text %></h4>
+  <p><%= round.winner.name %></p>
 <% end %>
-<ol>
-  <% @game.rounds.each do |round| %>
-  <li>
-    <%= round.question.text %>
-    <%# if round.submissions.size == 0 %>
-      | <%= link_to "Start Round #{round.number}", '/' %> ???
-    <%# end %>
-  </li>
-  <% end %>
-</ol>
 
-<% unless true %>
-  <h3>TEMP: Round Submissions</h3>
-  <ul>
-    <% @game.submissions.each do |submission| %>
-      <li><%= submission.nominee.name %>, nomitated by <%= submission.nominator.name %></li>
-    <% end %>
-  </ul>
-<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    localStorage.removeItem('game_id');
+    localStorage.removeItem('player_name');
+  })
+</script>

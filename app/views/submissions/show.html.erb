@@ -1,0 +1,9 @@
+<p>You submitted</p>
+<h3><%= @submission.nominee.name %></h3>
+<p>for <%= @submission.round.question.text %></p>
+
+<% if @round.submissions.size == @game.players.size  %>
+  <%= link_to 'See Results', game_round_path(@game, @round), class: button_block %>
+<% else %>
+  <p>hold tight while your teammates submit their votes...</p>
+<% end %>

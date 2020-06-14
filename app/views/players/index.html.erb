@@ -1,4 +1,4 @@
-<% if @game.active? %>
+<% if @game.activated? %>
   <h1>Let's do this thing!</h1>
   <%= link_to 'Go To Round 1', new_game_round_submission_path(@game, @game.rounds.first), class: button_block %>
 <% else %>

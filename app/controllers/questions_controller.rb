@@ -50,6 +50,6 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question)
-          .permit(:user_id, :text, :family_friendly)
+          .permit(:user_id, :text, :adult_rating)
   end
 end

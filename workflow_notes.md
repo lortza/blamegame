@@ -1,7 +1,4 @@
-submission
-belongs_to round
-nominee player_id
-nominator player_id
+
 
 submission form new
 show round.question

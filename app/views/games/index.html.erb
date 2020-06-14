@@ -2,14 +2,43 @@
 
 <header>
   <h1>Games</h1>
-  <%= link_to '+ Create Game', games_path, method: :post, class: "controls #{button_class}" %>
+  <%= link_to '+ Create Game Without Adult Content', games_path(adult_content_permitted: false), method: :post, class: "controls #{button_class}" %>
+  <%= link_to '+ Create Game With Adult Content', games_path(adult_content_permitted: true), method: :post, class: "controls #{button_class}" %>
   <%= link_to '+ New Game With Players', new_game_path, class: "controls #{button_class}" %>
 </header>
 
-<table class='table'>
+<h2>Current Games</h2>
+<% if @current_games.any? %>
+  <% @current_games.each do |game| %>
+    <div class="card mb-5">
+      <div class="card-body">
+        <h5 class="card-title"><%= game.date %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">Share Link: <%= link_to shareable_link(game), shareable_link(game), class: 'card-link' %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Players: <%= display_players(game) if game.players.any? %></h6>
+        <p class="card-text">
+          <ol>
+            <% game.rounds.each do |round| %>
+            <li>
+              <%= round.question.text %>
+              <% if round.winner.present? %>
+                | <%= link_to 'see results', game_round_path(game, round) %>
+              <% end %>
+            </li>
+            <% end %>
+          </ol>
+        </p>
+        <%= link_to 'Edit', edit_game_path(game) %>
+        <%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<table class='table mt-5'>
   <thead>
     <tr>
-      <th>Game</th>
+      <th>Past Games</th>
+      <th>Game Code</th>
       <th>Players</th>
       <th>Sign Up Link</th>
       <th>Players Ready?</th>
@@ -17,11 +46,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @games.each do |game| %>
+    <% @past_games.each do |game| %>
     <tr>
+      <td><%= game.date %></td>
       <td><%= link_to game.code, game %></td>
       <td><%= display_players(game) %></td>
-      <td><%= root_url %>games/<%= game.id %>/players/new</td>
+      <td><%= link_to shareable_link(game), shareable_link(game) %></td>
       <td><%= game.players_ready? %></td>
       <td><%= link_to 'Edit', edit_game_path(game) %></td>
       <td><%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %></td>
@@ -30,4 +60,4 @@
   </tbody>
 </table>
 
-<%= will_paginate @games, :page_links => false %>
+<%= will_paginate @past_games, :page_links => false %>

@@ -19,7 +19,7 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.text %></td>
-        <td><%= question.family_friendly? %></td>
+        <td><%= question.adult_rating? %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td>
           <%= link_to 'Delete', question,
