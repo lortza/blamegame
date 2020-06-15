@@ -3,7 +3,6 @@ class Game < ApplicationRecord
 
   belongs_to :user
   has_many :players, inverse_of: :game, dependent: :destroy
-  belongs_to :winner, class_name: 'Player', optional: true
   has_many :rounds, dependent: :destroy
   accepts_nested_attributes_for :players,
                                 allow_destroy: true, # allows user to delete player via checkbox
@@ -63,27 +62,39 @@ class Game < ApplicationRecord
     4.times { self.code += letters.sample }
   end
 
-  def set_winner
-    return unless all_rounds_are_complete?
-    return if there_is_a_tie?
 
-    winning_player_id = rounds_tally.first[0]
-    self.update!(winner_id: winning_player_id)
+  def winner
+    return unless all_rounds_are_complete?
+
+    tally = tally_rounds
+    return if there_is_a_tie?(tally)
+
+    winning_player_id = tally.first[0]
+    @winner ||= players.find(winning_player_id)
   end
 
   private
 
   def all_rounds_are_complete?
-    rounds.size == rounds.pluck(:winner_id).uniq.compact.size
+    rounds.map(&:complete?).uniq.first == true
   end
 
-  def there_is_a_tie?
-    # WIP
-    false
+  def there_is_a_tie?(tally)
+    return false if tally.size == 1
+
+    tally.first[1] == tally.second[1]
   end
 
-  def rounds_tally
-    results = rounds.group(:winner_id).count
+  def tally_rounds
+    results = {}
+    rounds.map do |round|
+      if results[round.winner.id].present?
+        results[round.winner.id] += 1
+      else
+        results[round.winner.id] = 1
+      end
+    end
+
     results.sort_by {|nominee, votes| -votes}
   end
 

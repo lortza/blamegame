@@ -19,7 +19,6 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game.set_winner
   end
 
   def edit

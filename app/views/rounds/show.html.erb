@@ -4,7 +4,7 @@
 <h1><%= display_winner(@round) %></h1>
 
 <ol>
-  <% @round.results.each do |nominee, nominators| %>
+  <% @round.results_by_nominee.each do |nominee, nominators| %>
   <li>
     <strong><%= nominee %>: </strong>
     <%= nominators.join(', ') %>

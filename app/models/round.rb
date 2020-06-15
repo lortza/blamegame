@@ -1,31 +1,23 @@
 class Round < ApplicationRecord
   belongs_to :game
   belongs_to :question
-  belongs_to :winner, class_name: 'Player', optional: true
-  has_many :submissions
+  has_many :submissions, dependent: :destroy
 
-  def set_winner
+  def winner
     return unless all_votes_are_in?
-    return if there_is_a_tie?
 
-    winning_player_id = submissions_tally.first[0]
-    self.update!(winner_id: winning_player_id)
+    tally = tally_submissions
+    return if there_is_a_tie?(tally)
+
+    winning_player_id = tally.first[0]
+    @winner ||= game.players.find(winning_player_id)
   end
 
-  def submissions_tally
-    results = submissions.group(:nominee_id).count
-    results.sort_by {|nominee, votes| -votes}
+  def complete?
+    submissions.present? && (submissions.size == game.players.size)
   end
 
-  def there_is_a_tie?
-    submissions_tally.first[1] == submissions_tally.second[1]
-  end
-
-  def all_votes_are_in?
-    submissions.size == game.players.size
-  end
-
-  def results
+  def results_by_nominee
     nominee_ids = submissions.pluck(:nominee_id).uniq
     results = {}
 
@@ -40,5 +32,22 @@ class Round < ApplicationRecord
     end
 
     results
+  end
+
+  private
+
+  def tally_submissions
+    results = submissions.group(:nominee_id).count
+    results.sort_by {|nominee, votes| -votes}
+  end
+
+  def there_is_a_tie?(tally)
+    return false if tally.size == 1
+
+    tally.first[1] == tally.second[1]
+  end
+
+  def all_votes_are_in?
+    complete?
   end
 end

@@ -3,9 +3,12 @@
 puts '**** Running seeds...'
 
 puts 'Destroying AllTheThings!TM'
-User.destroy_all
-Question.destroy_all
+Submission.destroy_all
+Round.destroy_all
 Game.destroy_all
+Player.destroy_all
+Question.destroy_all
+User.destroy_all
 
 # user = User.find_by(email: 'admin@email.com')
 user = User.create!(
@@ -16,20 +19,8 @@ user = User.create!(
       )
 puts "User: #{User.count}"
 
-questions = [
-  { adult_rating: false, text: "Who would you hire to plan your best friend's wedding?" },
-  { adult_rating: false, text: "Who always ends up tripping their partner on the dance floor?" },
-  { adult_rating: false, text: "Who can solve a Rubik's Cube the fastest?" },
-  { adult_rating: true, text: "Who has played the game Twister naked?" },
-  { adult_rating: true, text: "Who drinks whiskey in their coffee at work?" },
-  { adult_rating: false, text: "Who has thrown a birthday party for their pet?" },
-  { adult_rating: false, text: "Who doesn't need to use the instructions when putting together IKEA furniture?" },
-]
-questions.each do |question|
-  next if Question.exists?(text: question[:text])
-  Question.create!(question)
-end
-puts "Question: #{Question.count}"
+qty_to_seed = 10
+Rake::Task['db:populate_questions'].invoke(qty_to_seed)
 
 game = user.games.create!
 adult_content_permitted = true
