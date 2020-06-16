@@ -15,7 +15,13 @@
 <h3>a recap of winners by round:</h3>
 <% @game.rounds.each do |round| %>
   <h4><%= round.number %>. <%= round.question.text %></h4>
-  <p><%= round.winner.name %></p>
+  <p>
+    <% if round.winner.nil? %>
+      It was a tie
+    <% else %>
+      <%= round.winner.name %>
+    <% end %>
+  </p>
 <% end %>
 
 

@@ -24,7 +24,7 @@ class GamesController < ApplicationController
   end
 
   def edit
-    authorize(@game)
+    # authorize(@game)
 
     5.times { @game.players.build }
   end

@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  MAX_ROUNDS = 10
+  MAX_ROUNDS = 5
 
   belongs_to :user
   has_many :players, inverse_of: :game, dependent: :destroy
@@ -75,9 +75,10 @@ class Game < ApplicationRecord
     vote_results.first[1] == vote_results.second[1]
   end
 
+
   def votes_by_nominee
     results = {}
-    rounds.map do |round|
+    rounds_with_winners.map do |round|
       if results[round.winner.id].present?
         results[round.winner.id] += 1
       else
@@ -86,5 +87,9 @@ class Game < ApplicationRecord
     end
 
     results.sort_by {|nominee, votes| -votes}
+  end
+
+  def rounds_with_winners
+    rounds.select { |round| round.winner.present? }.compact
   end
 end

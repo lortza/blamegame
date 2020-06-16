@@ -25,7 +25,8 @@
 a { color: $link-color; }
 
 // Controls
-header, .controls-parent {
+header,
+.controls-parent {
   align-items: center;
   display: flex;
   flex-wrap: nowrap;

@@ -7,7 +7,7 @@ class Round < ApplicationRecord
     return unless all_votes_are_in?
 
     vote_results = votes_by_nominee
-    return if there_is_a_tie?(vote_results)
+    return nil if there_is_a_tie?(vote_results)
 
     winning_player_id = vote_results.first[0]
     @winner ||= game.players.find(winning_player_id)
