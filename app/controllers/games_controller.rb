@@ -2,8 +2,7 @@
 
 class GamesController < ApplicationController
   before_action :authenticate_user!, only: %i[index new edit update destroy]
-
-  before_action :set_game, only: %i[show edit update destroy]
+  before_action :set_game, only: %i[show edit update destroy players_ready]
 
   def index
     @current_games = current_user.games
@@ -53,6 +52,11 @@ class GamesController < ApplicationController
 
     notice = "Game at #{@game.date} was successfully deleted."
     redirect_to games_url, notice: notice
+  end
+
+  def players_ready
+    @game.update(players_ready: true)
+    redirect_to game_players_url(@game)
   end
 
   private

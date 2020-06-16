@@ -1,9 +1,14 @@
-<%= form_with(model: [@game, @player], local: true) do |form| %>
+<%= form_with(model: @player, local: true) do |form| %>
   <%= render 'shared/errors', object: @player %>
 
   <div class='field'>
+    <%= form.label :game_code %>
+    <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', id: 'game-code-field', class: 'form-control' %>
+  </div>
+
+  <div class='field'>
     <%= form.label :name %>
-    <%= form.text_field :name, autofocus: true, placeholder: 'Enter your name', onblur: 'storePlayerName()', id: 'name-field', class: 'form-control' %>
+    <%= form.text_field :name, placeholder: 'Enter your name', onblur: 'storePlayerName()', id: 'name-field', class: 'form-control' %>
   </div>
 
   <div class="mt-5 mb-5">
@@ -14,8 +19,9 @@
 <script>
   function storePlayerName(){
     let nameField = document.getElementById('name-field')
+    let gameCodeField = document.getElementById('game-code-field')
     console.log(nameField.value);
     localStorage.setItem('player_name', nameField.value);
-    localStorage.setItem('game_id', "<%= @game.id %>");
+    localStorage.setItem('game_id', gameCodeField.value);
   }
 </script>

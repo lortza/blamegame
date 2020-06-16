@@ -18,7 +18,7 @@ RSpec.describe Game, type: :model do
     allow_any_instance_of(Game).to receive(:there_is_a_tie?).and_return(false)
   end
 
-  describe 'winner' do
+  xdescribe 'winner' do
 
     it 'returns nil if not all rounds are complete' do
       allow_any_instance_of(Game).to receive(:all_rounds_are_complete?).and_return(false)
@@ -58,7 +58,7 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe '#tally_rounds' do
+  xdescribe '#tally_rounds' do
     it 'returns an array of player ids and counts' do
 
     end
