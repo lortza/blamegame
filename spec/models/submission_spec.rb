@@ -9,6 +9,6 @@ RSpec.describe Submission, type: :model do
 
   context 'validations' do
     # wip
-    # validates :nominator, uniqueness: { scope: :round_id,
+    # validates :nominator, uniqueness: { scope: :round_id, message: "you only get to vote once per round" }
   end
 end

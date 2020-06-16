@@ -6,10 +6,10 @@ class Round < ApplicationRecord
   def winner
     return unless all_votes_are_in?
 
-    tally = tally_submissions
-    return if there_is_a_tie?(tally)
+    vote_results = votes_by_nominee
+    return if there_is_a_tie?(vote_results)
 
-    winning_player_id = tally.first[0]
+    winning_player_id = vote_results.first[0]
     @winner ||= game.players.find(winning_player_id)
   end
 
@@ -30,21 +30,20 @@ class Round < ApplicationRecord
       nominator_name = Player.find(submission.nominator_id).name
       results[submission.nominee.name] << nominator_name
     end
-
-    results
+    results.sort_by {|nominee, nominators| -nominators.count}
   end
 
   private
 
-  def tally_submissions
+  def votes_by_nominee
     results = submissions.group(:nominee_id).count
     results.sort_by {|nominee, votes| -votes}
   end
 
-  def there_is_a_tie?(tally)
-    return false if tally.size == 1
+  def there_is_a_tie?(vote_results)
+    return false if vote_results.size == 1
 
-    tally.first[1] == tally.second[1]
+    vote_results.first[1] == vote_results.second[1]
   end
 
   def all_votes_are_in?

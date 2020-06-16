@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
+  before_action :authenticate_user!, only: %i[index new edit update destroy]
+
   before_action :set_game, only: %i[show edit update destroy]
 
   def index
@@ -22,6 +24,8 @@ class GamesController < ApplicationController
   end
 
   def edit
+    authorize(@game)
+
     5.times { @game.players.build }
   end
 
@@ -54,7 +58,7 @@ class GamesController < ApplicationController
   private
 
   def set_game
-    @game = current_user.games.find(params[:id])
+    @game = Game.find(params[:id])
   end
 
   def game_params
