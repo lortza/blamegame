@@ -1,6 +1,6 @@
 <h1><%= @player.name %>, Cast Your Vote!</h1>
 
-<h2><%= @round.question.text %></h2>
+<h2><%= @round.number %>. <%= @round.question.text %></h2>
 
 <%= form_with(model: [@game, @round, @submission], local: true) do |form| %>
   <%= render 'shared/errors', object: @submission %>
