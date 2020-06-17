@@ -20,6 +20,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    cookies.delete(:player_id)
   end
 
   def edit
@@ -50,6 +51,7 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
 
+    cookies.delete(:player_id)
     notice = "Game at #{@game.date} was successfully deleted."
     redirect_to games_url, notice: notice
   end

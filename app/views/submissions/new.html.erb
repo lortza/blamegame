@@ -1,4 +1,4 @@
-<h1>Cast Your Vote!</h1>
+<h1><%= @player.name %>, Cast Your Vote!</h1>
 
 <h2><%= @round.question.text %></h2>
 
@@ -10,10 +10,12 @@
     <%= form.collection_select :nominee_id, @game.players, :id, :name, {}, class: 'form-control' %>
   </div>
 
-  <div class='field'>
-    <%= form.label 'Please Select Your Name' %>
-    <%= form.collection_select :nominator_id, @game.players, :id, :name, {}, class: 'form-control' %>
-  </div>
+  <% if @player.nil? %>
+    <div class='field'>
+      <%= form.label 'Please Select Your Name' %>
+      <%= form.collection_select :nominator_id, @game.players, :id, :name, {}, class: 'form-control' %>
+    </div>
+  <% end %>
 
   <div class="mt-5 mb-5">
     <%= form.submit class: button_block %>
