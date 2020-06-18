@@ -2,10 +2,7 @@
 
 <header>
   <h1>Games</h1>
-  <div>
-    <%= link_to '+ New Game Without Adult Content', games_path(adult_content_permitted: false), method: :post, class: "controls mb-3 #{button_class}" %>
-    <%= link_to '+ New Game With Adult Content', games_path(adult_content_permitted: true), method: :post, class: "controls #{button_class}" %>
-  </div>
+  <%= link_to '+ New Game', new_game_path, class: "controls mb-3 #{button_class}" %>
 </header>
 
 <% if @current_games.any? %>
@@ -15,6 +12,7 @@
       <div class="card-body">
         <h5 class="card-title"><%= game.code %>: <%= game.date %></h5>
         <h6 class="card-subtitle mb-2 text-muted">Share Link: <%= link_to join_game_url, join_game_url %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Adult Content? <%= game.adult_content_permitted? %></h6>
         <h6 class="card-subtitle mb-2 text-muted">Players: <%= display_players(game) if game.players.any? %></h6>
         <h6 class="card-subtitle mb-2 text-muted">Players Ready? <%= game.players_ready? %></h6>
         <p class="card-text">

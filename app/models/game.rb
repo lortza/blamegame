@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  MAX_ROUNDS = 5
+  DEFAULT_MAX_ROUNDS = 10
 
   belongs_to :user
   has_many :players, inverse_of: :game, dependent: :destroy
@@ -27,9 +27,9 @@ class Game < ApplicationRecord
     created_at.strftime('%m-%d-%Y')
   end
 
-  def generate_rounds(adult_content_permitted)
-    round_numbers = (1..MAX_ROUNDS).to_a
-    questions = generate_questions(adult_content_permitted)
+  def generate_rounds
+    round_numbers = (1..max_rounds).to_a
+    questions = generate_questions
 
     questions.each do |question|
       self.rounds.create!(
@@ -57,11 +57,11 @@ class Game < ApplicationRecord
     4.times { self.code += letters.sample }
   end
 
-  def generate_questions(adult_content_permitted)
-    if adult_content_permitted == 'true'
-      ::Question.all.sample(MAX_ROUNDS)
+  def generate_questions
+    if adult_content_permitted?
+      ::Question.all.sample(max_rounds)
     else
-      ::Question.without_adult_content.sample(MAX_ROUNDS)
+      ::Question.without_adult_content.sample(max_rounds)
     end
   end
 

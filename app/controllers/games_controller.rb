@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: %i[index new edit update destroy]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy]
   before_action :set_game, only: %i[show edit update destroy players_ready]
 
   def index
@@ -15,8 +15,8 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = current_user.games.new
-    10.times { @game.players.build }
+    @game = current_user.games.new(max_rounds: Game::DEFAULT_MAX_ROUNDS)
+    5.times { @game.players.build }
   end
 
   def show
@@ -30,10 +30,10 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = current_user.games.new
+    @game = current_user.games.new(game_params)
 
     if @game.save
-      @game.generate_rounds(params[:adult_content_permitted])
+      @game.generate_rounds
       redirect_to games_url
     else
       render :new
@@ -69,6 +69,8 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:user_id,
+                                 :adult_content_permitted,
+                                 :max_rounds,
                                  :players_ready,
                                  players_attributes: [:id, :name, :_destroy])
   end
