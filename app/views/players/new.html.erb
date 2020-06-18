@@ -3,12 +3,12 @@
 
   <div class='field'>
     <%= form.label :game_code %>
-    <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', id: 'game-code-field', class: 'form-control' %>
+    <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', class: 'form-control' %>
   </div>
 
   <div class='field'>
     <%= form.label :name %>
-    <%= form.text_field :name, placeholder: 'Enter your name', onblur: 'storePlayerName()', id: 'name-field', class: 'form-control' %>
+    <%= form.text_field :name, placeholder: 'Enter your name', class: 'form-control' %>
   </div>
 
   <div class="mt-5 mb-5">
@@ -17,11 +17,11 @@
 <% end %>
 
 <script>
-  function storePlayerName(){
-    let nameField = document.getElementById('name-field')
-    let gameCodeField = document.getElementById('game-code-field')
-    console.log(nameField.value);
-    localStorage.setItem('player_name', nameField.value);
-    localStorage.setItem('game_id', gameCodeField.value);
-  }
+  document.addEventListener('DOMContentLoaded', function () {
+    let cookieNotice = localStorage.getItem('cookie_notice')
+    if (cookieNotice != 'true') {
+      alert("Hi there! This site uses a cookie to remember your name. We delete it at the end of each game. Have fun, y'all!")
+      localStorage.setItem('cookie_notice', 'true');
+    }
+  })
 </script>

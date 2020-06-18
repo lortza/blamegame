@@ -1,19 +1,21 @@
-<h1>Cast Your Vote!</h1>
+<h1><%= @player.name %>, Cast Your Vote!</h1>
 
-<h2><%= @round.question.text %></h2>
+<h2><%= @round.number %>. <%= @round.question.text %></h2>
 
 <%= form_with(model: [@game, @round, @submission], local: true) do |form| %>
   <%= render 'shared/errors', object: @submission %>
 
   <div class='field'>
     <%= form.label 'Which of your teammates best fits this question?' %>
-    <%= form.collection_select :nominee_id, @game.players, :id, :name, {}, class: 'form-control' %>
+    <%= form.collection_select :nominee_id, players_minus_nominator(@game, @player), :id, :name, {}, class: 'form-control' %>
   </div>
 
-  <div class='field'>
-    <%= form.label 'Please Select Your Name' %>
-    <%= form.collection_select :nominator_id, @game.players, :id, :name, {}, class: 'form-control' %>
-  </div>
+  <% if @player.nil? %>
+    <div class='field'>
+      <%= form.label 'Please Select Your Name' %>
+      <%= form.collection_select :nominator_id, @game.players, :id, :name, {}, class: 'form-control' %>
+    </div>
+  <% end %>
 
   <div class="mt-5 mb-5">
     <%= form.submit class: button_block %>

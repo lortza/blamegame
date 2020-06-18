@@ -53,7 +53,10 @@
     <tr>
       <td><%= game.date %></td>
       <td><%= link_to game.code, game %></td>
-      <td><%= display_players(game) %></td>
+      <td>
+        Winner: <%= display_winner(game) %> <br>
+        <%= display_players(game) %>
+      </td>
       <td><%= game.players_ready? %></td>
       <td><%= link_to 'Edit', edit_game_path(game) %></td>
       <td><%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %></td>
