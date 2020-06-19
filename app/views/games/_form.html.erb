@@ -1,9 +1,33 @@
 <%= form_with(model: game, local: true) do |form| %>
   <%= render 'shared/errors', object: game %>
-  <div class="field">
-    <%= form.label 'Players Ready?' %>
-    <%= form.check_box :players_ready %>
+
+  <div class='row mb-5'>
+    <div class='col-sm'>
+      <div class="field">
+        <%= form.label 'Max Rounds' %>
+        <%= form.number_field :max_rounds, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class='col-sm'>
+      <div class="field">
+        <%= form.label 'Allow Adult Content?' %><br>
+        <%= form.check_box :adult_content_permitted %>
+      </div>
+    </div>
+
+    <div class='col-sm'>
+      <div class="field">
+        <%= form.label 'Players Ready?' %><br>
+        <%= form.check_box :players_ready %>
+      </div>
+    </div>
+  </div> <!-- row -->
+
+  <div class="mt-5 mb-5">
+    <%= form.submit class: button_block %>
   </div>
+
   <table class="table table-players">
     <thead>
       <tr>

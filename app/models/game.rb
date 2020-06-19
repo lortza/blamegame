@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  MAX_ROUNDS = 5
+  DEFAULT_MAX_ROUNDS = 10
 
   belongs_to :user
   has_many :players, inverse_of: :game, dependent: :destroy
@@ -27,9 +27,9 @@ class Game < ApplicationRecord
     created_at.strftime('%m-%d-%Y')
   end
 
-  def generate_rounds(adult_content_permitted)
-    round_numbers = (1..MAX_ROUNDS).to_a
-    questions = generate_questions(adult_content_permitted)
+  def generate_rounds
+    round_numbers = (1..max_rounds).to_a
+    questions = generate_questions
 
     questions.each do |question|
       self.rounds.create!(
@@ -43,7 +43,7 @@ class Game < ApplicationRecord
     return unless all_rounds_are_complete?
 
     vote_results = votes_by_nominee
-    return if there_is_a_tie?(vote_results)
+    return if no_rounds_have_a_winner?(vote_results)
 
     winning_player_id = vote_results.first[0]
     @winner ||= players.find(winning_player_id)
@@ -57,16 +57,20 @@ class Game < ApplicationRecord
     4.times { self.code += letters.sample }
   end
 
-  def generate_questions(adult_content_permitted)
-    if adult_content_permitted == 'true'
-      ::Question.all.sample(MAX_ROUNDS)
+  def generate_questions
+    if adult_content_permitted?
+      ::Question.all.sample(max_rounds)
     else
-      ::Question.without_adult_content.sample(MAX_ROUNDS)
+      ::Question.without_adult_content.sample(max_rounds)
     end
   end
 
   def all_rounds_are_complete?
     rounds.map(&:complete?).uniq.first == true
+  end
+
+  def no_rounds_have_a_winner?(vote_results)
+    return true if (vote_results == []) || (there_is_a_tie?(vote_results))
   end
 
   def there_is_a_tie?(vote_results)
@@ -75,10 +79,9 @@ class Game < ApplicationRecord
     vote_results.first[1] == vote_results.second[1]
   end
 
-
   def votes_by_nominee
     results = {}
-    rounds_with_winners.map do |round|
+    rounds_with_winners.each do |round|
       if results[round.winner.id].present?
         results[round.winner.id] += 1
       else

@@ -88,40 +88,8 @@ header,
 
 
 // BOOTSTRAP OVERRIDES
-.card {
-  // height: $card-height;
-  .card-img-top {
-    background-color: $gray;
-    height: $card-image-height;
-  }
-}
-
-.card-title {
-  color: $gray;
-  font-style: italic;
-}
 
 .btn-xs {
   font-size: .4em;
   padding: 1px 4px;
-}
-
-.dropdown-menu {
-  .gratitude-nav-item {
-    &:hover {background-color: lighten($gratitude, 70%);}
-  }
-
-  .praise-nav-item {
-    &:hover {background-color: lighten($praise, 30%);}
-  }
-
-  .til-nav-item {
-    &:hover {background-color: lighten($til, 20%);}
-  }
-
-  .merit-nav-item,
-  .hype-nav-item,
-  .pdp-nav-item {
-    &:hover {background-color: lighten($merit, 40%);}
-  }
 }

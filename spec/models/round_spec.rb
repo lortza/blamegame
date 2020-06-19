@@ -20,4 +20,22 @@ RSpec.describe Round, type: :model do
 
     end
   end
+
+  # it 'returns nil when no rounds have winners' do
+  #   game = create(:game)
+  #   create(:round, game: game)
+  #   player1 = create(:player, game: game)
+  #   player2 = create(:player, game: game)
+  #
+  #   create(:submission,
+  #     round: game.rounds.first,
+  #     nominee_id: player1.id,
+  #     nominator_id: player2.id)
+  #   create(:submission,
+  #     round: game.rounds.first,
+  #     nominee_id: player2.id,
+  #     nominator_id: player1.id)
+  #
+  #   expect(game.winner).to eq(nil)
+  # end
 end
