@@ -12,7 +12,7 @@
   <% end %>
 </ol>
 
-<% if @round.number < Game::MAX_ROUNDS %>
+<% if @round.number < @round.game.max_rounds %>
   <%= link_to 'Next Question', next_round_submission(@round), class: button_block %>
 <% else %>
   <%= link_to "Let's see who won the game!", game_path(@round.game), class: button_block %>
