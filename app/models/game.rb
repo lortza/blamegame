@@ -43,7 +43,7 @@ class Game < ApplicationRecord
     return unless all_rounds_are_complete?
 
     vote_results = votes_by_nominee
-    return if there_is_a_tie?(vote_results)
+    return if no_rounds_have_a_winner?(vote_results)
 
     winning_player_id = vote_results.first[0]
     @winner ||= players.find(winning_player_id)
@@ -69,16 +69,19 @@ class Game < ApplicationRecord
     rounds.map(&:complete?).uniq.first == true
   end
 
+  def no_rounds_have_a_winner?(vote_results)
+    return true if (vote_results == []) || (there_is_a_tie?(vote_results))
+  end
+
   def there_is_a_tie?(vote_results)
     return false if vote_results.size == 1
 
     vote_results.first[1] == vote_results.second[1]
   end
 
-
   def votes_by_nominee
     results = {}
-    rounds_with_winners.map do |round|
+    rounds_with_winners.each do |round|
       if results[round.winner.id].present?
         results[round.winner.id] += 1
       else
