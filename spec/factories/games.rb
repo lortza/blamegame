@@ -2,7 +2,9 @@
 
 FactoryBot.define do
   factory :game do
-    user_id           { create(:user).id }
+    user_id { create(:user).id }
+    max_rounds { 3 }
+    adult_content_permitted { true }
 
     trait :with_3_players do
       after :create do |game|
