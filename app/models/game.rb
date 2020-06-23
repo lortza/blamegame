@@ -46,7 +46,8 @@ class Game < ApplicationRecord
   end
 
   def complete?
-    rounds.map(&:complete?).uniq.first == true
+    complete_status = rounds.map(&:complete?).uniq
+    complete_status.size == 1 && complete_status.first == true
   end
 
   def winner

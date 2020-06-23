@@ -2,6 +2,7 @@
 
 class RoundsController < ApplicationController
   before_action :set_round, only: %i[show edit update destroy]
+  before_action :redirect_to_game, only: %i[show]
 
   def show
   end
@@ -10,6 +11,11 @@ class RoundsController < ApplicationController
 
   def set_round
     @round = Round.find(params[:id])
+  end
+
+  def redirect_to_game
+    set_round
+    redirect_to game_url(@round.game) if @round.game.expired?
   end
 
   def round_params

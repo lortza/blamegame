@@ -5,6 +5,7 @@ class SubmissionsController < ApplicationController
   before_action :set_round, only: %i[index new create show edit update destroy]
   before_action :set_submission, only: %i[show destroy]
   before_action :set_player, only: %i[new create]
+  before_action :redirect_to_round, only: %i[new create]
 
   def new
     @submission = @round.submissions.new
@@ -40,6 +41,12 @@ class SubmissionsController < ApplicationController
 
   def set_player
     @player = Player.find_by(id: cookies[:player_id].to_i)
+  end
+
+  def redirect_to_round
+    set_game
+    set_round
+    redirect_to game_round_url(@game, @round), alert: 'Voting is closed for this round.' if @round.complete?
   end
 
   def submission_params
