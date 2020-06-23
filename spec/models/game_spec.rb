@@ -18,29 +18,90 @@ RSpec.describe Game, type: :model do
 
   before :each do
     game
-    allow_any_instance_of(Game).to receive(:all_rounds_are_complete?).and_return(true)
+    # allow_any_instance_of(Game).to receive(:complete?).and_return(true)
     allow_any_instance_of(Game).to receive(:there_is_a_tie?).and_return(false)
   end
 
   describe 'self.current' do
-    xit 'returns games that were created within the past hour' do
+    it 'returns games that were created within the past hour' do
+      game = create(:game, created_at: 30.minutes.ago)
+      expect(Game.current).to include(game)
     end
 
-    xit 'does not return games that are older than an hour' do
+    it 'does not return games that are older than an hour' do
+      game = create(:game, created_at: 1.5.hours.ago)
+      expect(Game.current).to_not include(game)
     end
   end
 
   describe 'self.past' do
-    xit 'does not return games that were created within the past hour' do
+    it 'does not return games that were created within the past hour' do
+      game = create(:game, created_at: 30.minutes.ago)
+      expect(Game.past).to_not include(game)
     end
 
-    xit 'returns games that are older than an hour' do
+    it 'returns games that are older than an hour' do
+      game = create(:game, created_at: 1.5.hours.ago)
+      expect(Game.past).to include(game)
+    end
+  end
+
+  describe 'expired?' do
+    let(:game) { create(:game) }
+    let(:round) { create(:round, game: game) }
+    let(:player1) { create(:player, game: game) }
+    let(:player2) { create(:player, game: game) }
+    let(:submission1) { create(:submission, round: round, nominee_id: player1.id, nominator_id: player2.id) }
+    let(:submission2) { create(:submission, round: round, nominee_id: player2.id, nominator_id: player1.id) }
+
+    before do
+      submission1
+      submission2
+    end
+
+    it 'returns true if the game is older than 2 hours regardless of completion' do
+      allow_any_instance_of(Game).to receive(:created_at).and_return(2.5.hours.ago)
+      allow_any_instance_of(Submission).to receive(:created_at).and_return(2.5.hours.ago)
+
+      expect(game.expired?).to be(true)
+    end
+
+    it 'returns false if the game is less than 2 hours old' do
+      allow_any_instance_of(Game).to receive(:created_at).and_return(1.hours.ago)
+      allow_any_instance_of(Submission).to receive(:created_at).and_return(5.minutes.ago)
+
+      expect(game.expired?).to be(false)
+    end
+
+    it 'returns true if the last submission was more than 30 minutes ago' do
+      submission2.update(created_at: 35.minutes.ago)
+
+      expect(game.expired?).to be(true)
     end
   end
 
   describe 'activated?' do
     xit '' do
 
+    end
+  end
+
+  describe 'complete?' do
+    it 'returns true if all rounds are complete' do
+      game
+      allow_any_instance_of(Round).to receive(:complete?).and_return(true)
+
+      expect(game.complete?).to be(true)
+    end
+
+    it 'returns false if all rounds are NOT complete' do
+      game
+      round1 = game.rounds.first
+      round2 = game.rounds.last
+      allow(round1).to receive(:complete?).and_return(true)
+      allow(round2).to receive(:complete?).and_return(false)
+
+      expect(game.complete?).to be(false)
     end
   end
 
@@ -56,7 +117,7 @@ RSpec.describe Game, type: :model do
 
   describe 'winner' do
     it 'returns nil if not all rounds are complete' do
-      allow_any_instance_of(Game).to receive(:all_rounds_are_complete?).and_return(false)
+      allow_any_instance_of(Game).to receive(:complete?).and_return(false)
       expect(game.winner).to eq(nil)
     end
 

@@ -33,8 +33,8 @@ show button link to round show page
 round show page has results & winner
 submissions count for each player. player with most == winner
 round stores player id as winner
-if current round number < Game::MAX_ROUNDS
+if current round number < Game::DEFAULT_MAX_ROUNDS
 button to go to next round (game.round.next?)
-if current round number == Game::MAX_ROUNDS
+if current round number == Game::DEFAULT_MAX_ROUNDS
 button to go to game show page with final stats & winner
 game show page tallies all rounds' winners groupby count to get overall winner

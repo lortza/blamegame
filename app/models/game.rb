@@ -10,13 +10,19 @@ class Game < ApplicationRecord
   before_create :generate_code
 
   def self.current
-    hour_window = Time.zone.now - 3600
-    where('created_at >= ?', hour_window)
+    where('created_at >= ?', 1.hour.ago)
   end
 
   def self.past
-    hour_window = Time.zone.now - 3600
-    where('created_at < ?', hour_window)
+    where('created_at < ?', 1.hour.ago)
+  end
+
+  def expired?
+    if complete?
+      rounds.last.submissions.last.created_at < 30.minutes.ago
+    else
+      created_at < 2.hours.ago
+    end
   end
 
   def activated?
@@ -39,8 +45,13 @@ class Game < ApplicationRecord
     end
   end
 
+  def complete?
+    complete_status = rounds.map(&:complete?).uniq
+    complete_status.size == 1 && complete_status.first == true
+  end
+
   def winner
-    return unless all_rounds_are_complete?
+    return unless complete?
 
     vote_results = votes_by_nominee
     return if no_rounds_have_a_winner?(vote_results)
@@ -65,9 +76,6 @@ class Game < ApplicationRecord
     end
   end
 
-  def all_rounds_are_complete?
-    rounds.map(&:complete?).uniq.first == true
-  end
 
   def no_rounds_have_a_winner?(vote_results)
     return true if (vote_results == []) || (there_is_a_tie?(vote_results))

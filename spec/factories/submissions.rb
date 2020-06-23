@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :submission do
-    round
+    round { create(:round) }
     nominee_id { create(:player).id }
     nominator_id { create(:player).id }
   end

@@ -3,6 +3,7 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, only: %i[index new create edit update destroy]
   before_action :set_game, only: %i[show edit update destroy players_ready]
+  before_action :redirect_to_play, only: %i[show]
 
   def index
     @current_games = current_user.games
@@ -65,6 +66,11 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.find(params[:id])
+  end
+
+  def redirect_to_play
+    set_game
+    redirect_to join_game_path if @game.expired? && @game.complete? && !current_user.present?
   end
 
   def game_params
