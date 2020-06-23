@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :round do
     game
     question
+    sequence(:number) { |n| n }
   end
 end
