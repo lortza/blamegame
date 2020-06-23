@@ -15,6 +15,7 @@
         <h6 class="card-subtitle mb-2 text-muted">Adult Content? <%= game.adult_content_permitted? %></h6>
         <h6 class="card-subtitle mb-2 text-muted">Players: <%= display_players(game) if game.players.any? %></h6>
         <h6 class="card-subtitle mb-2 text-muted">Players Ready? <%= game.players_ready? %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Game Over? <%= game.complete? %></h6>
         <p class="card-text">
           <ol>
             <% game.rounds.each do |round| %>
@@ -43,6 +44,7 @@
       <th>Game Code</th>
       <th>Players</th>
       <th>Players Ready?</th>
+      <th>Game Complete?</th>
       <th colspan='2'>Actions</th>
     </tr>
   </thead>
@@ -56,6 +58,7 @@
         <%= display_players(game) %>
       </td>
       <td><%= game.players_ready? %></td>
+      <td><%= game.complete? %></td>
       <td><%= link_to 'Edit', edit_game_path(game) %></td>
       <td><%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %></td>
     </tr>
