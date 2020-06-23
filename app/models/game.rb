@@ -10,18 +10,19 @@ class Game < ApplicationRecord
   before_create :generate_code
 
   def self.current
-    hour_window = 1.hour.ago
-    where('created_at >= ?', hour_window)
+    where('created_at >= ?', 1.hour.ago)
   end
 
   def self.past
-    hour_window = 1.hour.ago
-    where('created_at < ?', hour_window)
+    where('created_at < ?', 1.hour.ago)
   end
 
   def expired?
-    # hour_window = Time.zone.now - 3600
-    created_at < 1.hour.ago
+    if complete?
+      rounds.last.submissions.last.created_at < 30.minutes.ago
+    else
+      created_at < 2.hours.ago
+    end
   end
 
   def activated?

@@ -3,6 +3,8 @@
 FactoryBot.define do
   factory :game do
     user_id { create(:user).id }
+    sequence(:code) { |n| "code#{n}" }
+    players_ready { true }
     max_rounds { 3 }
     adult_content_permitted { true }
 

@@ -1,6 +1,6 @@
 class Question < ApplicationRecord
-  validates :text, presence: true
   has_many :rounds
+  validates :text, presence: true
 
   def self.search(field:, terms:)
     if terms.blank?

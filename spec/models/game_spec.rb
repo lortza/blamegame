@@ -47,14 +47,36 @@ RSpec.describe Game, type: :model do
   end
 
   describe 'expired?' do
-    it 'returns true if the game is older than 1 hour' do
-      game = create(:game, created_at: 2.hours.ago)
+    let(:game) { create(:game) }
+    let(:round) { create(:round, game: game) }
+    let(:player1) { create(:player, game: game) }
+    let(:player2) { create(:player, game: game) }
+    let(:submission1) { create(:submission, round: round, nominee_id: player1.id, nominator_id: player2.id) }
+    let(:submission2) { create(:submission, round: round, nominee_id: player2.id, nominator_id: player1.id) }
+
+    before do
+      submission1
+      submission2
+    end
+
+    it 'returns true if the game is older than 2 hours regardless of completion' do
+      allow_any_instance_of(Game).to receive(:created_at).and_return(2.5.hours.ago)
+      allow_any_instance_of(Submission).to receive(:created_at).and_return(2.5.hours.ago)
+
       expect(game.expired?).to be(true)
     end
 
-    it 'returns false if the game is less than an hour old' do
-      game = create(:game, created_at: 30.minutes.ago)
+    it 'returns false if the game is less than 2 hours old' do
+      allow_any_instance_of(Game).to receive(:created_at).and_return(1.hours.ago)
+      allow_any_instance_of(Submission).to receive(:created_at).and_return(5.minutes.ago)
+
       expect(game.expired?).to be(false)
+    end
+
+    it 'returns true if the last submission was more than 30 minutes ago' do
+      submission2.update(created_at: 35.minutes.ago)
+
+      expect(game.expired?).to be(true)
     end
   end
 
