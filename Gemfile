@@ -17,6 +17,7 @@ gem 'loofah', '>= 2.2.3'        # Upgrade for security update
 gem 'nokogiri', '>= 1.8.5'      # Upgrade for security update
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3'            # Use Puma as the app server
+gem 'pundit'                    # Authorization
 gem 'rack', '>= 2.0.6'          # Upgrade for security update
 gem 'rails', '~> 6.0.3.1'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'redcarpet', github: 'vmg/redcarpet' # markdown
