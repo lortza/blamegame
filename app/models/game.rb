@@ -13,6 +13,10 @@ class Game < ApplicationRecord
     where('created_at >= ?', 1.hour.ago)
   end
 
+  def self.current_codes
+    current.pluck(:code)
+  end
+
   def self.past
     where('created_at < ?', 1.hour.ago)
   end

@@ -4,6 +4,7 @@
   <div class='field'>
     <%= form.label :game_code %>
     <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', class: 'form-control' %>
+    <small id='error_helper_text' class="form-text error-helper-text hidden">Invalid Game Code</small>
   </div>
 
   <div class='field'>
@@ -12,16 +13,13 @@
   </div>
 
   <div class="mt-5 mb-5">
-    <%= form.submit 'Submit', class: 'btn btn-outline-primary btn-block' %>
+    <%= form.submit 'Submit', id: 'submit_button', class: 'btn btn-outline-primary btn-block' %>
   </div>
 <% end %>
 
-<script>
+<script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function () {
-    let cookieNotice = localStorage.getItem('cookie_notice')
-    if (cookieNotice != 'true') {
-      alert("Hi there! This site uses a cookie to remember your name. We delete it at the end of each game. Have fun, y'all!")
-      localStorage.setItem('cookie_notice', 'true');
-    }
+    displayCookieNotice();
+    validateGameCode(<%= raw(Game.current_codes) %>);
   })
 </script>
