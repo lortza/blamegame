@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
@@ -67,7 +69,7 @@ RSpec.describe Game, type: :model do
     end
 
     it 'returns false if the game is less than 2 hours old' do
-      allow_any_instance_of(Game).to receive(:created_at).and_return(1.hours.ago)
+      allow_any_instance_of(Game).to receive(:created_at).and_return(1.hour.ago)
       allow_any_instance_of(Submission).to receive(:created_at).and_return(5.minutes.ago)
 
       expect(game.expired?).to be(false)
@@ -82,7 +84,6 @@ RSpec.describe Game, type: :model do
 
   describe 'activated?' do
     xit '' do
-
     end
   end
 
@@ -139,17 +140,17 @@ RSpec.describe Game, type: :model do
       player3 = create(:player, game: game)
 
       create(:submission,
-        round: game.rounds.first,
-        nominee_id: player1.id,
-        nominator_id: player2.id)
+             round: game.rounds.first,
+             nominee_id: player1.id,
+             nominator_id: player2.id)
       create(:submission,
-        round: game.rounds.first,
-        nominee_id: player2.id,
-        nominator_id: player1.id)
+             round: game.rounds.first,
+             nominee_id: player2.id,
+             nominator_id: player1.id)
       create(:submission,
-        round: game.rounds.first,
-        nominee_id: player1.id,
-        nominator_id: player3.id)
+             round: game.rounds.first,
+             nominee_id: player1.id,
+             nominator_id: player3.id)
 
       expect(game.winner).to eq(player1)
     end

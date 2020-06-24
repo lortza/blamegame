@@ -70,7 +70,7 @@ class GamesController < ApplicationController
 
   def redirect_to_play
     set_game
-    redirect_to join_game_path if @game.expired? && @game.complete? && !current_user.present?
+    redirect_to join_game_path if @game.expired? && @game.complete? && current_user.blank?
   end
 
   def game_params
@@ -78,6 +78,6 @@ class GamesController < ApplicationController
                                  :adult_content_permitted,
                                  :max_rounds,
                                  :players_ready,
-                                 players_attributes: [:id, :name, :_destroy])
+                                 players_attributes: %i[id name _destroy])
   end
 end

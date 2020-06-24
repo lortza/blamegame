@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Round < ApplicationRecord
   belongs_to :game
   belongs_to :question
@@ -30,14 +32,14 @@ class Round < ApplicationRecord
       nominator_name = Player.find(submission.nominator_id).name
       results[submission.nominee.name] << nominator_name
     end
-    results.sort_by {|nominee, nominators| -nominators.count}
+    results.sort_by { |_nominee, nominators| -nominators.count }
   end
 
   private
 
   def votes_by_nominee
     results = submissions.group(:nominee_id).count
-    results.sort_by {|nominee, votes| -votes}
+    results.sort_by { |_nominee, votes| -votes }
   end
 
   def there_is_a_tie?(vote_results)

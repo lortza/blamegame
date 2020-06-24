@@ -21,7 +21,7 @@ RSpec.describe RoundsHelper, type: :helper do
 
     it 'defines next round as the one after the current one' do
       output = helper.next_round_submission(round1)
-      expect(output).to include("#{round2.id}")
+      expect(output).to include(round2.id.to_s)
     end
   end
 

@@ -26,11 +26,11 @@ class PlayersController < ApplicationController
   private
 
   def set_game
-    if params[:game_id].present?
-      @game = Game.find_by(id: params[:game_id])
-    else
-      @game = Game.find_by(code: player_params[:game_code]&.upcase)
-    end
+    @game = if params[:game_id].present?
+              Game.find_by(id: params[:game_id])
+            else
+              Game.find_by(code: player_params[:game_code]&.upcase)
+            end
   end
 
   def player_params

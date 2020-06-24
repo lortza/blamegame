@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Player < ApplicationRecord
   belongs_to :game, inverse_of: :players
   has_many :submissions, foreign_key: :nominee_id, dependent: :destroy
@@ -5,5 +7,5 @@ class Player < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :game_id,
-    message: "This name is already taken by another player. Please enter another." }
+                                 message: 'This name is already taken by another player. Please enter another.' }
 end

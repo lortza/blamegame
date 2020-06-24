@@ -20,6 +20,4 @@ RSpec.describe GamesHelper, type: :helper do
       expect(actual_output).to eq(expected_output)
     end
   end
-
-
 end

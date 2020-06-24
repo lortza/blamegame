@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game < ApplicationRecord
   DEFAULT_MAX_ROUNDS = 10
 
@@ -42,7 +44,7 @@ class Game < ApplicationRecord
     questions = generate_questions
 
     questions.each do |question|
-      self.rounds.create!(
+      rounds.create!(
         number: round_numbers.shift,
         question_id: question.id
       )
@@ -80,9 +82,8 @@ class Game < ApplicationRecord
     end
   end
 
-
   def no_rounds_have_a_winner?(vote_results)
-    return true if (vote_results == []) || (there_is_a_tie?(vote_results))
+    return true if (vote_results == []) || there_is_a_tie?(vote_results)
   end
 
   def there_is_a_tie?(vote_results)
@@ -101,7 +102,7 @@ class Game < ApplicationRecord
       end
     end
 
-    results.sort_by {|nominee, votes| -votes}
+    results.sort_by { |_nominee, votes| -votes }
   end
 
   def rounds_with_winners
