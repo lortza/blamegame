@@ -63,7 +63,10 @@ header,
   }
 }
 
+.input-error { border: 1px solid $error; }
+.error-helper-text { color: $error; }
 .file-field { color: $medium-gray; }
+.hidden { display: none; }
 
 
 // SEARCH BAR
