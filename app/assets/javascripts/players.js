@@ -8,6 +8,7 @@ function displayCookieNotice() {
 
 function validateGameCode(currentGameCodes) {
   let gameCodeField = document.getElementById('player_game_code');
+  let playerNameField = document.getElementById('player_name');
   let errorHelperText = document.getElementById('error_helper_text');
   let submitButton = document.getElementById('submit_button');
 
@@ -15,14 +16,26 @@ function validateGameCode(currentGameCodes) {
     let gameCodeValue = gameCodeField.value.toUpperCase();
     let valid_game_code = currentGameCodes.includes(gameCodeValue);
 
-    if (valid_game_code) {
+    if (valid_game_code && playerNameField.value) {
       errorHelperText.classList.add('hidden')
       gameCodeField.classList.remove('input-error')
       submitButton.classList.remove('hidden')
+    } else if (valid_game_code){
+      errorHelperText.classList.add('hidden')
+      gameCodeField.classList.remove('input-error')
+      // submitButton.classList.remove('hidden')
     } else {
       errorHelperText.classList.remove('hidden')
       gameCodeField.classList.add('input-error')
       submitButton.classList.add('hidden')
     }
-  }) // blur
+  }) // game code blur
+
+  playerNameField.addEventListener('keyup', function () {
+    if (valid_game_code && playerNameField.value) {
+      submitButton.classList.remove('hidden')
+    } else {
+      submitButton.classList.add('hidden')
+    }
+  }) // player name keyup
 }
