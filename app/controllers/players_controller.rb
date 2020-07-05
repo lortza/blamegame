@@ -13,7 +13,6 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @game = Game.current.find_by(code: player_params[:game_code].upcase)
     @player = Player.new(name: player_params[:name], game_id: @game&.id)
 
     if @player.save
@@ -27,11 +26,11 @@ class PlayersController < ApplicationController
   private
 
   def set_game
-    @game = if params[:game_id].present?
-              Game.find_by(id: params[:game_id])
-            else
-              Game.find_by(code: player_params[:game_code]&.upcase)
-            end
+    if params[:game_id].present?
+      @game = Game.find_by(id: params[:game_id]&.upcase)
+    else
+      @game = Game.find_by(code: player_params[:game_code]&.upcase)
+    end
   end
 
   def player_params
