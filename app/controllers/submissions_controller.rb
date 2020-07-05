@@ -20,7 +20,7 @@ class SubmissionsController < ApplicationController
     submission.nominator_id = @player.id
 
     if submission.save
-      redirect_to redirect_url(@game, @round, submission)
+      redirect_to game_round_submission_url(@game, @round, submission)
     else
       render :new
     end

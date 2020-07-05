@@ -12,8 +12,8 @@
   <% end %>
 </ol>
 
-<% if @round.number < @round.game.max_rounds %>
-  <%= link_to 'Next Question', next_round_submission(@round), class: button_block %>
-<% else %>
+<% if @round.number == @round.game.max_rounds || @round.game.complete? %>
   <%= link_to "Let's see who won the game!", game_path(@round.game), class: button_block %>
+<% else %>
+  <%= link_to 'Next Question', next_round_submission(@round), class: button_block %>
 <% end %>
