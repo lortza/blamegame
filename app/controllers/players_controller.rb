@@ -13,10 +13,15 @@ class PlayersController < ApplicationController
   end
 
   def create
-    player = @game.players.new(player_params.except(:game_code))
+    game = Game.current.find_by(code: player_params[:game_code].upcase)
 
-    if player.save
-      cookies[:player_id] = { value: player.id, expires: 1.day.from_now }
+    @player = Player.new(
+      name: player_params[:name],
+      game_id: game&.id
+    )
+
+    if @player.save
+      cookies[:player_id] = { value: @player.id, expires: 1.day.from_now }
       redirect_to game_players_url(@game)
     else
       render :new

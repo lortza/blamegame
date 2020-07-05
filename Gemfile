@@ -20,6 +20,7 @@ gem 'puma', '~> 4.3'            # Use Puma as the app server
 gem 'pundit'                    # Authorization
 gem 'rack', '>= 2.0.6'          # Upgrade for security update
 gem 'rails', '~> 6.0.3.1'       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails-controller-testing'
 gem 'redcarpet', github: 'vmg/redcarpet' # markdown
 gem 'sass-rails', '~> 6.0'      # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0'      # Use Uglifier as compressor for JavaScript assets
