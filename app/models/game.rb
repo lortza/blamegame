@@ -69,7 +69,7 @@ class Game < ApplicationRecord
   private
 
   def generate_code
-    acceptable_letters = (('A'..'Z').to_a) - ['O', 'I']
+    acceptable_letters = ('A'..'Z').to_a - %w[O I]
     letters = acceptable_letters.shuffle
     self.code = ''
     4.times { self.code += letters.sample }

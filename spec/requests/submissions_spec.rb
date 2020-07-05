@@ -37,8 +37,6 @@ RSpec.describe 'Submissions', type: :request do
       end
     end
 
-
-
     xit 'denies access to submissions#index' do
       get submissions_path
 

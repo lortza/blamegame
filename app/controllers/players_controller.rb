@@ -13,12 +13,8 @@ class PlayersController < ApplicationController
   end
 
   def create
-    game = Game.current.find_by(code: player_params[:game_code].upcase)
-
-    @player = Player.new(
-      name: player_params[:name],
-      game_id: game&.id
-    )
+    @game = Game.current.find_by(code: player_params[:game_code].upcase)
+    @player = Player.new(name: player_params[:name], game_id: @game&.id)
 
     if @player.save
       cookies[:player_id] = { value: @player.id, expires: 1.day.from_now }
