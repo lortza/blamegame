@@ -5,8 +5,10 @@ class Round < ApplicationRecord
   belongs_to :question
   has_many :submissions, dependent: :destroy
 
+  validates :number, presence: true
+
   def winner
-    return unless all_votes_are_in?
+    return nil unless all_votes_are_in?
 
     vote_results = votes_by_nominee
     return nil if there_is_a_tie?(vote_results)
@@ -21,21 +23,29 @@ class Round < ApplicationRecord
 
   def results_by_nominee
     nominee_ids = submissions.pluck(:nominee_id).uniq
-    results = {}
-
-    nominee_ids.each do |nominee_id|
-      nominee_name = Player.find(nominee_id).name
-      results[nominee_name] = []
-    end
-
-    submissions.each do |submission|
-      nominator_name = Player.find(submission.nominator_id).name
-      results[submission.nominee.name] << nominator_name
-    end
+    names_dictionary = nominee_names(nominee_ids)
+    results = count_submissions_for_each_nominee(names_dictionary)
     results.sort_by { |_nominee, nominators| -nominators.count }
   end
 
   private
+
+  def nominee_names(nominee_ids)
+    names_dictionary = {}
+    nominee_ids.each do |nominee_id|
+      nominee_name = Player.find(nominee_id).name
+      names_dictionary[nominee_name] = []
+    end
+    names_dictionary
+  end
+
+  def count_submissions_for_each_nominee(names_dictionary)
+    submissions.each do |submission|
+      nominator_name = Player.find(submission.nominator_id).name
+      names_dictionary[submission.nominee.name] << nominator_name
+    end
+    names_dictionary
+  end
 
   def votes_by_nominee
     results = submissions.group(:nominee_id).count
