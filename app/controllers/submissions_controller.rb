@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class SubmissionsController < ApplicationController
-  before_action :set_game, only: %i[index new create show edit update destroy]
-  before_action :set_round, only: %i[index new create show edit update destroy]
-  before_action :set_submission, only: %i[show destroy]
+  before_action :set_game, only: %i[new create show]
+  before_action :set_round, only: %i[new create show]
+  before_action :set_submission, only: %i[show]
   before_action :set_player, only: %i[new create]
   before_action :redirect_to_game, only: %i[new create]
   before_action :redirect_to_round, only: %i[new create]

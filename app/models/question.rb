@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
-  has_many :rounds
+  has_many :rounds, dependent: :nullify
   validates :text, presence: true
 
   def self.search(field:, terms:)

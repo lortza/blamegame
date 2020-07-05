@@ -44,22 +44,15 @@ module ApplicationHelper
   end
 
   class CodeRayify < Redcarpet::Render::HTML
-    def block_code(code, language)
-      language = 'bash' if language.nil?
-      CodeRay.scan(code, language).div(line_numbers: :table)
-    end
-  end
-
-  def markdown(text)
-    coderay_options = {
+    CODERAY_OPTIONS = {
       filter_html: true,
       hard_wrap: true,
       safe_links_only: true,
       with_toc_data: true,
       prettify: true
-    }
+    }.freeze
 
-    redcarpet_options = {
+    REDCARPET_OPTIONS = {
       autolink: true,
       disable_indented_code_blocks: false,
       fenced_code_blocks: true,
@@ -70,10 +63,17 @@ module ApplicationHelper
       strikethrough: true,
       superscript: true,
       tables: true
-    }
+    }.freeze
 
-    coderayified = CodeRayify.new(coderay_options)
-    markdown_to_html = Redcarpet::Markdown.new(coderayified, redcarpet_options)
+    def block_code(code, language)
+      language = 'bash' if language.nil?
+      CodeRay.scan(code, language).div(line_numbers: :table)
+    end
+  end
+
+  def markdown(text)
+    coderayified = CodeRayify.new(CodeRayify::CODERAY_OPTIONS)
+    markdown_to_html = Redcarpet::Markdown.new(coderayified, CodeRayify::REDCARPET_OPTIONS)
     markdown_to_html.render(text).html_safe
   end
 end

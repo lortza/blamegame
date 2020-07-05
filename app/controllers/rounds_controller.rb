@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RoundsController < ApplicationController
-  before_action :set_round, only: %i[show edit update destroy]
+  before_action :set_round, only: %i[show]
   before_action :redirect_to_game, only: %i[show]
 
   def show
