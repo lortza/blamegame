@@ -7,6 +7,8 @@ class Player < ApplicationRecord
 
   validates :name, :game_id, presence: true
 
+  # rubocop:disable Rails/UniqueValidationWithoutIndex
   validates :name, uniqueness: { scope: :game_id,
                                  message: 'This name is already taken by another player. Please enter another.' }
+  # rubocop:enable Rails/UniqueValidationWithoutIndex
 end

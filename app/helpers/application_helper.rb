@@ -71,9 +71,11 @@ module ApplicationHelper
     end
   end
 
+  # rubocop:disable Rails/OutputSafety
   def markdown(text)
     coderayified = CodeRayify.new(CodeRayify::CODERAY_OPTIONS)
     markdown_to_html = Redcarpet::Markdown.new(coderayified, CodeRayify::REDCARPET_OPTIONS)
     markdown_to_html.render(text).html_safe
   end
+  # rubocop:enable Rails/OutputSafety
 end
