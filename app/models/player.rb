@@ -2,8 +2,11 @@
 
 class Player < ApplicationRecord
   belongs_to :game, inverse_of: :players
-  has_many :submissions, foreign_key: :nominee_id, dependent: :destroy, inverse_of: :player
-  has_many :submissions, foreign_key: :nominator_id, dependent: :destroy, inverse_of: :player
+
+  # rubocop:disable Rails/InverseOf
+  has_many :submissions, foreign_key: :nominee_id, dependent: :destroy
+  has_many :submissions, foreign_key: :nominator_id, dependent: :destroy
+  # rubocop:enable Rails/InverseOf
 
   validates :name, :game_id, presence: true
 
