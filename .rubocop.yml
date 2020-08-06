@@ -1,0 +1,65 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+Style/Documentation:
+  Enabled: false
+Rails:
+  Enabled: true
+AllCops:
+  DefaultFormatter: progress
+  Exclude:
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'bin/**'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+    - 'lib/tasks/**/*'
+    - 'vendor/**/*'
+    # - '**/*.erb'
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: false
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: false
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: false
+Lint/RaiseException:
+  Enabled: false
+Lint/StructNewOverride:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - !ruby/regexp /.*_spec\.rb$/
+    - 'spec/factories/**/*'
+    - 'lib/tasks/*'
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+  - !ruby/regexp /.*_spec\.rb$/
+
+Style/BlockDelimiters:
+  Exclude:
+    - !ruby/regexp /.*_spec\.rb$/
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/ExponentialNotation:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: false
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: false
+Style/SlicingWithRange:
+  Enabled: false
