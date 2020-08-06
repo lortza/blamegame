@@ -6,6 +6,7 @@ ruby '2.6.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'bootsnap', '>= 1.4.2', require: false  # Reduces boot times through caching; required in config/boot.rb
+gem 'devise'                    # User authentication
 gem 'jbuilder', '~> 2.7'        # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'pg', '>= 0.18', '< 2.0'    # Use postgresql as the database for Active Record
 gem 'puma', '~> 4.1'            # Use Puma as the app server
@@ -30,6 +31,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rails-erd' # , require: false   # generates table diagram run `bundle exec erd`
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'scss_lint', require: false # css linter
