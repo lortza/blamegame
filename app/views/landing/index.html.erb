@@ -1,0 +1,12 @@
+<h1>Landing#index</h1>
+
+<%= link_to 'sweet tutorial', 'https://medium.com/@jelaniwoods/get-started-with-action-cable-in-rails-6-4c605f93c9b8', target: '_blank' %>
+
+<%= form_for @message, remote: true do |f| %>
+  <%= f.text_field :content, id: 'input' %>
+  <%= f.submit %>
+<% end %>
+
+
+<div id="messages" style='border: 1px solid pink;'>
+</div>
