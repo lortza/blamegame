@@ -10,7 +10,7 @@ class Round < ApplicationRecord
   def winner
     return nil unless all_votes_are_in?
 
-    vote_results = votes_by_nominee
+    vote_results = votes_by_candidate
     return nil if there_is_a_tie?(vote_results)
 
     winning_player_id = vote_results.first[0]
@@ -21,35 +21,35 @@ class Round < ApplicationRecord
     submissions.present? && (submissions.size == game.players.size)
   end
 
-  def results_by_nominee
-    nominee_ids = submissions.pluck(:nominee_id).uniq
-    names_dictionary = nominee_names(nominee_ids)
-    results = count_submissions_for_each_nominee(names_dictionary)
-    results.sort_by { |_nominee, nominators| -nominators.count }
+  def results_by_candidate
+    candidate_ids = submissions.pluck(:candidate_id).uniq
+    names_dictionary = candidate_names(candidate_ids)
+    results = count_submissions_for_each_candidate(names_dictionary)
+    results.sort_by { |_candidate, voters| -voters.count }
   end
 
   private
 
-  def nominee_names(nominee_ids)
+  def candidate_names(candidate_ids)
     names_dictionary = {}
-    nominee_ids.each do |nominee_id|
-      nominee_name = Player.find(nominee_id).name
-      names_dictionary[nominee_name] = []
+    candidate_ids.each do |candidate_id|
+      candidate_name = Player.find(candidate_id).name
+      names_dictionary[candidate_name] = []
     end
     names_dictionary
   end
 
-  def count_submissions_for_each_nominee(names_dictionary)
+  def count_submissions_for_each_candidate(names_dictionary)
     submissions.each do |submission|
-      nominator_name = Player.find(submission.nominator_id).name
-      names_dictionary[submission.nominee.name] << nominator_name
+      voter_name = Player.find(submission.voter_id).name
+      names_dictionary[submission.candidate.name] << voter_name
     end
     names_dictionary
   end
 
-  def votes_by_nominee
-    results = submissions.group(:nominee_id).count
-    results.sort_by { |_nominee, votes| -votes }
+  def votes_by_candidate
+    results = submissions.group(:candidate_id).count
+    results.sort_by { |_candidate, votes| -votes }
   end
 
   def there_is_a_tie?(vote_results)

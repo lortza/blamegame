@@ -2,8 +2,8 @@
 
 submission form new
 show round.question
-dropdown for nominee game.players
-dropdown for nominator game.players
+dropdown for candidate game.players
+dropdown for voter game.players
 
 
 workflow 1
@@ -25,8 +25,8 @@ when all players are in, the moderator clicks a boolean that says the game is re
 players refresh their page and see a button that says "go to round 1"
 on this page games/ABCD/rounds/1/submission/new
 shows the question
-dropdown for nominee (game.players.map(&:name))
-dropdown for nominator (later we'll use localstorage for this)
+dropdown for candidate (game.players.map(&:name))
+dropdown for voter (later we'll use localstorage for this)
 submit takes them to a "hold tight" page...?
 if round.submissions.count == game.players.count
 show button link to round show page

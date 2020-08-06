@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_215226) do
+ActiveRecord::Schema.define(version: 2020_08_10_215227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,13 +59,13 @@ ActiveRecord::Schema.define(version: 2020_08_10_215226) do
 
   create_table "submissions", force: :cascade do |t|
     t.bigint "round_id", null: false
-    t.bigint "nominee_id"
-    t.bigint "nominator_id"
+    t.bigint "candidate_id"
+    t.bigint "voter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["nominator_id"], name: "index_submissions_on_nominator_id"
-    t.index ["nominee_id"], name: "index_submissions_on_nominee_id"
+    t.index ["candidate_id"], name: "index_submissions_on_candidate_id"
     t.index ["round_id"], name: "index_submissions_on_round_id"
+    t.index ["voter_id"], name: "index_submissions_on_voter_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_08_10_215226) do
   add_foreign_key "players", "games"
   add_foreign_key "rounds", "games"
   add_foreign_key "rounds", "questions"
-  add_foreign_key "submissions", "players", column: "nominator_id"
-  add_foreign_key "submissions", "players", column: "nominee_id"
+  add_foreign_key "submissions", "players", column: "candidate_id"
+  add_foreign_key "submissions", "players", column: "voter_id"
   add_foreign_key "submissions", "rounds"
 end

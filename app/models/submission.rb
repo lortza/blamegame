@@ -2,11 +2,11 @@
 
 class Submission < ApplicationRecord
   belongs_to :round
-  belongs_to :nominee, class_name: 'Player'
-  belongs_to :nominator, class_name: 'Player'
+  belongs_to :candidate, class_name: 'Player'
+  belongs_to :voter, class_name: 'Player'
 
   # rubocop:disable Rails/UniqueValidationWithoutIndex
-  validates :nominator, uniqueness: { scope: :round_id,
-                                      message: 'you only get to vote once per round' }
+  validates :voter, uniqueness: { scope: :round_id,
+                                  message: 'you only get to vote once per round' }
   # rubocop:enable Rails/UniqueValidationWithoutIndex
 end

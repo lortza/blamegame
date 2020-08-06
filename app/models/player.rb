@@ -4,8 +4,8 @@ class Player < ApplicationRecord
   belongs_to :game, inverse_of: :players
 
   # rubocop:disable Rails/InverseOf
-  has_many :submissions, foreign_key: :nominee_id, dependent: :destroy
-  has_many :submissions, foreign_key: :nominator_id, dependent: :destroy
+  has_many :submissions, foreign_key: :candidate_id, dependent: :destroy
+  has_many :submissions, foreign_key: :voter_id, dependent: :destroy
   # rubocop:enable Rails/InverseOf
 
   validates :name, :game_id, presence: true

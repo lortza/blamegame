@@ -59,7 +59,7 @@ class Game < ApplicationRecord
   def winner
     return unless complete?
 
-    vote_results = votes_by_nominee
+    vote_results = votes_by_candidate
     return if no_rounds_have_a_winner?(vote_results)
 
     winning_player_id = vote_results.first[0]
@@ -93,7 +93,7 @@ class Game < ApplicationRecord
     vote_results.first[1] == vote_results.second[1]
   end
 
-  def votes_by_nominee
+  def votes_by_candidate
     results = {}
     rounds_with_winners.each do |round|
       if results[round.winner.id].present?
@@ -103,7 +103,7 @@ class Game < ApplicationRecord
       end
     end
 
-    results.sort_by { |_nominee, votes| -votes }
+    results.sort_by { |_candidate, votes| -votes }
   end
 
   def rounds_with_winners
