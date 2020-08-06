@@ -23,13 +23,13 @@ default: &default
 
 development:
   <<: *default
-  database: action_cable_rails_six_development
+  database: voting_game_fresh_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: action_cable_rails_six
+  #username: voting_game_fresh
 
   # The password associated with the postgres role (username).
   #password:
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: action_cable_rails_six_test
+  database: voting_game_fresh_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: action_cable_rails_six_production
-  username: action_cable_rails_six
-  password: <%= ENV['ACTION_CABLE_RAILS_SIX_DATABASE_PASSWORD'] %>
+  database: voting_game_fresh_production
+  username: voting_game_fresh
+  password: <%= ENV['VOTING_GAME_FRESH_DATABASE_PASSWORD'] %>

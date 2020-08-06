@@ -1,5 +1,5 @@
 {
-  "name": "action_cable_rails_six",
+  "name": "voting_game_fresh",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
