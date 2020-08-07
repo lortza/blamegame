@@ -1,0 +1,13 @@
+<% if @game.activated? %>
+  <h1>Let's do this thing!</h1>
+  <%= link_to 'Go To Round 1', new_game_round_submission_path(@game, @game.rounds.first), class: button_block %>
+<% else %>
+  <h1>Hold tight while your teammates arrive...</h1>
+
+  <% @game.players.each do |player| %>
+  <p><%= player.name %></p>
+  <% end %>
+
+  <h3>Is everybody in?</h3>
+  <%= link_to 'Start Game!', players_ready_path(id: @game.id), method: :post, class: button_block %>
+<% end %>

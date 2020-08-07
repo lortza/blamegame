@@ -1,24 +1,60 @@
-# README
+# Blame Game
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+checklist
+- [ ] master key
 
-Things you may want to cover:
+[![CircleCI](https://circleci.com/gh/lortza/voting_game.svg?style=svg)](https://circleci.com/gh/lortza/voting_game)
 
-* Ruby version
+[![Maintainability](https://api.codeclimate.com/v1/badges/5900dd05417f73a806a7/maintainability)](https://codeclimate.com/github/lortza/voting_game/maintainability)
 
-* System dependencies
+Description TBD
 
-* Configuration
+Live on heroku as TBD
 
-* Database creation
+## To Do
+- [ ] Rename all the things in all of the files
+- [ ] Set up routes
+- [ ] Set up database
+- [ ] Set up circleci
+- [ ] Set up dependabot
+- [ ] Set up codeclimate
 
-* Database initialization
+## Features
 
-* How to run the test suite
+* wip
 
-* Services (job queues, cache servers, search engines, etc.)
+## Getting Started
 
-* Deployment instructions
+* Fork & Clone
+* `bundle`
+* Set up DB: `rake db:setup` (Runs `db:create`, `db:schema:load` and `db:seed`)
+* User: In development, see the seeds file for the user credentials so you can log in
+* `routes.rb`: comment out line 7, uncomment line 10 to allow users to sign up at http://localhost:3000/users/sign_up
 
-* ...
+
+## Tests
+* Tests: `bundle exec rspec`
+
+### Linters
+This project uses these linters in CI:
+* [reek](https://github.com/troessner/reek)
+* [rubocop](https://github.com/rubocop-hq/rubocop)
+* [scss-lint](https://github.com/sds/scss-lint)
+* FactoryBot.lint -- coming soon
+
+Run them locally on your machine like this:
+```
+bundle exec reek
+
+bundle exec rubocop
+
+bundle exec scss-lint app/assets/stylesheets/**.scss
+```
+
+## Related Docs
+* [Devise](https://github.com/plataformatec/devise) user authentication (sign up/in/out)
+* [Pundit](https://github.com/varvet/pundit) user authorization (restricts access to content)
+* [Uglifier](https://github.com/lautis/uglifier) in harmony mode
+* [Dependabot](https://app.dependabot.com/accounts/lortza/) dependency manager
+* [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers) for testing model relationships and validations
+* [FactoryBot](https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md) to build test objects

@@ -1,0 +1,69 @@
+<% content_for(:title, "Games") %>
+
+<header>
+  <h1>Games</h1>
+  <%= link_to '+ New Game', new_game_path, class: "controls mb-3 #{button_class}" %>
+</header>
+
+<% if @current_games.any? %>
+  <h2>Current Games</h2>
+  <% @current_games.each do |game| %>
+    <div class="card mb-5">
+      <div class="card-body">
+        <h5 class="card-title"><%= game.code %>: <%= game.date %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">Share Link: <%= link_to join_game_url, join_game_url %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Adult Content? <%= game.adult_content_permitted? %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Players: <%= display_players(game) if game.players.any? %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Players Ready? <%= game.players_ready? %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Game Over? <%= game.complete? %></h6>
+        <p class="card-text">
+          <ol>
+            <% game.rounds.each do |round| %>
+            <li>
+              <%= round.question.text %>
+              <% if round.winner.present? %>
+                | <%= link_to 'see results', game_round_path(game, round) %>
+              <% end %>
+            </li>
+            <% end %>
+          </ol>
+        </p>
+        <%= link_to 'Edit', edit_game_path(game) %>
+        <%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<h2>Past Games</h2>
+
+<table class='table mt-5'>
+  <thead>
+    <tr>
+      <th>Date Played</th>
+      <th>Game Code</th>
+      <th>Players</th>
+      <th>Players Ready?</th>
+      <th>Game Complete?</th>
+      <th colspan='2'>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @past_games.each do |game| %>
+    <tr>
+      <td><%= game.date %></td>
+      <td><%= link_to game.code, game %></td>
+      <td>
+        Winner: <%= display_winner(game) %> <br>
+        <%= display_players(game) %>
+      </td>
+      <td><%= game.players_ready? %></td>
+      <td><%= game.complete? %></td>
+      <td><%= link_to 'Edit', edit_game_path(game) %></td>
+      <td><%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @past_games, :page_links => false %>

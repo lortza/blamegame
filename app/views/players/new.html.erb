@@ -1,0 +1,25 @@
+<%= form_with(model: @player, local: true) do |form| %>
+  <%= render 'shared/errors', object: @player %>
+
+  <div class='field'>
+    <%= form.label :game_code %>
+    <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', class: 'form-control' %>
+    <small id='error_helper_text' class="form-text error-helper-text hidden">Invalid Game Code</small>
+  </div>
+
+  <div class='field'>
+    <%= form.label :name %>
+    <%= form.text_field :name, placeholder: 'Enter your name', class: 'form-control' %>
+  </div>
+
+  <div class="mt-5 mb-5">
+    <%= form.submit 'Submit', id: 'submit_button', class: 'btn btn-outline-primary btn-block hidden' %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+    displayCookieNotice();
+    validateGameCode(<%= raw(Game.current_codes) %>);
+  })
+</script>

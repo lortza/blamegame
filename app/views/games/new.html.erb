@@ -1,0 +1,8 @@
+<% content_for(:title, "New Game") %>
+
+<header>
+  <h1>New Game</h1>
+  <%= link_to 'Back', games_path, class: "controls #{button_class('secondary')}" %>
+</header>
+
+<%= render 'form', game: @game %>

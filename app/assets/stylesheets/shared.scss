@@ -1,0 +1,98 @@
+@import 'variables';
+
+.right { float: right; }
+
+.footer--delete {
+  border-top: 1px solid $gray;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.image {
+  max-width: 600px;
+  width: 100%;
+}
+
+.environment-banner {
+  color: $white;
+  font-family: monospace;
+  font-size: 1.25em;
+  padding: .75em;
+  text-align: center;
+}
+
+// Links
+a { color: $link-color; }
+
+// Controls
+header,
+.controls-parent {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.controls {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+
+  a {
+    clear: both;
+    margin-left: 10px;
+
+    &:hover {
+      color: $default-text;
+      text-decoration: none;
+    }
+  }
+}
+
+// Forms
+.field {
+  label {
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 1rem;
+  }
+
+  .form-check-label {
+    font-weight: normal;
+    margin-top: 0;
+  }
+}
+
+.input-error { border: 1px solid $error; }
+.error-helper-text { color: $error; }
+.file-field { color: $medium-gray; }
+.hidden { display: none; }
+
+
+// SEARCH BAR
+.search-icon {
+  color: $medium-gray;
+  float: right;
+  position: relative;
+  right: 14px;
+  top: 25px;
+}
+
+.clear-search {
+  font-size: 90%;
+  margin-bottom: 2em;
+  text-align: center;
+  a { color: $medium-gray; }
+}
+
+.brand-image {
+  height: 25px;
+}
+
+
+// BOOTSTRAP OVERRIDES
+
+.btn-xs {
+  font-size: .4em;
+  padding: 1px 4px;
+}

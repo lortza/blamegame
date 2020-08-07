@@ -1,0 +1,8 @@
+Description:
+    Data migration generator that provides a template with best practices for data migrations.
+
+Example:
+    rails g data_migration migration_name_here
+
+    This will create:
+        A timestamped data migration file in the `db/migrate` directory
