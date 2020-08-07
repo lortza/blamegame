@@ -11,13 +11,14 @@ gem 'jbuilder', '~> 2.7'        # Build JSON APIs with ease. Read more: https://
 gem 'pg', '>= 0.18', '< 2.0'    # Use postgresql as the database for Active Record
 gem 'puma', '~> 4.1'            # Use Puma as the app server
 gem 'pundit'                    # Authorization
+gem 'rails-controller-testing'
 gem 'sass-rails', '>= 6'        # Use SCSS for stylesheets
 gem 'turbolinks', '~> 5'        # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'webpacker', '~> 4.0'       # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'will_paginate', '~> 3.2.0' # pagination. Styles: http://mislav.github.io/will_paginate/
 # gem 'redis', '~> 4.0'       # Use Redis adapter to run Action Cable in production
 # gem 'bcrypt', '~> 3.1.7'    # Use Active Model has_secure_password
 # gem 'image_processing', '~> 1.2'  # Use Active Storage variant
-gem 'rails-controller-testing'
 
 
 group :development, :test do
