@@ -24,13 +24,13 @@ RSpec.describe Round, type: :model do
     end
 
     it 'returns false when not all players have voted' do
-      create(:submission, round: round, nominee_id: player2.id, nominator_id: player1.id)
+      create(:submission, round: round, candidate_id: player2.id, voter_id: player1.id)
       expect(round.complete?).to be(false)
     end
 
     it 'returns true when all players have voted' do
-      create(:submission, round: round, nominee_id: player2.id, nominator_id: player1.id)
-      create(:submission, round: round, nominee_id: player1.id, nominator_id: player2.id)
+      create(:submission, round: round, candidate_id: player2.id, voter_id: player1.id)
+      create(:submission, round: round, candidate_id: player1.id, voter_id: player2.id)
 
       expect(round.complete?).to be(true)
     end
@@ -50,8 +50,8 @@ RSpec.describe Round, type: :model do
     end
 
     it 'returns the player with the most submissions in this round' do
-      create(:submission, round: round, nominator_id: player1.id, nominee_id: player1.id)
-      create(:submission, round: round, nominator_id: player2.id, nominee_id: player1.id)
+      create(:submission, round: round, voter_id: player1.id, candidate_id: player1.id)
+      create(:submission, round: round, voter_id: player2.id, candidate_id: player1.id)
 
       expect(round.winner).to eq(player1)
     end
@@ -67,7 +67,7 @@ RSpec.describe Round, type: :model do
     end
   end
 
-  describe 'results_by_nominee' do
+  describe 'results_by_candidate' do
     let(:game) { create(:game) }
     let(:round) { create(:round, game: game) }
     let(:player1) { create(:player, game: game) }
@@ -79,30 +79,30 @@ RSpec.describe Round, type: :model do
       player2
     end
 
-    it 'returns an array with nominator name and list of nominators' do
-      create(:submission, round: round, nominator_id: player1.id, nominee_id: player1.id)
-      create(:submission, round: round, nominator_id: player2.id, nominee_id: player1.id)
+    it 'returns an array with voter name and list of voters' do
+      create(:submission, round: round, voter_id: player1.id, candidate_id: player1.id)
+      create(:submission, round: round, voter_id: player2.id, candidate_id: player1.id)
 
       expected_results = [[player1.name, [player1.name, player2.name]]]
-      expect(round.results_by_nominee).to eq(expected_results)
+      expect(round.results_by_candidate).to eq(expected_results)
     end
 
     it 'puts the player with most votes first' do
       player3 = create(:player, game: game)
-      create(:submission, round: round, nominator_id: player1.id, nominee_id: player2.id)
-      create(:submission, round: round, nominator_id: player2.id, nominee_id: player1.id)
-      create(:submission, round: round, nominator_id: player3.id, nominee_id: player2.id)
+      create(:submission, round: round, voter_id: player1.id, candidate_id: player2.id)
+      create(:submission, round: round, voter_id: player2.id, candidate_id: player1.id)
+      create(:submission, round: round, voter_id: player3.id, candidate_id: player2.id)
 
       expected_results = [[player2.name, [player1.name, player3.name]], [player1.name, [player2.name]]]
-      expect(round.results_by_nominee).to eq(expected_results)
+      expect(round.results_by_candidate).to eq(expected_results)
     end
 
     it 'orders by submission order in the case of a tie' do
-      create(:submission, round: round, nominator_id: player1.id, nominee_id: player2.id)
-      create(:submission, round: round, nominator_id: player2.id, nominee_id: player1.id)
+      create(:submission, round: round, voter_id: player1.id, candidate_id: player2.id)
+      create(:submission, round: round, voter_id: player2.id, candidate_id: player1.id)
 
       expected_results = [[player2.name, [player1.name]], [player1.name, [player2.name]]]
-      expect(round.results_by_nominee).to eq(expected_results)
+      expect(round.results_by_candidate).to eq(expected_results)
     end
   end
 end

@@ -17,7 +17,7 @@ class SubmissionsController < ApplicationController
 
   def create
     submission = @round.submissions.new(submission_params)
-    submission.nominator_id = @player.id
+    submission.voter_id = @player.id
 
     if submission.save
       redirect_to game_round_submission_url(@game, @round, submission)
@@ -56,6 +56,6 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-    params.require(:submission).permit(:round_id, :nominee_id, :nominator_id)
+    params.require(:submission).permit(:round_id, :candidate_id, :voter_id)
   end
 end

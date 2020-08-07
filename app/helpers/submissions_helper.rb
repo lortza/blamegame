@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module SubmissionsHelper
-  def players_minus_nominator(game, nominator)
-    game.players.where.not(id: nominator&.id)
+  def players_minus_voter(game, voter)
+    game.players.where.not(id: voter&.id)
   end
 end

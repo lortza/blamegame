@@ -2,6 +2,7 @@
 
 checklist
 - [ ] master key
+- [ ] back up production database
 
 [![CircleCI](https://circleci.com/gh/lortza/voting_game.svg?style=svg)](https://circleci.com/gh/lortza/voting_game)
 

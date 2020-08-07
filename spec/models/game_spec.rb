@@ -53,8 +53,8 @@ RSpec.describe Game, type: :model do
     let(:round) { create(:round, game: game) }
     let(:player1) { create(:player, game: game) }
     let(:player2) { create(:player, game: game) }
-    let(:submission1) { create(:submission, round: round, nominee_id: player1.id, nominator_id: player2.id) }
-    let(:submission2) { create(:submission, round: round, nominee_id: player2.id, nominator_id: player1.id) }
+    let(:submission1) { create(:submission, round: round, candidate_id: player1.id, voter_id: player2.id) }
+    let(:submission2) { create(:submission, round: round, candidate_id: player2.id, voter_id: player1.id) }
 
     before do
       submission1
@@ -141,16 +141,16 @@ RSpec.describe Game, type: :model do
 
       create(:submission,
              round: game.rounds.first,
-             nominee_id: player1.id,
-             nominator_id: player2.id)
+             candidate_id: player1.id,
+             voter_id: player2.id)
       create(:submission,
              round: game.rounds.first,
-             nominee_id: player2.id,
-             nominator_id: player1.id)
+             candidate_id: player2.id,
+             voter_id: player1.id)
       create(:submission,
              round: game.rounds.first,
-             nominee_id: player1.id,
-             nominator_id: player3.id)
+             candidate_id: player1.id,
+             voter_id: player3.id)
 
       expect(game.winner).to eq(player1)
     end

@@ -7,13 +7,13 @@
 
   <div class='field'>
     <%= form.label 'Which of your teammates best fits this question?' %>
-    <%= form.collection_select :nominee_id, @game.players, :id, :name, {}, class: 'form-control' %>
+    <%= form.collection_select :candidate_id, @game.players, :id, :name, {}, class: 'form-control' %>
   </div>
 
   <% if @player.nil? %>
     <div class='field'>
       <%= form.label 'Please Select Your Name' %>
-      <%= form.collection_select :nominator_id, @game.players, :id, :name, {}, class: 'form-control' %>
+      <%= form.collection_select :voter_id, @game.players, :id, :name, {}, class: 'form-control' %>
     </div>
   <% end %>
 

@@ -1,5 +1,5 @@
-<p><%= @submission.nominator.name %>, you submitted:</p>
-<h3><%= @submission.nominee.name %></h3>
+<p><%= @submission.voter.name %>, you submitted:</p>
+<h3><%= @submission.candidate.name %></h3>
 <p>for <%= @submission.round.question.text %></p>
 
 <% if @round.submissions.size == @game.players.size  %>
