@@ -1,12 +1,18 @@
 # Blame Game
 
 checklist
-- [ ] master key
-- [ ] back up production database
+- [x] try copying master key
+- [x] back up production database & update CSV
+- [ ] kill heroku app
+- [ ] regenerate master key
+- [x] rename app and database to blamegame
+- [ ] push new app to old repo, maybe.
+- [x] delete databases locally via postgres console
+- [ ] heroku redis deploy guide https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable#deploying-our-application-to-heroku
 
-[![CircleCI](https://circleci.com/gh/lortza/voting_game.svg?style=svg)](https://circleci.com/gh/lortza/voting_game)
+[![CircleCI](https://circleci.com/gh/lortza/blame_game.svg?style=svg)](https://circleci.com/gh/lortza/blame_game)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/5900dd05417f73a806a7/maintainability)](https://codeclimate.com/github/lortza/voting_game/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5900dd05417f73a806a7/maintainability)](https://codeclimate.com/github/lortza/blame_game/maintainability)
 
 Description TBD
 

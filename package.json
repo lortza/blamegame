@@ -1,5 +1,5 @@
 {
-  "name": "voting_game_fresh",
+  "name": "blame_game",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
