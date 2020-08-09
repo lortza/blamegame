@@ -19,15 +19,19 @@ user = User.create!(
       )
 puts "User: #{User.count}"
 
-qty_to_seed = 10
+qty_to_seed = 20
 Rake::Task['db:populate_questions'].invoke(qty_to_seed)
 
-game = user.games.create!(
-  max_rounds: 5,
-  adult_content_permitted: true
-)
-game.generate_rounds
+player_names = %w[Albert Alex Ditter Ivy James Jasper LionelScritchy Loki LukeBrown Mindy Moonie Murph Pickles Thor Zorro]
 
-['Albert', 'Alex', 'Ivy', 'Moonie', 'Zorro'].each do |player_name|
-  game.players.create!(name: player_name)
+3.times do
+  game = user.games.create!(
+    max_rounds: 5,
+    adult_content_permitted: true
+  )
+  game.generate_rounds
+
+  player_names.sample(5).each do |player_name|
+    game.players.create!(name: player_name)
+  end
 end
