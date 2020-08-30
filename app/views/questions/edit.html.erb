@@ -1,9 +1,8 @@
 <% content_for(:title, "Editing #{@question.text}") %>
 
-
 <header>
-  <h1>Editing Question</h1>
-  <%= link_to 'Back', questions_path, class: "ml-2 #{button_class('secondary')}" %>
+  <h1 class='title is-1'>Editing Question</h1>
+  <%= link_to 'Cancel', questions_path, class: "ml-2 #{button_classes('is-primary')}" %>
 </header>
 
 <%= render 'form', question: @question %>

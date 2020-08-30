@@ -1,29 +1,31 @@
 <%= form_with(model: question, local: true) do |form| %>
   <%= render 'shared/errors', object: question %>
-
-  <div class='row'>
-    <div class='col-10'>
-      <div class='field'>
+  <div class='columns'>
+    <div class='field column is-three-quarters'>
+      <div class='control'>
         <%= form.label 'Question' %>
-        <%= form.text_field :text, class: 'form-control' %>
+        <%= form.text_field :text, class: 'input' %>
       </div>
     </div>
-    <div class='col-2'>
-      <div class='field'>
-        <%= form.label :adult_rating %>
-        <%= form.check_box :adult_rating, class: 'form-control' %>
-      </div>
-    </div>
-  </div><!-- row -->
 
-  <div class="mt-5 mb-5">
+    <div class='field column'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :adult_rating, class: 'checkbox' %>
+          Adult Rating
+        </label>
+      </div>
+    </div>
+  </div><!-- columns -->
+
+  <div class='mt-5 mb-5'>
     <%= form.submit class: button_block %>
   </div>
 <% end %>
 
 <% if question.persisted? %>
   <hr>
-  <h4>Danger Zone</h4>
+  <h4 class='title is-4'>Danger Zone</h4>
   <p>This is the nuclear option. It will delete the question and no one will be able to use it again.</p>
-  <%= link_to 'Delete Question', question, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_class('danger')}" if question.persisted? %>
+  <%= link_to 'Delete Question', question, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_classes('danger')}" if question.persisted? %>
 <% end %>

@@ -1,28 +1,30 @@
 <%= form_with(model: game, local: true) do |form| %>
   <%= render 'shared/errors', object: game %>
 
-  <div class='row mb-5'>
-    <div class='col-sm'>
-      <div class="field">
-        <%= form.label 'Max Rounds' %>
-        <%= form.number_field :max_rounds, class: 'form-control' %>
+  <div class='columns'>
+    <div class='field column is-two-thirds'>
+      <%= form.label 'Max Rounds' %>
+      <%= form.number_field :max_rounds, class: 'input' %>
+    </div>
+
+    <div class='field column'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :adult_content_permitted, class: 'checkbox' %>
+          Allow Adult Content?
+        </label>
       </div>
     </div>
 
-    <div class='col-sm'>
-      <div class="field">
-        <%= form.label 'Allow Adult Content?' %><br>
-        <%= form.check_box :adult_content_permitted %>
+    <div class='field column'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :players_ready, class: 'checkbox' %>
+          Players Ready?
+        </label>
       </div>
     </div>
-
-    <div class='col-sm'>
-      <div class="field">
-        <%= form.label 'Players Ready?' %><br>
-        <%= form.check_box :players_ready %>
-      </div>
-    </div>
-  </div> <!-- row -->
+  </div> <!-- columns -->
 
   <div class="mt-5 mb-5">
     <%= form.submit class: button_block %>
@@ -38,7 +40,7 @@
     <tbody>
       <%= form.fields_for :players do |f_player| %>
       <tr>
-        <td><%= f_player.text_field :name, class: 'form-control' %></td>
+        <td><%= f_player.text_field :name, class: 'input' %></td>
         <td><%= f_player.check_box :_destroy if f_player.object.persisted? %></td>
       </tr>
       <% end %>
@@ -54,5 +56,5 @@
   <hr>
   <h4>Danger Zone</h4>
   <p>This is the nuclear option. It will delete the whole game, all players, and any rounds.</p>
-  <%= link_to 'Delete Game and All Players', game, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_class('danger')}" %>
+  <%= link_to 'Delete Game and All Players', game, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_classes('is-danger')}" %>
 <% end %>

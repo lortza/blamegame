@@ -3,12 +3,12 @@
     <div class='col-12 col-md-10 mb-2'>
       <%= text_field_tag :search, params[:search],
                                   placeholder: 'Search Entries',
-                                  class: 'form-control'
+                                  class: 'input'
       %>
     </div>
 
     <div class='col-12 col-md-2'>
-      <button type='submit' class='btn btn-outline-primary' style='width: 100%;'>Submit</button>
+      <button type='submit' class='<%= button_block %>' style='width: 100%;'>Submit</button>
       <%= link_to 'Reset', destination_url, class: 'ml-3' %>
     </div>
   </div> <!-- row -->

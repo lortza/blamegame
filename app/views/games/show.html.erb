@@ -1,26 +1,27 @@
 <% content_for(:title, "Game #{@game.date}") %>
 
 <header>
-  <%= link_to 'Back to Games Index', games_path, class: "controls mb-5 #{button_class}" if current_user.present? %>
+  <%= link_to 'Back to Games Index', games_path, class: "controls mb-5 #{button_classes}" if current_user.present? %>
 </header>
 
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <p class="lead">and the winner is...</p>
-    <h1 class="display-4"><%= display_winner(@game) %></h1>
-  </div>
-</div>
+<section class="hero is-success mb-5">
+  <center>
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="subtitle branded">
+          and the winner is...
+        </h2>
+        <h1 class="winner">
+          <i class="fas fa-crown"></i> <%= display_winner(@game) %>! <i class="fas fa-poo"></i>
+        </h1>
+      </div>
+    </div>
+  </center>
+</section>
 
-<h3>a recap of winners by round:</h3>
+<h4 class='title is-4 branded'>Winners by Round</h4>
 <% @game.rounds.each do |round| %>
-  <h4><%= round.number %>. <%= round.question.text %></h4>
-  <p>
-    <% if round.winner.nil? %>
-      It was a tie
-    <% else %>
-      <%= round.winner.name %>
-    <% end %>
-  </p>
+  <p><%= round.number %>. <%= round.question.text %> → <span class='branded'><%= display_winner(round) %></span></p>
 <% end %>
 
-<%= link_to 'Play Another Game', join_game_path, class: button_block %>
+<%= link_to ('<i class="fas fa-gamepad mr-2"></i>'.html_safe + 'Play Another Game'), join_game_path, class: "#{button_block} mt-5" %>

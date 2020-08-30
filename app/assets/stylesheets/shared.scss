@@ -19,7 +19,23 @@
   font-size: 1.25em;
   padding: .75em;
   text-align: center;
+  background-color: $medium-gray;
 }
+
+.hidden { display: none; }
+
+// Fonts
+a.nav-brand-name {
+  // font-family: 'Bungee Outline', cursive;
+  font-family: 'Chewy', cursive;
+  font-size: 2.5em;
+  color: $white;
+  &:hover { color: $is-warning; };
+}
+
+.branded { font-family: 'Chewy', cursive; }
+
+
 
 // Links
 a { color: $link-color; }
@@ -86,13 +102,15 @@ header,
 }
 
 .brand-image {
-  height: 25px;
+  height: 60px;
 }
 
 
-// BOOTSTRAP OVERRIDES
+// BULMA OVERRIDES
 
-.btn-xs {
-  font-size: .4em;
-  padding: 1px 4px;
+.hero-body {
+  .winner {
+    font-size: 3em;
+    margin-top: -.75em;
+  }
 }

@@ -1,8 +1,8 @@
 <% content_for(:title, "Edit #{@game.created_at}") %>
 
 <header>
-  <h1>Editing Game</h1>
-  <%= link_to 'Back', games_path, class: "ml-2 controls #{button_class('secondary')}" %>
+  <h1 class='title is-1'>Editing Game</h1>
+  <%= link_to 'Cancel', games_path, class: "ml-2 controls #{button_classes('is-primary')}" %>
 </header>
 
 <%= render 'form', game: @game %>

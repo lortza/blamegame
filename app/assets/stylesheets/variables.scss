@@ -12,12 +12,6 @@ $brand-yellow: #bab13f;
 $brand-main: $brand-dark-blue;
 $brand-secondary: $brand-light-blue;
 
-// Post Types
-$gratitude: #46185f;
-$til: #fc0;
-$praise: #f65c78;
-$merit: #297ca0;
-
 
 // Colors: Other
 $white: #fff;
@@ -27,10 +21,4 @@ $gray: #808080;
 $medium-gray: #ccc;
 $link-color: $brand-light-blue;
 $error: #f00;
-
-// Syntax Highlighting
-$jekyll: #eef;
-$coderay: #ececec;
-$github: #f6f8fa;
-$inline-code: $github;
-$code-block: $github;
+$is-warning: #ffdd57;

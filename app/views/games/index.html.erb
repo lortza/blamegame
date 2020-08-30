@@ -1,12 +1,12 @@
 <% content_for(:title, "Games") %>
 
 <header>
-  <h1>Games</h1>
-  <%= link_to '+ New Game', new_game_path, class: "controls mb-3 #{button_class}" %>
+  <h1 class='title is-1'>Games</h1>
+  <%= link_to '+ New Game', new_game_path, class: "controls mb-3 #{button_classes}" %>
 </header>
 
 <% if @current_games.any? %>
-  <h2>Current Games</h2>
+  <h2 class='title is-2'>Current Games</h2>
   <% @current_games.each do |game| %>
     <div class="card mb-5">
       <div class="card-body">
@@ -35,9 +35,9 @@
   <% end %>
 <% end %>
 
-<h2>Past Games</h2>
+<h2 class='title is-2'>Past Games</h2>
 
-<table class='table mt-5'>
+<table class="<%= table_classes %>">
   <thead>
     <tr>
       <th>Date Played</th>

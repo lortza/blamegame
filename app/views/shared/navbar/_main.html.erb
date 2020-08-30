@@ -1,15 +1,53 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light mb-5">
-  <%= image_tag '/images/nelson.png', class: 'brand-image mr-2' %> <%= link_to 'BlameGame', root_url, class: 'navbar-brand' %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar is-danger mb-5" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <%= image_tag '/images/nelson.png', class: 'brand-image' %>
+    <%= link_to 'BlameGame', root_url, class: 'ml-2 mr-2 nav-brand-name' %>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
       <%= render 'shared/navbar/signed_in' if current_user %>
-      <li class="nav-item">
-        <%= session_links %>
-      </li>
-    </ul>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <%= session_links %>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+</script>
