@@ -43,6 +43,7 @@ a.nav-brand-name {
 a { color: $link-color; }
 
 // Controls
+// Replace these with Bulma level, level-left, level-item, etc
 header,
 .controls-parent {
   align-items: center;
@@ -109,6 +110,10 @@ header,
 
 
 // BULMA OVERRIDES
+
+.section {
+  padding: 1.5rem 1.5rem;
+}
 
 .hero-body {
   .winner {

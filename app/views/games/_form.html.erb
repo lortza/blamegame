@@ -1,4 +1,5 @@
-<%= form_with(model: game, local: true) do |form| %>
+<section class='section'>
+  <%= form_with(model: game, local: true) do |form| %>
   <%= render 'shared/errors', object: game %>
 
   <div class='columns'>
@@ -29,8 +30,10 @@
   <div class="mt-5 mb-5">
     <%= form.submit class: button_block %>
   </div>
+</section>
 
-  <table class="table table-players">
+<section class='section'>
+  <table class="table is-fullwidth is-narrow">
     <thead>
       <tr>
         <th>Player Name</th>
@@ -47,14 +50,6 @@
     </tbody>
   </table>
 
-  <div class="mt-5 mb-5">
-    <%= form.submit class: button_block %>
-  </div>
-<% end %>
-
-<% if game.persisted? %>
-  <hr>
-  <h4>Danger Zone</h4>
-  <p>This is the nuclear option. It will delete the whole game, all players, and any rounds.</p>
-  <%= link_to 'Delete Game and All Players', game, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_classes('is-danger')}" %>
-<% end %>
+  <%= form.submit class: button_block %>
+  <% end %>
+</section>

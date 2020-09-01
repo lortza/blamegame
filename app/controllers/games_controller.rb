@@ -59,7 +59,8 @@ class GamesController < ApplicationController
 
   def players_ready
     @game.update(players_ready: true)
-    redirect_to game_players_url(@game)
+    round = @game.rounds
+    redirect_to new_game_round_submission_url(@game, @game.rounds.first)
   end
 
   private

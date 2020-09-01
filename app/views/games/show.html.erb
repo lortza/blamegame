@@ -19,9 +19,11 @@
   </center>
 </section>
 
-<h4 class='title is-4 branded'>Winners by Round</h4>
-<% @game.rounds.each do |round| %>
-  <p><%= round.number %>. <%= round.question.text %> → <span class='branded'><%= display_winner(round) %></span></p>
-<% end %>
+<section class='section'>
+  <h4 class='title is-4 branded'>Winners by Round</h4>
+  <% @game.rounds.each do |round| %>
+    <p><%= round.number %>. <%= round.question.text %> → <span class='branded'><%= display_winner(round) %></span></p>
+  <% end %>
 
-<%= link_to ('<i class="fas fa-gamepad mr-2"></i>'.html_safe + 'Play Another Game'), join_game_path, class: "#{button_block} mt-5" %>
+  <%= link_to ('<i class="fas fa-gamepad mr-2"></i>'.html_safe + 'Play Another Game'), join_game_path, class: "#{button_block} mt-5" %>
+</section>

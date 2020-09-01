@@ -1,5 +1,5 @@
 <div class='centered'>
-  <h1 class='title branded'><%= @player&.name %> Cast Your Vote!</h1>
+  <h1 class='title branded'><%= @player&.name %>, cast your vote!</h1>
   <p>Question <%= @round.number %> of <%= @game.max_rounds %></p>
   <h2 class='title is-2'><%= @round.question.text %></h2>
 
@@ -22,7 +22,7 @@
     <% end %>
 
     <div class="mt-5 mb-5">
-      <%= form.submit class: button_block %>
+      <%= form.submit 'Submit Your Vote!', class: button_block %>
     </div>
   <% end %>
 </div>
