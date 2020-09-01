@@ -1,23 +1,28 @@
-<h1><%= @player&.name %> Cast Your Vote!</h1>
+<div class='centered'>
+  <h1 class='title branded'><%= @player&.name %> Cast Your Vote!</h1>
+  <p>Question <%= @round.number %> of <%= @game.max_rounds %></p>
+  <h2 class='title is-2'><%= @round.question.text %></h2>
 
-<h2><%= @round.number %>. <%= @round.question.text %></h2>
+  <%= form_with(model: [@game, @round, @submission], local: true) do |form| %>
+    <%= render 'shared/errors', object: @submission %>
 
-<%= form_with(model: [@game, @round, @submission], local: true) do |form| %>
-  <%= render 'shared/errors', object: @submission %>
-
-  <div class='field'>
-    <%= form.label 'Which of your teammates best fits this question?' %>
-    <%= form.collection_select :candidate_id, @game.players, :id, :name, {}, class: 'form-control' %>
-  </div>
-
-  <% if @player.nil? %>
     <div class='field'>
-      <%= form.label 'Please Select Your Name' %>
-      <%= form.collection_select :voter_id, @game.players, :id, :name, {}, class: 'form-control' %>
+      <%= form.label 'Select a Player' %>
+      <br>
+      <div class='select is-large'>
+        <%= form.collection_select :candidate_id, @game.players, :id, :name, {}, class: 'select' %>
+      </div>
+    </div>
+
+    <% if @player.nil? %>
+      <div class='field'>
+        <%= form.label 'Please Select Your Name' %>
+        <%= form.collection_select :voter_id, @game.players, :id, :name, {}, class: 'input' %>
+      </div>
+    <% end %>
+
+    <div class="mt-5 mb-5">
+      <%= form.submit class: button_block %>
     </div>
   <% end %>
-
-  <div class="mt-5 mb-5">
-    <%= form.submit class: button_block %>
-  </div>
-<% end %>
+</div>

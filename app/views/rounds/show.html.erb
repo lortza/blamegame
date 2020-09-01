@@ -1,19 +1,30 @@
-<p>The results are in...</p>
+<div class='centered'>
+  <p>Question <%= @round.number %> of <%= @round.game.max_rounds %></p>
+  <h2 class='title is-2'><%= @round.question.text %></h2>
 
-<h3><%= @round.number %>. <%= @round.question.text %></h3>
-<h1><%= display_winner(@round) %></h1>
+  <!-- if we're waiting for results... -->
+  <div id='round-waiting'>
+    <p>okay <%= @player.name %>, hold tight while your teammates submit their votes...</p>
+  </div>
 
-<ol>
-  <% @round.results_by_candidate.each do |candidate, voters| %>
-  <li>
-    <strong><%= candidate %>: </strong>
-    <%= voters.join(', ') %>
-  </li>
-  <% end %>
-</ol>
+  <ul id="round-submissions">
+    <% @round.submissions.each do |submission| %>
+      <li><strong><%= submission.candidate.name %></strong> received a vote from <%= submission.voter.name %> </li>
+    <% end %>
+  </ul>
 
-<% if @round.number == @round.game.max_rounds || @round.game.complete? %>
-  <%= link_to "Let's see who won the game!", game_path(@round.game), class: button_block %>
-<% else %>
-  <%= link_to 'Next Question', next_round_submission(@round), class: button_block %>
-<% end %>
+
+  <!-- if all results are in -->
+  <div id='round-results' class='mt-5 <%= hidden_class(@round) %>'>
+    <p>The results are in and the winner is...</p>
+    <h1 class='title branded' id='round-winner'><%= display_winner(@round) %></h1>
+
+    <section class='mt-6'>
+      <% if @round.number == @round.game.max_rounds || @round.game.complete? %>
+        <%= link_to "Let's see who won the game!", game_path(@round.game), class: button_block %>
+      <% else %>
+        <%= link_to 'Next Question', next_round_submission(@round), class: button_block %>
+      <% end %>
+    </section>
+  </div>
+</div>

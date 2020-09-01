@@ -35,7 +35,9 @@ a.nav-brand-name {
 
 .branded { font-family: 'Chewy', cursive; }
 
-
+// Icons
+.fa-check { color: $is-success; }
+.fa-times { color: $is-danger; }
 
 // Links
 a { color: $link-color; }

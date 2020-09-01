@@ -27,4 +27,9 @@ module StylesHelper
   def boolean_checkmark(value)
     '<i class="fas fa-check"></i>'.html_safe if value
   end
+
+  def boolean_check_or_x(value)
+    icon = value ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>'
+    icon.html_safe
+  end
 end

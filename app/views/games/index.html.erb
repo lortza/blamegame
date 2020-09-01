@@ -7,29 +7,42 @@
 
 <% if @current_games.any? %>
   <h2 class='title is-2'>Current Games</h2>
+
   <% @current_games.each do |game| %>
-    <div class="card mb-5">
-      <div class="card-body">
-        <h5 class="card-title"><%= game.code %>: <%= game.date %></h5>
-        <h6 class="card-subtitle mb-2 text-muted">Share Link: <%= link_to join_game_url, join_game_url %></h6>
-        <h6 class="card-subtitle mb-2 text-muted">Adult Content? <%= game.adult_content_permitted? %></h6>
-        <h6 class="card-subtitle mb-2 text-muted">Players: <%= display_players(game) if game.players.any? %></h6>
-        <h6 class="card-subtitle mb-2 text-muted">Players Ready? <%= game.players_ready? %></h6>
-        <h6 class="card-subtitle mb-2 text-muted">Game Over? <%= game.complete? %></h6>
-        <p class="card-text">
-          <ol>
-            <% game.rounds.each do |round| %>
-            <li>
-              <%= round.question.text %>
-              <% if round.winner.present? %>
-                | <%= link_to 'see results', game_round_path(game, round) %>
-              <% end %>
-            </li>
-            <% end %>
-          </ol>
-        </p>
-        <%= link_to 'Edit', edit_game_path(game) %>
-        <%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %>
+    <div class="tile is-ancestor">
+      <div class="tile is-12">
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-light">
+            <div class="controls-parent">
+              <p class="title"><%= game.code %>: <%= game.date %></p>
+              <div class='media-right'>
+                <%= link_to 'Edit', edit_game_path(game), class: button_classes('is-info') %>
+                <%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'}, class: button_classes('is-danger') %>
+              </div>
+            </div>
+
+            <p class="subtitle">Share Link: <%= link_to join_game_url, join_game_url %></p>
+            <div class="content">
+              <p>
+                Adult Content? <%= boolean_check_or_x(game.adult_content_permitted?) %> |
+                Players Ready? <%= boolean_check_or_x(game.players_ready?) %> |
+                Game Over? <%= boolean_check_or_x(game.complete?) %>
+              </p>
+              <p>Players: <%= display_players(game) if game.players.any? %></p>
+              <p>Questions:</p>
+              <ol>
+                <% game.rounds.each do |round| %>
+                <li>
+                  <%= round.question.text %>
+                  <% if round.winner.present? %>
+                    | <%= link_to 'see results', game_round_path(game, round) %>
+                  <% end %>
+                </li>
+                <% end %>
+              </ol>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   <% end %>

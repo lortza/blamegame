@@ -3,17 +3,17 @@
 
   <div class='field'>
     <%= form.label :game_code %>
-    <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', class: 'form-control' %>
+    <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', class: 'input' %>
     <small id='error_helper_text' class="form-text error-helper-text hidden">Invalid Game Code</small>
   </div>
 
   <div class='field'>
     <%= form.label :name %>
-    <%= form.text_field :name, placeholder: 'Enter your name', class: 'form-control' %>
+    <%= form.text_field :name, placeholder: 'Enter your name', class: 'input' %>
   </div>
 
   <div class="mt-5 mb-5">
-    <%= form.submit 'Submit', id: 'submit_button', class: 'btn btn-outline-primary btn-block hidden' %>
+    <%= form.submit 'Submit', id: 'submit_button', class: "hidden #{button_block}" %>
   </div>
 <% end %>
 
