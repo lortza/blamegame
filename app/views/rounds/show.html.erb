@@ -21,9 +21,9 @@
 
     <section class='mt-6'>
       <% if @round.number == @round.game.max_rounds || @round.game.complete? %>
-        <%= link_to "Let's see who won the game!", game_path(@round.game), class: button_block %>
+        <%= link_to "Let's see who won the game!", game_path(@round.game), class: button_classes %>
       <% else %>
-        <%= link_to 'Next Question', next_round_submission(@round), class: button_block %>
+        <%= link_to 'Next Question', next_round_submission(@round), class: button_classes %>
       <% end %>
     </section>
   </div>
