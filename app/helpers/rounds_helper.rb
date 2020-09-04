@@ -15,4 +15,8 @@ module RoundsHelper
       "It's a tie"
     end
   end
+
+  def hidden_class(round)
+    'hidden' unless round.complete?
+  end
 end
