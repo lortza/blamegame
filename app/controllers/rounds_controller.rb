@@ -2,6 +2,7 @@
 
 class RoundsController < ApplicationController
   before_action :set_round, only: %i[show]
+  before_action :set_player, only: %i[show]
   before_action :redirect_to_game, only: %i[show]
 
   def show
@@ -11,6 +12,10 @@ class RoundsController < ApplicationController
 
   def set_round
     @round = Round.find(params[:id])
+  end
+
+  def set_player
+    @player = Player.find_by(id: cookies[:player_id].to_i)
   end
 
   def redirect_to_game
