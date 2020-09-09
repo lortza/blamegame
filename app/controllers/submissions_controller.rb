@@ -31,7 +31,7 @@ class SubmissionsController < ApplicationController
         voter_name: submission.voter.name,
         candidate_name: submission.candidate.name,
         round_complete: @round.complete?,
-        winner: @round.winner&.name || "It's a Tie from the JS"
+        winner: @round.winner&.name || "It's a tie"
 
       redirect_to game_round_url(@game, @round)
     else

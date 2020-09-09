@@ -34,7 +34,7 @@ consumer.subscriptions.create("RoundChannel", {
     }
 
     if (data.candidate_name === undefined) {
-      console.log('somethintg undefined')
+      console.log('something undefined')
     } else {
       submissions.insertAdjacentHTML('beforeend', '<li> ' + submission + '</li>')
     }

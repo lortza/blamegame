@@ -3,9 +3,9 @@
   <h2 class='title is-2'><%= @round.question.text %></h2>
 
   <!-- if we're waiting for results... -->
-  <div id='round-waiting'>
-    <p>okay <%= @player.name %>, hold tight while your teammates submit their votes...</p>
-  </div>
+  <% unless @round.complete? %>
+    <p id='round-waiting'>okay <%= @player.name %>, hold tight while your teammates submit their votes...</p>
+  <% end %>
 
   <ul id="round-submissions">
     <% @round.submissions.each do |submission| %>
