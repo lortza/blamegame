@@ -16,7 +16,7 @@ gem 'sass-rails', '>= 6'        # Use SCSS for stylesheets
 gem 'turbolinks', '~> 5'        # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'webpacker', '~> 4.0'       # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'will_paginate', '~> 3.2.0' # pagination. Styles: http://mislav.github.io/will_paginate/
-# gem 'redis', '~> 4.0'       # Use Redis adapter to run Action Cable in production
+gem 'redis', '~> 4.0'           # Use Redis adapter to run Action Cable in production
 # gem 'bcrypt', '~> 3.1.7'    # Use Active Model has_secure_password
 # gem 'image_processing', '~> 1.2'  # Use Active Storage variant
 
