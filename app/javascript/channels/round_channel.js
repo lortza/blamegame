@@ -12,7 +12,6 @@ document.addEventListener('turbolinks:load', function () {
       connected() {
         // Called when the subscription is ready for use on the server
         console.log('RoundChannel: Connected')
-        console.log(data)
       },
 
       disconnected() {

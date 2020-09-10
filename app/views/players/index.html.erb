@@ -1,18 +1,21 @@
 <section class='section centered'>
   <% if @game.activated? %>
-    <h1 class='title branded centered'>Let's do this thing!</h1>
-    <%= link_to 'Go To Round 1', new_game_round_submission_path(@game, @game.rounds.first), class: button_block %>
+    <div id='game-ready' class='hidden'>
+      <h1 class='title branded centered'>Let's do this thing!</h1>
+      <%= link_to 'Go To Round 1', new_game_round_submission_path(@game, @game.rounds.first), class: button_block %>
+    </div>
   <% else %>
     <h1 class='title branded centered'>Hold tight while your teammates arrive...</h1>
     <!-- TODO: add new players as they are created via ActionCable -->
-    <div id='players'>
+    <div id='game-players'>
       <% @game.players.each do |player| %>
         <p><%= player.name %></p>
       <% end %>
     </div>
 
-    <!-- TODO: if game is started, display a link via ActionCable to go to round 1  -->
-    <h3 class='title mt-5'>Is everybody in?</h3>
-    <%= link_to 'Start Game!', players_ready_path(id: @game.id), method: :post, class: button_block %>
+    <div id='game-waiting-for-players'>
+      <h3 class='title mt-5'>Is everybody in?</h3>
+      <%= link_to 'Start Game!', players_ready_path(id: @game.id), method: :post, class: button_block %>
+    </div>
   <% end %>
 </section>
