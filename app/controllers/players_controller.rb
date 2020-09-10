@@ -17,6 +17,7 @@ class PlayersController < ApplicationController
 
     if @player.save
       cookies[:player_id] = { value: @player.id, expires: 1.day.from_now }
+      cookies[:game_id] = { value: @game.id, expires: 1.day.from_now }
       redirect_to game_players_url(@game)
     else
       render :new

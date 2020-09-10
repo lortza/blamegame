@@ -21,7 +21,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    cookies.delete(:player_id)
+    delete_cookies
   end
 
   def edit
@@ -52,7 +52,7 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
 
-    cookies.delete(:player_id)
+    delete_cookies
     notice = "Game at #{@game.date} was successfully deleted."
     redirect_to games_url, notice: notice
   end
@@ -80,5 +80,12 @@ class GamesController < ApplicationController
                                  :max_rounds,
                                  :players_ready,
                                  players_attributes: %i[id name _destroy])
+  end
+
+  def delete_cookies
+    cookie_names = [:player_id, :game_id]
+    cookie_names.each do |name|
+      cookies.delete(name)
+    end
   end
 end

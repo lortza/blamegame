@@ -20,18 +20,11 @@ class SubmissionsController < ApplicationController
     submission.voter_id = @player.id
 
     if submission.save
-      # RoundChannel.broadcast_to @round,
-      #              voter_name: submission.voter.name,
-      #              candidate_name: submission.candidate.name,
-      #              round_complete: @round.complete?,
-      #              winner: @round.winner&.name || "It's a Tie from the JS"
-
-
-      ActionCable.server.broadcast 'round_channel',
-        voter_name: submission.voter.name,
-        candidate_name: submission.candidate.name,
-        round_complete: @round.complete?,
-        winner: @round.winner&.name || "It's a tie"
+      RoundChannel.broadcast_to @round,
+                   voter_name: submission.voter.name,
+                   candidate_name: submission.candidate.name,
+                   round_complete: @round.complete?,
+                   winner: @round.winner&.name || "It's a tie"
 
       redirect_to game_round_url(@game, @round)
     else

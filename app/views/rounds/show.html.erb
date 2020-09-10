@@ -1,3 +1,5 @@
+<div id='round-channel-id' data-round-id="<%= @round.id %>"></div>
+
 <div class='centered'>
   <p>Question <%= @round.number %> of <%= @round.game.max_rounds %></p>
   <h2 class='title is-2'><%= @round.question.text %></h2>
@@ -28,9 +30,3 @@
     </section>
   </div>
 </div>
-
-<!-- WIP multi-channel version -->
-<!-- <div id="round_channel"
-     data-channel-subscribe="round"
-     data-round-id="<%#= @round.id %>"
- ></div> -->
