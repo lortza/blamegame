@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: games
+#
+#  id                      :bigint           not null, primary key
+#  user_id                 :bigint           not null
+#  code                    :string
+#  players_ready           :boolean          default(FALSE)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  max_rounds              :integer
+#  adult_content_permitted :boolean          default(FALSE)
+#
 class Game < ApplicationRecord
   DEFAULT_MAX_ROUNDS = 10
 

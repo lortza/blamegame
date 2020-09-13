@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: players
+#
+#  id         :bigint           not null, primary key
+#  game_id    :bigint           not null
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Player < ApplicationRecord
   belongs_to :game, inverse_of: :players
 

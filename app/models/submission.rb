@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: submissions
+#
+#  id           :bigint           not null, primary key
+#  round_id     :bigint           not null
+#  candidate_id :bigint
+#  voter_id     :bigint
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
 class Submission < ApplicationRecord
   belongs_to :round
   belongs_to :candidate, class_name: 'Player'
