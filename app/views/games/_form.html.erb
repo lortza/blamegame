@@ -5,7 +5,7 @@
   <div class='columns'>
     <div class='field column is-two-thirds'>
       <%= form.label 'Max Rounds' %>
-      <%= form.number_field :max_rounds, class: 'input' %>
+      <%= form.number_field :max_rounds, min: 1, class: 'input' %>
     </div>
 
     <div class='field column'>

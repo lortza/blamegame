@@ -11,6 +11,10 @@ class Game < ApplicationRecord
                                 reject_if: :all_blank # at least 1 player should be present
   before_create :generate_code
 
+  validates :max_rounds,
+            presence: true,
+            numericality: { greater_than: 0 }
+
   def self.current
     where('created_at >= ?', 1.hour.ago)
   end
