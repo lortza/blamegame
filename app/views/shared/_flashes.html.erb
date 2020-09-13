@@ -1,6 +1,18 @@
 <% flash.each do |type, message| %>
-  <div class="alert alert-<%= bootstrap_flash_class(type) %> fadein mt-3">
-    <button type="button" class="close" data-dismiss="alert"><span aria-hidden=true>&times;</span><span class="sr-only">Close</span></button>
-    <%= message %>
+  <div class="<%= bulma_flash_class(type) %>">
+    <button type="button" class="delete" data-dismiss="alert"><span aria-hidden=true>&times;</span><span class="sr-only">Close</span></button>
+    <%= message.html_safe %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+      $notification = $delete.parentNode;
+
+      $delete.addEventListener('click', () => {
+        $notification.parentNode.removeChild($notification);
+      });
+    });
+  });
+</script>

@@ -5,15 +5,17 @@ module StylesHelper
     'table is-striped is-narrow is-hoverable is-fullwidth'
   end
 
-  def bootstrap_flash_class(type)
-    case type
-    when 'alert' then 'warning'
-    when 'error' then 'danger'
-    when 'warning' then 'warning'
-    when 'notice' then 'success'
+  def bulma_flash_class(type)
+    modifier = case type
+    when 'alert' then 'is-warning'
+    when 'error' then 'is-danger'
+    when 'warning' then 'is-warning'
+    when 'notice' then 'is-info'
     else
       'info'
     end
+
+    "notification is-light #{modifier}"
   end
 
   def button_classes(style = 'is-primary')
