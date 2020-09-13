@@ -1,21 +1,20 @@
 <section class='section centered'>
-  <% if @game.activated? %>
-    <div id='game-ready' class='hidden'>
-      <h1 class='title branded centered'>Let's do this thing!</h1>
-      <%= link_to 'Go To Round 1', new_game_round_submission_path(@game, @game.rounds.first), class: button_block %>
-    </div>
-  <% else %>
-    <h1 class='title branded centered'>Hold tight while your teammates arrive...</h1>
-    <!-- TODO: add new players as they are created via ActionCable -->
-    <div id='game-players'>
-      <% @game.players.each do |player| %>
-        <p><%= player.name %></p>
-      <% end %>
-    </div>
+  <h1 id='game-waiting-for-players-title' class='title branded centered'>Hold tight while your teammates arrive...</h1>
+  <div id='game-players'>
+    <% @game.players.each do |player| %>
+      <p class='title is-4 mb-0'><%= player.name %></p>
+    <% end %>
+  </div>
 
-    <div id='game-waiting-for-players'>
-      <h3 class='title mt-5'>Is everybody in?</h3>
-      <%= link_to 'Start Game!', players_ready_path(id: @game.id), method: :post, class: button_block %>
+  <% unless @game.activated? %>
+    <div id='game-waiting-for-players-section'>
+      <p class='mt-6'>Is everybody in?</p>
+      <%= link_to 'Start Game!', players_ready_path(id: @game.id), method: :post, class: button_classes %>
     </div>
   <% end %>
+
+  <div id='game-ready' class='hidden mt-5'>
+    <h1 class='title branded centered'>Everybody's In. Let's do this thing!</h1>
+    <%= link_to 'Go To Round 1', new_game_round_submission_path(@game, @game.rounds.first), class: button_block %>
+  </div>
 </section>

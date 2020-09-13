@@ -26,20 +26,21 @@ document.addEventListener('turbolinks:load', function () {
       received(data) {
         // Called when there's incoming data on the websocket for this channel
         console.log('Received:')
-
-        const waiting = document.querySelector("#game-waiting-for-players");
+        const waitingTitle = document.querySelector("#game-waiting-for-players-title");
+        const waitingSection = document.querySelector("#game-waiting-for-players-section");
         const players = document.querySelector("#game-players");
         const ready = document.querySelector("#game-ready");
 
         if (data.game_activated == true){
-          waiting.classList.add('hidden')
           ready.classList.remove('hidden')
+          waitingTitle.remove()
+          waitingSection.remove()
         }
 
-        if (data.player_name === undefined) {
-          console.log('something undefined')
+        if (data.player_name === undefined || data.player_name === 'undefined') {
+          console.log('player undefined')
         } else {
-          players.insertAdjacentHTML('beforeend', `<p>${data.player_name}</p>`)
+          players.insertAdjacentHTML('beforeend', `<p class='title is-4 mb-0'>${data.player_name}</p>`)
         }
       }
     })

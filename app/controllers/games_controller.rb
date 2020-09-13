@@ -35,7 +35,7 @@ class GamesController < ApplicationController
 
     if @game.save
       @game.generate_rounds
-      redirect_to games_url
+      redirect_to games_url, notice: "Oh SNAP! It's about to be <em>on</em>. Game #{@game.code} is ready to rock!"
     else
       render :new
     end
@@ -60,6 +60,12 @@ class GamesController < ApplicationController
   def players_ready
     @game.update(players_ready: true)
     round = @game.rounds
+
+    GameChannel.broadcast_to @game,
+                 game_code: @game.code,
+                 player_name: 'undefined',
+                 game_activated: @game.activated?
+
     redirect_to new_game_round_submission_url(@game, @game.rounds.first)
   end
 

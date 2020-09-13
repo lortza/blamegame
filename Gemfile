@@ -32,7 +32,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'annotate' # adds attributes to top of models
+  gem 'annotate' # adds attributes to top of models: https://github.com/ctran/annotate_models
   gem 'rails-erd' # , require: false   # generates table diagram run `bundle exec erd`
   gem 'rubocop-performance'
   gem 'rubocop-rails'
