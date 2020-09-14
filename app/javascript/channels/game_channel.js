@@ -7,6 +7,25 @@ document.addEventListener('turbolinks:load', function () {
   	if (parts.length == 2) return parts.pop().split(";").shift();
   };
 
+  const displayIncomingPlayers = function(data) {
+    const waitingTitle = document.querySelector("#game-waiting-for-players-title");
+    const waitingSection = document.querySelector("#game-waiting-for-players-section");
+    const players = document.querySelector("#game-players");
+    const ready = document.querySelector("#game-ready");
+
+    if (data.game_activated == true){
+      ready.classList.remove('hidden')
+      waitingTitle.remove()
+      waitingSection.remove()
+    }
+
+    if (data.player_name === undefined || data.player_name === 'undefined') {
+      console.log('player undefined')
+    } else {
+      players.insertAdjacentHTML('beforeend', `<p class='title is-4 mb-0'>${data.player_name}</p>`)
+    }
+  } //displayIncomingPlayers
+
   consumer.subscriptions.create({
       // This hash provides the params to the game_channel.rb
       channel: 'GameChannel',
@@ -26,22 +45,8 @@ document.addEventListener('turbolinks:load', function () {
       received(data) {
         // Called when there's incoming data on the websocket for this channel
         console.log('Received:')
-        const waitingTitle = document.querySelector("#game-waiting-for-players-title");
-        const waitingSection = document.querySelector("#game-waiting-for-players-section");
-        const players = document.querySelector("#game-players");
-        const ready = document.querySelector("#game-ready");
+        displayIncomingPlayers(data)
 
-        if (data.game_activated == true){
-          ready.classList.remove('hidden')
-          waitingTitle.remove()
-          waitingSection.remove()
-        }
-
-        if (data.player_name === undefined || data.player_name === 'undefined') {
-          console.log('player undefined')
-        } else {
-          players.insertAdjacentHTML('beforeend', `<p class='title is-4 mb-0'>${data.player_name}</p>`)
-        }
-      }
-    })
-  })
+      }//received
+    })//consumer.subscriptions
+  })//addEventListener
