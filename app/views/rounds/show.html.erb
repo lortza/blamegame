@@ -10,7 +10,7 @@
   <% end %>
 
   <ul id="round-submissions">
-    <% @round.submissions.each do |submission| %>
+    <% @round.submissions.includes(:voter, :candidate).each do |submission| %>
       <li><strong><%= submission.candidate.name %></strong> received a vote from <%= submission.voter.name %> </li>
     <% end %>
   </ul>

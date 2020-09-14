@@ -2,11 +2,16 @@ import consumer from "./consumer"
 
 // Multi-channel version:
 document.addEventListener('turbolinks:load', function () {
+  const roundIdDiv = document.querySelector('#round-channel-id')
+  let roundId = null
+  if (roundIdDiv) {
+    roundId = roundIdDiv.dataset.roundId
+  }
 
   consumer.subscriptions.create({
       // This hash provides the params to the round_channel.rb
       channel: "RoundChannel",
-      round_id: document.querySelector('#round-channel-id').dataset.roundId
+      round_id: roundId
     }, {
 
       connected() {
