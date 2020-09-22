@@ -108,6 +108,10 @@ header,
 }
 
 // FUNSIES
+.vertical-center-parent {
+  display: flex;
+  align-items: center;
+}
 .grand-winner-box {
   --border-width: 3px;
   // Gradient border only
@@ -118,9 +122,12 @@ header,
   // border-radius: var(--border-width);
 
   // Full gradient background
-  width: 500px;
-  height: 300px;
-  padding-top: 100px;
+  $width: 50%;
+  width: $width;
+  max-width: 500px;
+  min-width: 300px;
+  height: $width * .9;
+  padding: 4rem 1rem;
   color: white;
   border-radius: var(--border-width);
 
@@ -165,7 +172,8 @@ header,
 .hero-body {
   .winner {
     font-size: 3em;
-    margin-top: -.75em;
+    margin-top: -.5em;
+    line-height: 105%;
     text-shadow: $drop-shadow;
   }
 }
