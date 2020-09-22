@@ -4,6 +4,7 @@ namespace :db do
   desc "Populate Question Data"
 
   task :populate_questions, [:qty_records_to_seed] => [:environment] do |_t, args|
+    # bundle exec rake db:populate_questions
     ActiveRecord::Migration.say_with_time('Populating question data') do
       source_file = Rails.root.join('lib', 'tasks', 'data', 'questions.csv')
       qty_all_records = source_file.readlines.size
