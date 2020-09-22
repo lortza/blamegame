@@ -77,10 +77,14 @@ class Game < ApplicationRecord
     return unless complete?
 
     vote_results = votes_by_candidate
-    return if no_rounds_have_a_winner?(vote_results)
+    return nil if no_rounds_have_a_winner?(vote_results)
 
     winning_player_id = vote_results.first[0]
     @winner ||= players.find(winning_player_id)
+  end
+
+  def tied?
+    winner.blank?
   end
 
   private

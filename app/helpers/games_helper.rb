@@ -1,14 +1,26 @@
 # frozen_string_literal: true
 
 module GamesHelper
-  def display_players(game)
+  def display_player_names(game)
     players = game.players
     return link_to 'Add Players', edit_game_path(game) unless players.present?
 
     winner = game.winner
-    output = winner_intro(winner)
+    output = "#{winner_intro(winner)}, "
     everyone_else = players - [winner]
     output += everyone_else.map(&:name).join(', ')
+    output.html_safe
+  end
+
+  def display_player_names_and_points(game)
+    players = game.players
+    return link_to 'Add Players', edit_game_path(game) unless players.present?
+
+    everyone_else = players - [game.winner]
+    output = ''
+    output += everyone_else.map do |player|
+      "#{player.name}: #{player.votes} votes"
+    end.join(' | ')
     output.html_safe
   end
 
@@ -23,6 +35,6 @@ module GamesHelper
   private
 
   def winner_intro(winner)
-    winner ? "#{winner_icon} <strong>#{winner.name}</strong>, " : "#{tie_icon} Tied: "
+    winner ? "#{winner_icon} <strong>#{winner.name}</strong>" : "#{tie_icon} Tied"
   end
 end

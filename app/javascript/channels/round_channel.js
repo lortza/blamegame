@@ -33,8 +33,6 @@ document.addEventListener('turbolinks:load', function () {
 
         console.log('Received:')
 
-        const submission = `${data.candidate_name} received a vote from ${data.voter_name}`;
-        console.log(submission)
         console.log(`round_complete?: ${data.round_complete}`)
         console.log(`winner: ${data.winner}`)
         console.log(`results_by_candidate: ${data.results_by_candidate}`)
@@ -48,6 +46,8 @@ document.addEventListener('turbolinks:load', function () {
         if (data.candidate_name === undefined) {
           console.log('something undefined')
         } else {
+          const submission = `<strong>${data.candidate_name}</strong> received a vote from ${data.voter_name}`;
+          console.log(submission)
           submissions.insertAdjacentHTML('beforeend', '<li> ' + submission + '</li>')
         }
       }
