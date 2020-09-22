@@ -19,7 +19,7 @@ module GamesHelper
     everyone_else = players - [game.winner]
     output = ''
     output += everyone_else.map do |player|
-      "#{player.name}: #{player.votes} votes"
+      "#{player.name}: #{pluralize(player.rounds_won, 'round')}"
     end.join(' | ')
     output.html_safe
   end

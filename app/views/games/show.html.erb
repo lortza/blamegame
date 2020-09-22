@@ -4,7 +4,7 @@
   <%= link_to 'Back to Games Index', games_path, class: "controls mb-5 #{button_classes}" if current_user.present? %>
 </header>
 <% unless @game.tied? %>
-  <marquee><strong>Congrats to <%= display_winner(@game) %> with <%= pluralize(@game.winner.votes, 'vote') %>!</strong> <%= display_player_names_and_points(@game) %></marquee>
+  <marquee><strong>Congrats to <%= display_winner(@game) %> with <%= pluralize(@game.winner.rounds_won, 'winning round') %>!</strong> <%= display_player_names_and_points(@game) %></marquee>
 <% end %>
 <section class="hero mb-5">
   <center>
@@ -12,7 +12,7 @@
       <div class="container grand-winner-box">
         <h2 class="subtitle branded">
           <% unless @game.tied? %>
-            Earning <%= pluralize(@game.winner.votes, 'vote') %> across <%= pluralize(@game.rounds.length, 'round') %>,<br>
+            Winning <%= @game.winner.rounds_won %> out of <%= pluralize(@game.rounds.length, 'round') %>,<br>
           <% end %>
           the winner is...
         </h2>

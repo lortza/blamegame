@@ -25,7 +25,7 @@ class Player < ApplicationRecord
                                  message: 'This name is already taken by another player. Please enter another.' }
   # rubocop:enable Rails/UniqueValidationWithoutIndex
 
-  def votes
+  def rounds_won
     winning_rounds = game.rounds.select { |round| round.winner == self }
     winning_rounds.length
   end
