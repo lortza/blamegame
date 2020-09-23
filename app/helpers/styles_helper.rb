@@ -7,12 +7,12 @@ module StylesHelper
 
   def bulma_flash_class(type)
     modifier = case type
-    when 'alert' then 'is-warning'
-    when 'error' then 'is-danger'
-    when 'warning' then 'is-warning'
-    when 'notice' then 'is-info'
-    else
-      'info'
+               when 'alert' then 'is-warning'
+               when 'error' then 'is-danger'
+               when 'warning' then 'is-warning'
+               when 'notice' then 'is-info'
+               else
+                 'info'
     end
 
     "notification is-light #{modifier}"

@@ -21,10 +21,10 @@ class SubmissionsController < ApplicationController
 
     if submission.save
       RoundChannel.broadcast_to @round,
-                   voter_name: submission.voter.name,
-                   candidate_name: submission.candidate.name,
-                   round_complete: @round.complete?,
-                   winner: @round.winner&.name || "It's a tie"
+                                voter_name: submission.voter.name,
+                                candidate_name: submission.candidate.name,
+                                round_complete: @round.complete?,
+                                winner: @round.winner&.name || "It's a tie"
 
       redirect_to game_round_url(@game, @round)
     else

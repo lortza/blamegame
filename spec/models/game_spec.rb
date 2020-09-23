@@ -12,7 +12,6 @@ RSpec.describe Game, type: :model do
   context 'validations' do
     it { should validate_presence_of(:max_rounds) }
     it { should validate_numericality_of(:max_rounds) }
-
   end
 
   let(:game) { create(:game, :with_3_players, :with_2_rounds) }

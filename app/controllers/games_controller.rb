@@ -62,9 +62,9 @@ class GamesController < ApplicationController
     round = @game.rounds
 
     GameChannel.broadcast_to @game,
-                 game_code: @game.code,
-                 player_name: 'undefined',
-                 game_activated: @game.activated?
+                             game_code: @game.code,
+                             player_name: 'undefined',
+                             game_activated: @game.activated?
 
     redirect_to new_game_round_submission_url(@game, @game.rounds.first)
   end
@@ -89,7 +89,7 @@ class GamesController < ApplicationController
   end
 
   def delete_cookies
-    cookie_names = [:player_id, :game_id]
+    cookie_names = %i[player_id game_id]
     cookie_names.each do |name|
       cookies.delete(name)
     end

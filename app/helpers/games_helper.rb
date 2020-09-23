@@ -3,7 +3,7 @@
 module GamesHelper
   def display_player_names(game)
     players = game.players
-    return link_to 'Add Players', edit_game_path(game) unless players.present?
+    return link_to 'Add Players', edit_game_path(game) if players.blank?
 
     winner = game.winner
     output = "#{winner_intro(winner)}, "
@@ -14,7 +14,7 @@ module GamesHelper
 
   def display_player_names_and_points(game)
     players = game.players
-    return link_to 'Add Players', edit_game_path(game) unless players.present?
+    return link_to 'Add Players', edit_game_path(game) if players.blank?
 
     everyone_else = players - [game.winner]
     output = ''
