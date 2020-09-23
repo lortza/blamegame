@@ -27,9 +27,9 @@ jobs:
       - ruby/bundle-install
 
       # Run linters!
-      - run: bundle exec rubocop
+      # - run: bundle exec rubocop
       # - run: bundle exec reek
-      - run: bundle exec scss-lint app/assets/stylesheets/**.scss --exclude app/assets/stylesheets/coderay.scss
+      - run: bundle exec scss-lint app/assets/stylesheets/**.scss
 
       # Database setup
       - run: bundle exec rake db:create
