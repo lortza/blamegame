@@ -1,5 +1,11 @@
 @import 'variables';
 
+
+.round-winner-name {
+  font-size: 3em;
+  color: $is-link;
+}
+
 // GAME WINNER BOX
 .vertical-center-parent {
   display: flex;
@@ -7,6 +13,9 @@
 }
 .grand-winner-box {
   --border-width: 3px;
+
+  .subtitle { color: $black; }
+
   // Gradient border only
   // width: 500px;
   // height: 500px;

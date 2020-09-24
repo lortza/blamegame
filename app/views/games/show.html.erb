@@ -4,7 +4,10 @@
   <%= link_to 'Back to Games Index', games_path, class: "controls mb-5 #{button_classes}" if current_user.present? %>
 </header>
 <% unless @game.tied? %>
-  <marquee><strong>Congrats to <%= display_winner(@game) %> with <%= pluralize(@game.winner.rounds_won, 'winning round') %>!</strong> <%= display_player_names_and_points(@game) %></marquee>
+  <marquee>
+    ✨<strong>Congrats to <%= display_winner(@game) %> for taking the win!</strong> ✨
+    Here's how everyone else ranked... <%= display_player_names_and_points(@game) %>
+  </marquee>
 <% end %>
 <section class="hero mb-5">
   <center>
@@ -16,8 +19,8 @@
           <% end %>
           the winner is...
         </h2>
-        <h1 class="winner">
-          <i class="fas fa-crown"></i> <%= display_winner(@game) %>! <i class="fas fa-poo"></i>
+        <h1 class="winner branded">
+            👑💩 <%= display_winner(@game) %>! 🎊🎉
         </h1>
       </div>
     </div>
