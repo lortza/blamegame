@@ -14,11 +14,11 @@ module ApplicationHelper
       link_to 'Sign Out',
               destroy_user_session_path,
               method: :delete,
-              class: 'button is-light'
+              class: 'button is-primary is-inverted'
     else
       link_to 'Sign In',
               user_session_path,
-              class: 'button is-primary'
+              class: 'button is-primary is-inverted'
     end
   end
 end

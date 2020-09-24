@@ -2,7 +2,7 @@
 
 module StylesHelper
   def table_classes
-    'table is-striped is-narrow is-hoverable is-fullwidth'
+    'table is-striped is-hoverable is-fullwidth'
   end
 
   def bulma_flash_class(type)
