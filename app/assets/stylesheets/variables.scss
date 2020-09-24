@@ -12,18 +12,30 @@ $brand-yellow: #bab13f;
 $brand-main: $brand-dark-blue;
 $brand-secondary: $brand-light-blue;
 
-// Colors: Bulma
-$is-primary: #00d1b2;
-$is-info: #3298dc;
-$is-success: #48c774;
-$is-link: #3273dc;
-$is-warning: #ffdd57;
-$is-danger: #f14668;
+// Colors: Bulma Default
+// $is-primary: #00d1b2;
+// $is-info: #3298dc;
+// $is-success: #48c774;
+// $is-link: #3273dc;
+// $is-warning: #ffdd57;
+// $is-danger: #f14668;
 $is-light: #f5f5f5;
 $is-dark: #363636;
 
+// Colors: Bulma Nuclear
+$is-primary: #d9ff00;
+$is-info: #3298dc;
+$is-success: #00ff48;
+$is-link: #0ff;
+$is-warning: #fa0;
+$is-danger: #f90000;
+$is-white: #080808; // is actually black
+$is-black: #fff; // is actually white
+
 // Colors: Other
 $white: #fff;
+$black: #000;
+$magenta: #FF00FF;
 $default-text: $brand-dark-blue;
 $light-gray: #f1f1f1;
 $gray: #808080;
@@ -33,3 +45,5 @@ $error: #f00;
 
 // Features
 $drop-shadow: 2px 2px 4px #222;
+$navbar: $magenta;
+$pagination: $is-primary;

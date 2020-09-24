@@ -1,21 +1,24 @@
-<%= form_with(model: @player, local: true) do |form| %>
-  <%= render 'shared/errors', object: @player %>
+<section class='form-narrow'>
+  <%= form_with(model: @player, local: true) do |form| %>
+    <%= render 'shared/errors', object: @player %>
 
-  <div class='field'>
-    <%= form.label :game_code %>
-    <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', class: 'input' %>
-    <small id='error_helper_text' class="form-text error-helper-text hidden">Invalid Game Code</small>
-  </div>
+    <div class='field'>
+      <%= form.label :game_code %>
+      <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', class: 'input' %>
+      <small id='error_helper_text' class="form-text error-helper-text hidden">Invalid Game Code</small>
+    </div>
 
-  <div class='field'>
-    <%= form.label :name %>
-    <%= form.text_field :name, placeholder: 'Enter your name', class: 'input' %>
-  </div>
+    <div class='field'>
+      <%= form.label :name %>
+      <%= form.text_field :name, placeholder: 'Enter your name', class: 'input' %>
+    </div>
 
-  <div class="mt-5 mb-5">
-    <%= form.submit 'Submit', id: 'submit_button', class: "hidden #{button_block}" %>
-  </div>
-<% end %>
+    <div class="mt-5 mb-5">
+      <%= form.submit 'Submit', id: 'submit_button', class: button_block %>
+    </div>
+  <% end %>
+</section>
+
 
 <%= javascript_include_tag 'players'%>
 <script type="text/javascript">

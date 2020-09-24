@@ -5,13 +5,21 @@
 # Table name: games
 #
 #  id                      :bigint           not null, primary key
-#  user_id                 :bigint           not null
+#  adult_content_permitted :boolean          default(FALSE)
 #  code                    :string
+#  max_rounds              :integer
 #  players_ready           :boolean          default(FALSE)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  max_rounds              :integer
-#  adult_content_permitted :boolean          default(FALSE)
+#  user_id                 :bigint           not null
+#
+# Indexes
+#
+#  index_games_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 class Game < ApplicationRecord
   DEFAULT_MAX_ROUNDS = 10

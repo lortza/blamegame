@@ -2,7 +2,7 @@
 
 module StylesHelper
   def table_classes
-    'table is-striped is-narrow is-hoverable is-fullwidth'
+    'table is-striped is-hoverable is-fullwidth'
   end
 
   def bulma_flash_class(type)
@@ -10,12 +10,12 @@ module StylesHelper
                when 'alert' then 'is-warning'
                when 'error' then 'is-danger'
                when 'warning' then 'is-warning'
-               when 'notice' then 'is-info'
+               when 'notice' then 'is-success'
                else
-                 'info'
+                 'is-info'
     end
 
-    "notification is-light #{modifier}"
+    "notification #{modifier}"
   end
 
   def button_classes(style = 'is-primary')

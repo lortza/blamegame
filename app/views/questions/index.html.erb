@@ -5,7 +5,7 @@
   <%= link_to '+ New Question', new_question_path, class: "controls #{button_classes}" %>
 </header>
 
-<%= render partial: 'shared/filter_form', locals: { destination_url: questions_path } %>
+<%= render partial: 'shared/search_form', locals: { destination_url: questions_path } %>
 
 <table class='<%= table_classes %>'>
   <thead>

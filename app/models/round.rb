@@ -5,11 +5,21 @@
 # Table name: rounds
 #
 #  id          :bigint           not null, primary key
-#  game_id     :bigint           not null
-#  question_id :bigint           not null
 #  number      :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  game_id     :bigint           not null
+#  question_id :bigint           not null
+#
+# Indexes
+#
+#  index_rounds_on_game_id      (game_id)
+#  index_rounds_on_question_id  (question_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (game_id => games.id)
+#  fk_rails_...  (question_id => questions.id)
 #
 class Round < ApplicationRecord
   belongs_to :game

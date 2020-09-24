@@ -1,0 +1,66 @@
+@import 'variables';
+
+
+.round-winner-name {
+  font-size: 3em;
+  color: $is-link;
+}
+
+// GAME WINNER BOX
+.vertical-center-parent {
+  display: flex;
+  align-items: center;
+}
+.grand-winner-box {
+  --border-width: 3px;
+
+  .subtitle { color: $black; }
+
+  // Gradient border only
+  // width: 500px;
+  // height: 500px;
+  // padding-top: 20%;
+  // background: white;
+  // border-radius: var(--border-width);
+
+  // Full gradient background
+  $width: 50%;
+  width: $width;
+  max-width: 500px;
+  min-width: 300px;
+  height: $width * .9;
+  padding: 4rem 1rem;
+  color: white;
+  border-radius: var(--border-width);
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: calc(-1 * var(--border-width));
+    left: calc(-1 * var(--border-width));
+    z-index: -1;
+    width: calc(100% + var(--border-width) * 2);
+    height: calc(100% + var(--border-width) * 2);
+    background: linear-gradient(
+      60deg,
+      hsl(224, 85%, 66%),
+      hsl(269, 85%, 66%),
+      hsl(314, 85%, 66%),
+      hsl(359, 85%, 66%),
+      hsl(44, 85%, 66%),
+      hsl(89, 85%, 66%),
+      hsl(134, 85%, 66%),
+      hsl(179, 85%, 66%)
+    );
+    background-size: 300% 300%;
+    background-position: 0 50%;
+    border-radius: calc(2 * var(--border-width));
+    animation: moveGradient 4s alternate infinite;
+  }
+}
+
+@keyframes moveGradient {
+  50% {
+    background-position: 100% 50%;
+  }
+}

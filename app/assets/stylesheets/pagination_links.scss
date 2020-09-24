@@ -20,14 +20,14 @@
   .disabled { visibility: hidden; }
 
   a {
-    border: 1px solid $brand-main;
-    color: $brand-main;
+    border: 1px solid $pagination;
+    color: $pagination;
     text-decoration: none;
   }
 
   a:hover,
   a:focus {
-    border-color: darken($brand-main, 5%);
-    color: darken($brand-main, 5%);
+    border-color: darken($pagination, 5%);
+    color: darken($pagination, 5%);
   }
 }

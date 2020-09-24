@@ -19,7 +19,7 @@
   <!-- if all results are in -->
   <div id='round-results' class='mt-5 <%= hidden_class(@round) %>'>
     <p>The results are in and the winner is...</p>
-    <h1 class='title branded' id='round-winner'><%= display_winner(@round) %></h1>
+    <h1 class='branded round-winner-name' id='round-winner'><%= display_winner(@round) %></h1>
 
     <section class='mt-6'>
       <% if @round.number == @round.game.max_rounds || @round.game.complete? %>

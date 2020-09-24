@@ -1,34 +1,16 @@
-# Blame Game
+# BlameGame
 
-checklist
-- [x] try copying master key
-- [x] back up production database & update CSV
-- [ ] kill heroku app
-- [ ] regenerate master key
-- [x] rename app and database to blamegame
-- [ ] push new app to old repo, maybe.
-- [x] delete databases locally via postgres console
-- [ ] heroku redis deploy guide https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable#deploying-our-application-to-heroku
+[![CircleCI](https://circleci.com/gh/lortza/blamegame.svg?style=svg)](https://circleci.com/gh/lortza/blamegame)
 
-[![CircleCI](https://circleci.com/gh/lortza/blame_game.svg?style=svg)](https://circleci.com/gh/lortza/blame_game)
+[![Maintainability](https://api.codeclimate.com/v1/badges/639f9dda118f72314481/maintainability)](https://codeclimate.com/github/lortza/blamegame/maintainability)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/5900dd05417f73a806a7/maintainability)](https://codeclimate.com/github/lortza/blame_game/maintainability)
+Live on heroku as http://blamegame.herokuapp.com/
 
-Description TBD
-
-Live on heroku as TBD
-
-## To Do
-- [ ] Rename all the things in all of the files
-- [ ] Set up routes
-- [ ] Set up database
-- [ ] Set up circleci
-- [ ] Set up dependabot
-- [ ] Set up codeclimate
+Side project online version of a game where players vote for their teammate who is most likely to match the prompt. For example, which of your teammates is most likely to have been valedictorian in high school?
 
 ## Features
-
-* wip
+* an account-holding user can create new games, decide how many rounds to play, and choose whether to include adult content
+* players receive instant vote feedback via ActionCable
 
 ## Getting Started
 

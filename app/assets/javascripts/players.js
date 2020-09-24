@@ -23,7 +23,7 @@ function validateGameCode(currentGameCodes) {
     } else {
       errorHelperText.classList.remove('hidden')
       gameCodeField.classList.add('input-error')
-      submitButton.classList.add('hidden')
+      // submitButton.classList.add('hidden')
     }
   }) // game code blur
 }

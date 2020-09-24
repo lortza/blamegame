@@ -5,10 +5,18 @@
 # Table name: players
 #
 #  id         :bigint           not null, primary key
-#  game_id    :bigint           not null
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  game_id    :bigint           not null
+#
+# Indexes
+#
+#  index_players_on_game_id  (game_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (game_id => games.id)
 #
 class Player < ApplicationRecord
   belongs_to :game, inverse_of: :players
