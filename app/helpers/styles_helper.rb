@@ -10,12 +10,12 @@ module StylesHelper
                when 'alert' then 'is-warning'
                when 'error' then 'is-danger'
                when 'warning' then 'is-warning'
-               when 'notice' then 'is-info'
+               when 'notice' then 'is-success'
                else
-                 'info'
+                 'is-info'
     end
 
-    "notification is-light #{modifier}"
+    "notification #{modifier}"
   end
 
   def button_classes(style = 'is-primary')

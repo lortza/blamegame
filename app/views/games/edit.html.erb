@@ -7,10 +7,9 @@
   </header>
 </section>
 
+<%= form_with(model: @game, local: true) do |form| %>
+<%= render 'shared/errors', object: @game %>
 <section class='section'>
-  <%= form_with(model: @game, local: true) do |form| %>
-  <%= render 'shared/errors', object: @game %>
-
   <div class='columns'>
     <div class='field column is-one-third'>
       <%= form.label 'Max Rounds' %>
@@ -37,7 +36,7 @@
   </div> <!-- columns -->
 </section>
 
-<section class='section'>
+<!-- <section class='section'>
   <table class="table is-fullwidth is-narrow">
     <thead>
       <tr>
@@ -46,18 +45,20 @@
       </tr>
     </thead>
     <tbody>
-      <%= form.fields_for :players do |f_player| %>
+      <%#= form.fields_for :players do |f_player| %>
       <tr>
-        <td><%= f_player.text_field :name, class: 'input' %></td>
-        <td><%= f_player.check_box :_destroy if f_player.object.persisted? %></td>
+        <td><%#= f_player.text_field :name, class: 'input' %></td>
+        <td><%#= f_player.check_box :_destroy if f_player.object.persisted? %></td>
       </tr>
-      <% end %>
+      <%# end %>
     </tbody>
   </table>
+</section> -->
 
-  <%= form.submit class: button_block %>
-  <% end %>
-</section>
+  <section class='section'>
+    <%= form.submit class: button_classes %>
+  </section>
+<% end %>
 
 
 
