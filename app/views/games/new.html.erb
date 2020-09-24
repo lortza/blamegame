@@ -7,4 +7,39 @@
   </header>
 </section>
 
-<%= render 'form', game: @game %>
+<%#= render 'form', game: @game %>
+
+<section class='section'>
+  <%= form_with(model: @game, local: true) do |form| %>
+  <%= render 'shared/errors', object: @game %>
+
+  <div class='columns'>
+    <div class='field column is-one-third'>
+      <%= form.label 'Max Rounds' %>
+      <%= form.number_field :max_rounds, min: 1, class: 'input' %>
+    </div>
+
+    <div class='field column'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :adult_content_permitted, class: 'checkbox' %>
+          Allow Adult Content?
+        </label>
+      </div>
+    </div>
+
+    <div class='field column'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :players_ready, class: 'checkbox' %>
+          Players Ready?
+        </label>
+      </div>
+    </div>
+  </div> <!-- columns -->
+
+  <div class="mt-5 mb-5">
+    <%= form.submit class: button_block %>
+  </div>
+  <% end %>
+</section>

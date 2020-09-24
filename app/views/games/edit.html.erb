@@ -2,16 +2,68 @@
 
 <section class='section'>
   <header class='level'>
-    <h1 class='title is-1 level-left'>Editing Game</h1>
+    <h1 class='title is-1 level-left'>Editing Game: <%= @game.code %></h1>
     <%= link_to 'Cancel', games_path, class: "level-right #{button_classes('is-primary')}" %>
   </header>
 </section>
 
-<%= render 'form', game: @game %>
+<section class='section'>
+  <%= form_with(model: @game, local: true) do |form| %>
+  <%= render 'shared/errors', object: @game %>
+
+  <div class='columns'>
+    <div class='field column is-one-third'>
+      <%= form.label 'Max Rounds' %>
+      <%= form.number_field :max_rounds, min: 1, class: 'input' %>
+    </div>
+
+    <div class='field column'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :adult_content_permitted, class: 'checkbox' %>
+          Allow Adult Content?
+        </label>
+      </div>
+    </div>
+
+    <div class='field column'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :players_ready, class: 'checkbox' %>
+          Players Ready?
+        </label>
+      </div>
+    </div>
+  </div> <!-- columns -->
+</section>
+
+<section class='section'>
+  <table class="table is-fullwidth is-narrow">
+    <thead>
+      <tr>
+        <th>Player Name</th>
+        <th>Delete Player?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form.fields_for :players do |f_player| %>
+      <tr>
+        <td><%= f_player.text_field :name, class: 'input' %></td>
+        <td><%= f_player.check_box :_destroy if f_player.object.persisted? %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= form.submit class: button_block %>
+  <% end %>
+</section>
+
+
 
 <section class='section'>
   <hr>
-  <h4>Danger Zone</h4>
+  <h4 class='title text__is-danger'>Danger Zone</h4>
   <p>This is the nuclear option. It will delete the whole game, all players, and any rounds.</p>
   <%= link_to 'Delete Game and All Players', @game, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_classes('is-danger')}" %>
 </section>
