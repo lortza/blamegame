@@ -17,12 +17,8 @@ Rails.application.routes.draw do
   resources :games do
     resources :players, only: [:index]
     resources :rounds, only: [:show] do
-      resources :submissions, only: [:new, :create, :show]
+      resources :submissions, only: [:new, :create]
     end
   end
   resources :questions
-
-  # ActionCable Tutorial Routes
-  get 'landing/index'
-  resources :messages
 end
