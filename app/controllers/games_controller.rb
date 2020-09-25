@@ -35,7 +35,8 @@ class GamesController < ApplicationController
 
     if @game.save
       @game.generate_rounds
-      redirect_to games_url, notice: "Oh SNAP! It's about to be <em>on</em>. Game #{@game.code} is ready to rock!"
+      notice = "Oh SNAP! It's about to be <em>on</em>. Game #{@game.code} is ready to rock!"
+      redirect_to games_url, notice: notice
     else
       render :new
     end
@@ -53,7 +54,7 @@ class GamesController < ApplicationController
     @game.destroy
 
     delete_cookies
-    notice = "Game at #{@game.date} was successfully deleted."
+    notice = "Game at #{@game.code} was successfully deleted."
     redirect_to games_url, notice: notice
   end
 
