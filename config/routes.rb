@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'players#new'
 
-  mount ActionCable.server => '/cable'
+  # mount ActionCable.server => '/cable'
 
   # Skip registrations for now so no new users can sign up.
   devise_for :users, skip: [:registrations]
