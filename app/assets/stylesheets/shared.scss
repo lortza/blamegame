@@ -42,32 +42,6 @@ a.nav-brand-name {
 // Links
 a { color: $link-color; }
 
-// Controls
-// Replace these with Bulma level, level-left, level-item, etc
-header,
-.controls-parent {
-  align-items: center;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}
-
-.controls {
-  align-items: center;
-  display: flex;
-  justify-content: flex-end;
-
-  a {
-    clear: both;
-    margin-left: 10px;
-
-    &:hover {
-      color: $default-text;
-      text-decoration: none;
-    }
-  }
-}
-
 // Forms
 .form-narrow {
   min-width: 300px;
@@ -106,5 +80,3 @@ header,
 .brand-image {
   height: 60px;
 }
-
-.text__is-danger { color: $is-danger; }

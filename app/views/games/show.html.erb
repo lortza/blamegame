@@ -1,8 +1,5 @@
-<% content_for(:title, "Game #{@game.date}") %>
+<% content_for(:title, "Game #{@game.code}") %>
 
-<header>
-  <%= link_to 'Back to Games Index', games_path, class: "controls mb-5 #{button_classes}" if current_user.present? %>
-</header>
 <% unless @game.tied? %>
   <marquee>
     ✨<strong>Congrats to <%= display_winner(@game) %> for taking the win!</strong> ✨
@@ -28,10 +25,12 @@
 </section>
 
 <section class='section'>
-  <h4 class='title is-4 branded'>Winners by Round</h4>
+  <h2 class='title is-3 branded'>Winners by Round</h2>
   <% @game.rounds.each do |round| %>
     <p><%= round.number %>. <%= round.question.text %> → <span class='branded'><%= display_winner(round) %></span></p>
   <% end %>
 
-  <%= link_to ('<i class="fas fa-gamepad mr-2"></i>'.html_safe + 'Play Another Game'), join_game_path, class: "#{button_classes} mt-5" %>
+  <%= link_to ('<i class="fas fa-gamepad mr-2"></i>'.html_safe + 'Play Another Game'), join_game_path, class: "#{button_classes} mt-5" %><br>
+  <%= link_to 'Back to Games Index', games_path, class: "#{button_classes} mt-5" if current_user.present? %>
+
 </section>

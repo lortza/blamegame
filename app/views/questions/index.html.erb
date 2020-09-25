@@ -1,8 +1,8 @@
 <% content_for(:title, 'Questions') %>
 
-<header>
-  <h1 class='title is-1'>Questions</h1>
-  <%= link_to '+ New Question', new_question_path, class: "controls #{button_classes}" %>
+<header class='level'>
+  <h1 class='title is-1 level-left'>Questions</h1>
+  <%= link_to '+ New Question', new_question_path, class: "level-right #{button_classes}" %>
 </header>
 
 <%= render partial: 'shared/search_form', locals: { destination_url: questions_path } %>

@@ -1,8 +1,18 @@
 <% content_for(:title, "Editing #{@question.text}") %>
 
-<header>
-  <h1 class='title is-1'>Editing Question</h1>
-  <%= link_to 'Cancel', questions_path, class: "ml-2 #{button_classes('is-primary')}" %>
-</header>
+<section class='section'>
+  <header class='level'>
+    <h1 class='title is-1 level-left'>Editing Question</h1>
+    <%= link_to 'Cancel', questions_path, class: "level-right ml-2 #{button_classes('is-primary')}" %>
+  </header>
+</section>
 
 <%= render 'form', question: @question %>
+
+<section class='section'>
+  <hr>
+  <h4 class='title has-text-danger'>Danger Zone</h4>
+  <p>This is the nuclear option. It will delete the question and no one will be able to use it again.</p>
+
+  <%= link_to 'Delete Question', @question, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_classes('is-danger')}" %>
+</section>
