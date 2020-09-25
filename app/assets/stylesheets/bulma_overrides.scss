@@ -1,7 +1,15 @@
 @import 'variables';
 
 // BULMA OVERRIDES
-.navbar { background-color: $navbar; }
+.title {
+  text-transform: none;
+  font-weight: normal;
+}
+
+// https://versions.bulma.io/0.7.0/documentation/components/navbar/
+nav.is-info {
+  background-color: $navbar !important;
+}
 .section {
   padding: 1.5rem 1.5rem;
 }

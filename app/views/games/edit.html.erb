@@ -61,10 +61,9 @@
 <% end %>
 
 
-
 <section class='section'>
   <hr>
-  <h4 class='title text__is-danger'>Danger Zone</h4>
+  <h4 class='title has-text-danger'>Danger Zone</h4>
   <p>This is the nuclear option. It will delete the whole game, all players, and any rounds.</p>
   <%= link_to 'Delete Game and All Players', @game, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_classes('is-danger')}" %>
 </section>

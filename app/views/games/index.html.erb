@@ -1,10 +1,12 @@
 <% content_for(:title, "Games") %>
 
 <section class='section'>
-  <header>
-    <h1 class='title is-1'>Games</h1>
-    <%= link_to '+ New Game', new_game_path, class: "controls mb-3 #{button_classes}" %>
-  </header>
+  <div class='level'>
+    <div class='level-left'></div>
+    <div class='level-right'>
+      <%= link_to '+ New Game', new_game_path, class: "level-item mb-3 #{button_classes}" %>
+    </div>
+  </div>
 </section>
 
 <section class='section'>
@@ -24,8 +26,8 @@
             </div>
           </div>
 
-          <p class="subtitle">Share Link: <%= link_to join_game_url, join_game_url %></p>
           <div class="content">
+            <p>Share Link: <%= link_to join_game_url, join_game_url %></p>
             <p>
               Adult Content? <%= boolean_check_or_x(game.adult_content_permitted?) %> |
               Players Ready? <%= boolean_check_or_x(game.players_ready?) %> |
