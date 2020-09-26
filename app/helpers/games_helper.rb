@@ -24,6 +24,14 @@ module GamesHelper
     output.html_safe
   end
 
+  def rounds_won_as_emojis(player)
+    emojis = ''
+    player.rounds_won.times do |win|
+      emojis += '⭐ '
+    end
+    emojis
+  end
+
   def winner_icon
     "<i class='fas fa-crown'></i>"
   end
