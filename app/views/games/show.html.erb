@@ -24,13 +24,37 @@
   </center>
 </section>
 
-<section class='section'>
-  <h2 class='title is-3 branded'>Winners by Round</h2>
-  <% @game.rounds.each do |round| %>
-    <p><%= round.number %>. <%= round.question.text %> → <span class='branded'><%= display_winner(round) %></span></p>
-  <% end %>
+<section>
+  <div class='columns'>
+    <div class='column'>
+      <section class='section'>
+        <h2 class='title is-3 branded'>Winners by Round</h2>
+        <table>
+          <tbody>
+            <% @game.players.each do |player| %>
+            <tr>
+              <td style='padding-right: 15px;'><span class='title is-5 branded'><%= player.name %></span></td>
+              <td><%= rounds_won_as_emojis(player) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+    </div>
 
+    <div class='column'>
+      <section class='section'>
+        <h2 class='title is-3 branded'>Questions</h2>
+        <% @game.rounds.each do |round| %>
+        <p><%= round.number %>. <%= round.question.text %> → <span class='branded'><%= display_winner(round) %></span></p>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<section>
   <%= link_to ('<i class="fas fa-gamepad mr-2"></i>'.html_safe + 'Play Another Game'), join_game_path, class: "#{button_classes} mt-5" %><br>
-  <%= link_to 'Back to Games Index', games_path, class: "#{button_classes} mt-5" if current_user.present? %>
-
+  <%= link_to '+ Start a New Game', new_game_path, class: "#{button_classes('is-link')} mt-5" if current_user.present? %>
 </section>
