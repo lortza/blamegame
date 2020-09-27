@@ -1,10 +1,10 @@
 <% if object.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(object.errors.count, "error") %> prohibited this object from being saved:</h2>
+    <h2 class='title is-h2 has-text-danger'><%= pluralize(object.errors.count, "error") %> prohibited this object from being saved:</h2>
 
-    <ul>
+    <ul class='mb-5'>
     <% object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+      <li class='has-text-danger'><%= message %></li>
     <% end %>
     </ul>
   </div>
