@@ -4,7 +4,7 @@
 
     <div class='field'>
       <%= form.label :game_code %>
-      <%= form.text_field :game_code, autofocus: true, placeholder: 'Ex: HMJY', class: 'input' %>
+      <%= form.text_field :game_code, value: @player&.game&.code, placeholder: 'Ex: HMJY', class: 'input' %>
       <small id='error_helper_text' class="form-text error-helper-text hidden">Invalid Game Code</small>
     </div>
 
