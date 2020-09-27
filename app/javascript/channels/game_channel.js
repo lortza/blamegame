@@ -8,15 +8,10 @@ document.addEventListener('turbolinks:load', function () {
   };
 
   const displayIncomingPlayers = function(data) {
-    const waitingTitle = document.querySelector("#game-waiting-for-players-title");
-    const waitingSection = document.querySelector("#game-waiting-for-players-section");
     const players = document.querySelector("#game-players");
-    const ready = document.querySelector("#game-ready");
 
     if (data.game_activated == true){
-      ready.classList.remove('hidden')
-      waitingTitle.remove()
-      waitingSection.remove()
+      window.location.href = data.destination_url
     }
 
     if (data.player_name === undefined || data.player_name === 'undefined') {

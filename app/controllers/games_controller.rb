@@ -21,7 +21,14 @@ class GamesController < ApplicationController
   end
 
   def show
-    delete_cookies
+    # Trying to get all browsers to go to the game#show when a single
+    # player clicks the button. Causes infinite loop.
+    # RoundChannel.broadcast_to @game.rounds.last,
+    #                          game_code: @game.code,
+    #                          game_over: true,
+    #                          destination_url: game_url(@game)
+   delete_cookies
+
   end
 
   def edit
@@ -65,7 +72,8 @@ class GamesController < ApplicationController
     GameChannel.broadcast_to @game,
                              game_code: @game.code,
                              player_name: 'undefined',
-                             game_activated: @game.activated?
+                             game_activated: @game.activated?,
+                             destination_url: new_game_round_submission_url(@game, @game.rounds.first)
 
     redirect_to new_game_round_submission_url(@game, @game.rounds.first)
   end

@@ -9,6 +9,13 @@ class SubmissionsController < ApplicationController
 
   def new
     @submission = @round.submissions.new
+
+    # Trying to get all browsers to go to the next question when a single
+    # player clicks the "Next Question" button.Causes infinite loop.
+    # last_round = @round.game.rounds.find_by(number: @round.number - 1)
+    # RoundChannel.broadcast_to last_round,
+    #                           advance_game: true,
+    #                           destination_url: request.env['PATH_INFO']
   end
 
   def create

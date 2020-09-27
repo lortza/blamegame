@@ -37,6 +37,18 @@ document.addEventListener('turbolinks:load', function () {
         console.log(`winner: ${data.winner}`)
         console.log(`results_by_candidate: ${data.results_by_candidate}`)
 
+        // Trying to get all browsers to go to the game#show when a single
+        // player clicks the button. Causes infinite loop.
+        // if (data.game_over == true){
+        //   window.location.href = data.destination_url
+        // }
+
+        // Trying to get all browsers to go to the next question when a single
+        // player clicks the "Next Question" button.Causes infinite loop.
+        // if (data.advance_game == true){
+        //   window.location.href = data.destination_url
+        // }
+
         if (data.round_complete == true){
           waiting.classList.add('hidden')
           results.classList.remove('hidden')
