@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :players, only: [:new, :create]
   get 'play', to: 'players#new', as: 'join_game'
+  get 'play/:game_code', to: 'players#new_with_code', as: 'join_game_with_code'
   post 'play', to: 'games#players_ready', as: 'players_ready'
 
   resources :games do

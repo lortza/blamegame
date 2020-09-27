@@ -12,6 +12,20 @@ class PlayersController < ApplicationController
     cookies.delete(:player_id)
   end
 
+  def new_with_code
+    cookies.delete(:player_id)
+    game = Game.find_by(code: params[:game_code])
+
+    if game.present? && !game.activated?
+      @player = Player.new(game: game)
+    else
+      redirect_to join_game_path
+      return
+    end
+
+    render :new
+  end
+
   def create
     @player = Player.new(name: player_params[:name], game_id: @game&.id)
 

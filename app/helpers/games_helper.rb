@@ -40,6 +40,10 @@ module GamesHelper
     '<i class="far fa-handshake"></i>'
   end
 
+  def share_link(game)
+    "#{root_url}play/#{game.code}"
+  end
+
   private
 
   def winner_intro(winner)
