@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: %i[index new create edit update destroy]
+  before_action :authenticate_user!, only: %i[index new create edit update]
 
-  before_action :set_question, only: %i[edit update destroy]
+  before_action :set_question, only: %i[edit update]
+  before_action :set_deck, only: %i[index new create edit update]
 
   def index
     search_term = params[:search]
@@ -36,12 +37,6 @@ class QuestionsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def destroy
-    @question.destroy
-    notice = "#{@question.text} was successfully deleted."
-    redirect_to questions_url, notice: notice
   end
 
   private

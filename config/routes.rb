@@ -21,5 +21,7 @@ Rails.application.routes.draw do
       resources :submissions, only: [:new, :create]
     end
   end
-  resources :questions
+  resources :decks do
+    resources :questions, only: [:index, :new, :create, :edit, :update ]
+  end
 end
