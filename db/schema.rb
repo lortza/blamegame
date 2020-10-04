@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_002205) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "deck_id"
+    t.boolean "archived", default: false
     t.index ["deck_id"], name: "index_questions_on_deck_id"
   end
 

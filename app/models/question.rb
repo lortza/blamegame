@@ -14,15 +14,19 @@ class Question < ApplicationRecord
   has_many :rounds, dependent: :nullify
   validates :text, presence: true
 
+  def self.active
+    where(archived: false)
+  end
+
   def self.search(field:, terms:)
     if terms.blank?
-      all
+      active
     else
       where("#{field} ILIKE ?", "%#{terms}%")
     end
   end
 
   def self.without_adult_content
-    where.not(adult_rating: true)
+    active.where.not(adult_rating: true)
   end
 end
