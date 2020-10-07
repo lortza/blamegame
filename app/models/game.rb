@@ -27,6 +27,8 @@ class Game < ApplicationRecord
   belongs_to :user
   has_many :players, inverse_of: :game, dependent: :destroy
   has_many :rounds, dependent: :destroy
+  has_many :game_decks, dependent: :destroy
+  has_many :decks, through: :game_decks
   accepts_nested_attributes_for :players,
                                 allow_destroy: true, # allows user to delete player via checkbox
                                 reject_if: :all_blank # at least 1 player should be present

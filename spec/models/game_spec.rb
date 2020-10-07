@@ -7,6 +7,8 @@ RSpec.describe Game, type: :model do
     it { should belong_to(:user) }
     it { should have_many(:players) }
     it { should have_many(:rounds) }
+    it { should have_many(:game_decks) }
+    it { should have_many(:decks).through(:game_decks) }
   end
 
   context 'validations' do
