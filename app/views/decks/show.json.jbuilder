@@ -1,1 +1,1 @@
-json.partial! "decks/deck", deck: @deck
+json.partial! 'decks/deck', deck: @deck

@@ -34,7 +34,7 @@ module GamesHelper
 
   def rounds_won_as_emojis(player)
     emojis = ''
-    player.rounds_won.times do |win|
+    player.rounds_won.times do |_win|
       emojis += '⭐ '
     end
     emojis

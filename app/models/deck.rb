@@ -28,8 +28,8 @@ class Deck < ApplicationRecord
 
   DEFAULT_DECK_NAMES = [
     'Official 1',
-    'Official 2'
-  ]
+    'Official 2',
+  ].freeze
 
   def self.default_decks
     where(name: DEFAULT_DECK_NAMES).order(:name)

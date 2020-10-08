@@ -30,8 +30,7 @@ class GamesController < ApplicationController
     #                          game_code: @game.code,
     #                          game_over: true,
     #                          destination_url: game_url(@game)
-   delete_cookies
-
+    delete_cookies
   end
 
   def edit
@@ -98,8 +97,7 @@ class GamesController < ApplicationController
                                  :max_rounds,
                                  :players_ready,
                                  players_attributes: %i[id name _destroy],
-                                 deck_ids: []
-                               )
+                                 deck_ids: [])
   end
 
   def delete_cookies
