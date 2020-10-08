@@ -1,0 +1,36 @@
+<% content_for(:title, 'Questions') %>
+
+<header class='level'>
+  <h1 class='title is-1 level-left'>Question Decks</h1>
+  <%= link_to '+ New Deck', new_deck_path, class: "level-right #{button_classes}" %>
+</header>
+
+<section class='section form-narrow'>
+
+
+  <% @decks.order(:name).each do |deck| %>
+    <div class="card mb-5">
+      <div class="card-content">
+        <p class="title">
+          <%= link_to "#{deck.name} Deck", deck_questions_path(deck) %>
+        </p>
+        <p class="subtitle">
+          Questions: <%= deck.questions.length %>
+        </p>
+      </div>
+      <footer class="card-footer">
+        <p class="card-footer-item">
+          <span>
+            <%= link_to 'Edit Deck', edit_deck_path(deck) %>
+          </span>
+        </p>
+        <p class="card-footer-item">
+          <span>
+            <%= link_to 'Questions', deck_questions_path(deck) %>
+          </span>
+        </p>
+      </footer>
+    </div>
+  <% end %>
+
+</section>

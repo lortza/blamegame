@@ -8,24 +8,23 @@ class QuestionsController < ApplicationController
 
   def index
     search_term = params[:search]
-    questions = search_term.present? ? Question.search(field: 'text', terms: search_term) : Question.all
-
-    @questions = questions.order(:id)
-                          .paginate(page: params[:page], per_page: 30)
+    @questions = @deck.questions.search(field: 'text', terms: search_term)
+                      .order(:id)
+                      .paginate(page: params[:page], per_page: 30)
   end
 
   def new
-    @question = Question.new
+    @question = @deck.questions.new
   end
 
   def edit
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = @deck.questions.new(question_params)
 
     if @question.save
-      redirect_to questions_url
+      redirect_to deck_questions_url(@deck)
     else
       render :new
     end
@@ -33,7 +32,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      redirect_to questions_url
+      redirect_to deck_questions_url(@deck)
     else
       render :edit
     end
@@ -43,6 +42,10 @@ class QuestionsController < ApplicationController
 
   def set_question
     @question = Question.find(params[:id])
+  end
+
+  def set_deck
+    @deck = current_user.decks.find(params[:deck_id])
   end
 
   def question_params

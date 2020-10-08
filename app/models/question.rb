@@ -5,12 +5,23 @@
 # Table name: questions
 #
 #  id           :bigint           not null, primary key
-#  text         :string
 #  adult_rating :boolean
+#  archived     :boolean          default(FALSE)
+#  text         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  deck_id      :bigint
+#
+# Indexes
+#
+#  index_questions_on_deck_id  (deck_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (deck_id => decks.id)
 #
 class Question < ApplicationRecord
+  belongs_to :deck
   has_many :rounds, dependent: :nullify
   validates :text, presence: true
 

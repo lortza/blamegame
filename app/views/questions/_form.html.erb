@@ -1,5 +1,5 @@
 <section class='section'>
-  <%= form_with(model: question, local: true) do |form| %>
+  <%= form_with(model: [deck, question], local: true) do |form| %>
   <%= render 'shared/errors', object: question %>
   <div class='columns'>
     <div class='field column is-three-quarters'>

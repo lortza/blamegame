@@ -1,0 +1,14 @@
+<section class='section'>
+  <%= form_with(model: deck, local: true) do |form| %>
+    <%= render 'shared/errors', object: deck %>
+
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'input' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: button_classes %>
+    </div>
+  <% end %>
+</section>

@@ -2,9 +2,15 @@
 
 <section class='section'>
   <header class='level'>
-    <h1 class='title is-1 level-left'>New Question</h1>
-    <%= link_to 'Cancel', questions_path, class: "level-right ml-2 #{button_classes('is-primary')}" %>
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><%= link_to 'Decks', decks_path %></li>
+        <li><%= link_to "#{@deck.name} Deck", deck_questions_path(@deck) %></li>
+        <li class="is-active"><a href="#" aria-current="page">New Question</a></li>
+      </ul>
+    </nav>
+    <%= link_to 'Cancel', deck_questions_path(@deck), class: "level-right ml-2 #{button_classes('is-primary')}" %>
   </header>
 </section>
 
-<%= render 'form', question: @question %>
+<%= render 'form', deck: @deck, question: @question %>
