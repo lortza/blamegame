@@ -34,6 +34,7 @@
               Game Over? <%= boolean_check_or_x(game.complete?) %>
             </p>
             <p>Players: <%= display_player_names(game) if game.players.any? %></p>
+            <p>Decks: <%= display_deck_names(game) %></p>
             <p>Questions:</p>
             <ol>
               <% game.rounds.each do |round| %>
@@ -61,6 +62,7 @@
       <tr>
         <th>Date Played</th>
         <th>Game Code</th>
+        <th>Decks</th>
         <th>Players</th>
         <th>Players Ready?</th>
         <th>Game Complete?</th>
@@ -72,6 +74,7 @@
       <tr>
         <td><%= game.date %></td>
         <td><%= link_to game.code, game %></td>
+        <td><%= display_only_custom_deck_names(game) %></td>
         <td><%= display_player_names(game) %></td>
         <td><%= boolean_check_or_x(game.players_ready?) %></td>
         <td><%= boolean_check_or_x(game.complete?) %></td>

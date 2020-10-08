@@ -107,10 +107,11 @@ class Game < ApplicationRecord
   end
 
   def generate_questions
+    base_questions = ::Question.active.where(deck_id: deck_ids)
     if adult_content_permitted?
-      ::Question.all.sample(max_rounds)
+      base_questions.sample(max_rounds)
     else
-      ::Question.without_adult_content.sample(max_rounds)
+      base_questions.without_adult_content.sample(max_rounds)
     end
   end
 

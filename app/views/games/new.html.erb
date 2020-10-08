@@ -38,6 +38,16 @@
     </div>
   </div> <!-- columns -->
 
+  <div class="field">
+    <%= form.label 'Decks' %>
+    <%= form.collection_check_boxes :deck_ids, form_decks(current_user), :id, :name do |r| %>
+      <div class='form-check'>
+        <%= r.check_box class: 'form-check-input' %>
+        <%= r.label class: 'form-check-label' %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="mt-5 mb-5">
     <%= form.submit class: button_classes %>
   </div>
