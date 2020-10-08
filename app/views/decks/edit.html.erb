@@ -1,0 +1,15 @@
+<% content_for(:title, "Editing #{@deck.name}") %>
+
+<section class='section'>
+  <header class='level'>
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><%= link_to 'Decks', decks_path %></li>
+        <li class="is-active"><a href="#" aria-current="page">Editing <%= @deck.name %> Deck</a></li>
+      </ul>
+    </nav>
+    <%= link_to 'Cancel', decks_path, class: "level-right ml-2 #{button_classes('is-primary')}" %>
+  </header>
+</section>
+
+<%= render 'form', deck: @deck %>

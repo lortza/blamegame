@@ -1,5 +1,5 @@
 <% if current_user&.admin? %>
   <%= link_to '+ New Game', new_game_path, class: 'navbar-item' %>
   <%= link_to 'Games', games_path, class: 'navbar-item' %>
-  <%= link_to 'Questions', questions_path, class: 'navbar-item' %>
+  <%= link_to 'Question Decks', decks_path, class: 'navbar-item' %>
 <% end %>

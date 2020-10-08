@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :game do
-    user_id { create(:user).id }
+    user
     sequence(:code) { |n| "code#{n}" }
     players_ready { true }
     max_rounds { 3 }

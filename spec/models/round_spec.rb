@@ -14,10 +14,19 @@ RSpec.describe Round, type: :model do
   end
 
   describe 'complete?' do
-    let(:game) { create(:game) }
-    let(:round) { create(:round, game: game) }
+    let(:user) { create(:user) }
+    let(:game) { create(:game, user: user) }
+    let(:deck) { create(:deck, user: user) }
+    let(:question) { create(:question, deck: deck) }
+    let(:round) { create(:round, game: game, question: question) }
     let(:player1) { create(:player, game: game) }
     let(:player2) { create(:player, game: game) }
+
+    before do
+      round
+      player1
+      player2
+    end
 
     it 'returns false if there are no submissions' do
       expect(round.complete?).to be(false)
@@ -37,8 +46,11 @@ RSpec.describe Round, type: :model do
   end
 
   describe 'winner' do
-    let(:game) { create(:game) }
-    let(:round) { create(:round, game: game) }
+    let(:user) { create(:user) }
+    let(:game) { create(:game, user: user) }
+    let(:deck) { create(:deck, user: user) }
+    let(:question) { create(:question, deck: deck) }
+    let(:round) { create(:round, game: game, question: question) }
     let(:player1) { create(:player, game: game) }
     let(:player2) { create(:player, game: game) }
 
@@ -68,8 +80,11 @@ RSpec.describe Round, type: :model do
   end
 
   describe 'results_by_candidate' do
-    let(:game) { create(:game) }
-    let(:round) { create(:round, game: game) }
+    let(:user) { create(:user) }
+    let(:game) { create(:game, user: user) }
+    let(:deck) { create(:deck, user: user) }
+    let(:question) { create(:question, deck: deck) }
+    let(:round) { create(:round, game: game, question: question) }
     let(:player1) { create(:player, game: game) }
     let(:player2) { create(:player, game: game) }
 

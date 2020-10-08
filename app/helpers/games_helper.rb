@@ -12,6 +12,14 @@ module GamesHelper
     output.html_safe
   end
 
+  def display_deck_names(game)
+    game.decks.map(&:name).join(', ')
+  end
+
+  def display_only_custom_deck_names(game)
+    (game.decks - Deck.default_decks).map(&:name).join(', ')
+  end
+
   def display_player_names_and_points(game)
     players = game.players
     return link_to 'Add Players', edit_game_path(game) if players.blank?
@@ -26,7 +34,7 @@ module GamesHelper
 
   def rounds_won_as_emojis(player)
     emojis = ''
-    player.rounds_won.times do |win|
+    player.rounds_won.times do |_win|
       emojis += '⭐ '
     end
     emojis
@@ -42,6 +50,12 @@ module GamesHelper
 
   def share_link(game)
     "#{root_url}play/#{game.code}"
+  end
+
+  def form_decks(user)
+    return (Deck.default_decks + user.decks.order(:name)) unless user.admin?
+
+    user.decks.order(:name)
   end
 
   private

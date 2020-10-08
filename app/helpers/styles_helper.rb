@@ -13,7 +13,7 @@ module StylesHelper
                when 'notice' then 'is-success'
                else
                  'is-info'
-    end
+               end
 
     "notification #{modifier}"
   end

@@ -16,7 +16,10 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = current_user.games.new(max_rounds: Game::DEFAULT_MAX_ROUNDS)
+    @game = current_user.games.new(
+      max_rounds: Game::DEFAULT_MAX_ROUNDS,
+      deck_ids: Deck.default_decks.pluck(:id)
+    )
     5.times { @game.players.build }
   end
 
@@ -27,8 +30,7 @@ class GamesController < ApplicationController
     #                          game_code: @game.code,
     #                          game_over: true,
     #                          destination_url: game_url(@game)
-   delete_cookies
-
+    delete_cookies
   end
 
   def edit
@@ -94,7 +96,8 @@ class GamesController < ApplicationController
                                  :adult_content_permitted,
                                  :max_rounds,
                                  :players_ready,
-                                 players_attributes: %i[id name _destroy])
+                                 players_attributes: %i[id name _destroy],
+                                 deck_ids: [])
   end
 
   def delete_cookies

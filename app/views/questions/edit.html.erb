@@ -2,17 +2,15 @@
 
 <section class='section'>
   <header class='level'>
-    <h1 class='title is-1 level-left'>Editing Question</h1>
-    <%= link_to 'Cancel', questions_path, class: "level-right ml-2 #{button_classes('is-primary')}" %>
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><%= link_to 'Decks', decks_path %></li>
+        <li><%= link_to "#{@deck.name} Deck", deck_questions_path(@deck) %></li>
+        <li class="is-active"><a href="#" aria-current="page">Editing Question</a></li>
+      </ul>
+    </nav>
+    <%= link_to 'Cancel', deck_questions_path(@deck), class: "level-right ml-2 #{button_classes('is-primary')}" %>
   </header>
 </section>
 
-<%= render 'form', question: @question %>
-
-<section class='section'>
-  <hr>
-  <h4 class='title has-text-danger'>Danger Zone</h4>
-  <p>This is the nuclear option. It will delete the question and no one will be able to use it again.</p>
-
-  <%= link_to 'Delete Question', @question, method: :delete, data: { confirm: 'Are you sure?' }, class: "mb-5 #{button_classes('is-danger')}" %>
-</section>
+<%= render 'form', deck: @deck, question: @question %>

@@ -20,7 +20,7 @@ user = User.create!(
 puts "User: #{User.count}"
 
 qty_to_seed = 20
-Rake::Task['db:populate_questions'].invoke(qty_to_seed)
+Rake::Task['db:populate_official_deck1'].invoke(qty_to_seed)
 
 player_names = %w[Albert Alex Ditter Ivy James Jasper LionelScritchy Loki LukeBrown Mindy Moonie Murph Pickles Thor Zorro]
 

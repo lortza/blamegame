@@ -1,18 +1,25 @@
-<% content_for(:title, 'Questions') %>
+<% content_for(:title, 'Deck Questions') %>
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><%= link_to 'Decks', decks_path %></li>
+    <li class="is-active"><a href="#" aria-current="page"><%= @deck.name %></a></li>
+  </ul>
+</nav>
 
 <header class='level'>
-  <h1 class='title is-1 level-left'>Questions</h1>
-  <%= link_to '+ New Question', new_question_path, class: "level-right #{button_classes}" %>
+  <h1 class='title is-1 level-left'><%= @deck.name %> Questions</h1>
+  <%= link_to '+ New Question', new_deck_question_path(@deck), class: "level-right #{button_classes}" %>
 </header>
 
-<%= render partial: 'shared/search_form', locals: { destination_url: questions_path } %>
+<%= render partial: 'shared/search_form', locals: { destination_url: deck_questions_path(deck: @deck) } %>
 
 <table class='<%= table_classes %>'>
   <thead>
     <tr>
       <th></th>
       <th>Adult Content</th>
-      <th colspan='2'>Actions</th>
+      <th colspan='1'>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -20,12 +27,7 @@
       <tr>
         <td><%= question.text %></td>
         <td><%= boolean_checkmark(question.adult_rating?) %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td>
-          <%= link_to 'Delete', question,
-            method: :delete,
-            data: { confirm: 'Are you sure?' } %>
-        </td>
+        <td><%= link_to 'Edit', edit_deck_question_path(deck: @deck, id: question) %></td>
       </tr>
     <% end %>
   </tbody>

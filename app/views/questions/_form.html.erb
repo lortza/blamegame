@@ -1,5 +1,5 @@
 <section class='section'>
-  <%= form_with(model: question, local: true) do |form| %>
+  <%= form_with(model: [deck, question], local: true) do |form| %>
   <%= render 'shared/errors', object: question %>
   <div class='columns'>
     <div class='field column is-three-quarters'>
@@ -14,6 +14,15 @@
         <label class='checkbox'>
           <%= form.check_box :adult_rating, class: 'checkbox' %>
           Adult Rating
+        </label>
+      </div>
+    </div>
+
+    <div class='field column'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :archived, class: 'checkbox' %>
+          Archived
         </label>
       </div>
     </div>
