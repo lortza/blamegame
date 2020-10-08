@@ -36,6 +36,18 @@ namespace :db do
       deck.questions.count
     end
   end
+
+  desc "Back-populate questions with decks"
+  task :assign_deck_to_questions do
+    # bundle exec rake db:assign_deck_to_questions
+    game_owner = User.find_by(admin: true)
+    default_deck_1 = game_owner.decks.create!(name: 'Official 1')
+    game_owner.decks.create!(name: 'Official 2')
+
+    Question.all.each do |question|
+      question.update!(deck: default_deck_1)
+    end
+  end
 end
 
 
