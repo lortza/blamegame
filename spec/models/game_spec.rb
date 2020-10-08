@@ -16,48 +16,49 @@ RSpec.describe Game, type: :model do
     it { should validate_numericality_of(:max_rounds) }
   end
 
-  let(:game) { create(:game, :with_3_players, :with_2_rounds) }
+  let(:user) { create(:user) }
+  let(:game) { create(:game, :with_3_players, user: user) }
+  let(:deck) { create(:deck, user: user) }
+  let(:question) { create(:question, deck: deck) }
+  let(:round) { create(:round, game: game, question: question) }
   let(:player1) { game.player.first }
   let(:player2) { game.player.second }
   let(:player3) { game.player.third }
 
-  before :all do
-    create_list(:question, 50)
-  end
-
   before :each do
     game
-    # allow_any_instance_of(Game).to receive(:complete?).and_return(true)
-    allow_any_instance_of(Game).to receive(:there_is_a_tie?).and_return(false)
   end
 
   describe 'self.current' do
     it 'returns games that were created within the past hour' do
-      game = create(:game, created_at: 30.minutes.ago)
+      game = create(:game, user: user, created_at: 30.minutes.ago)
       expect(Game.current).to include(game)
     end
 
     it 'does not return games that are older than an hour' do
-      game = create(:game, created_at: 1.5.hours.ago)
+      game = create(:game, user: user, created_at: 1.5.hours.ago)
       expect(Game.current).to_not include(game)
     end
   end
 
   describe 'self.past' do
     it 'does not return games that were created within the past hour' do
-      game = create(:game, created_at: 30.minutes.ago)
+      game = create(:game, user: user, created_at: 30.minutes.ago)
       expect(Game.past).to_not include(game)
     end
 
     it 'returns games that are older than an hour' do
-      game = create(:game, created_at: 1.5.hours.ago)
+      game = create(:game, user: user, created_at: 1.5.hours.ago)
       expect(Game.past).to include(game)
     end
   end
 
   describe 'expired?' do
+    let(:user) { create(:user) }
+    let(:deck) { create(:deck, user: user) }
+    let(:question) { create(:question, deck: deck) }
+    let(:round) { create(:round, game: game, question: question) }
     let(:game) { create(:game) }
-    let(:round) { create(:round, game: game) }
     let(:player1) { create(:player, game: game) }
     let(:player2) { create(:player, game: game) }
     let(:submission1) { create(:submission, round: round, candidate_id: player1.id, voter_id: player2.id) }
@@ -95,17 +96,29 @@ RSpec.describe Game, type: :model do
   end
 
   describe 'complete?' do
-    it 'returns true if all rounds are complete' do
-      game
-      allow_any_instance_of(Round).to receive(:complete?).and_return(true)
+    let(:user) { create(:user) }
+    let(:deck) { create(:deck, user: user) }
+    let(:question1) { create(:question, deck: deck) }
+    let(:question2) { create(:question, deck: deck) }
+    let(:game) { create(:game, user: user) }
+    let(:round1) { create(:round, game: game, question: question1) }
+    let(:round2) { create(:round, game: game, question: question1) }
+    let(:player1) { create(:player, game: game) }
+    let(:player2) { create(:player, game: game) }
+    let(:submission1) { create(:submission, round: round, candidate_id: player1.id, voter_id: player2.id) }
+    let(:submission2) { create(:submission, round: round, candidate_id: player2.id, voter_id: player1.id) }
 
+    before do
+      round1
+      round2
+    end
+
+    it 'returns true if all rounds are complete' do
+      allow_any_instance_of(Round).to receive(:complete?).and_return(true)
       expect(game.complete?).to be(true)
     end
 
     it 'returns false if all rounds are NOT complete' do
-      game
-      round1 = game.rounds.first
-      round2 = game.rounds.last
       allow(round1).to receive(:complete?).and_return(true)
       allow(round2).to receive(:complete?).and_return(false)
 
@@ -114,12 +127,74 @@ RSpec.describe Game, type: :model do
   end
 
   describe 'generate_rounds' do
+    let(:deck1) { create(:deck, user: user) }
+    let(:deck2) { create(:deck, user: user) }
+    let(:question1) { create(:question, deck: deck1, adult_rating: true) }
+    let(:question2) { create(:question, deck: deck2) }
+    let(:question3) { create(:question, deck: deck2) }
+
     it 'generates the max_rounds for a game' do
+      question1
+      question2
+      question3
       expected_rounds = 3
-      game = create(:game, max_rounds: expected_rounds)
+      game = create(:game,
+                    user: user,
+                    deck_ids: [deck1.id, deck2.id],
+                    max_rounds: expected_rounds)
       game.generate_rounds
 
       expect(game.rounds.size).to eq(expected_rounds)
+    end
+
+    it 'excludes adult questions when requested' do
+      question1
+      game = create(:game, user: user,
+                           adult_content_permitted: false,
+                           max_rounds: 1,
+                           deck_ids: [deck1.id])
+      game.generate_rounds
+
+      expect(game.rounds).to eq([])
+    end
+
+    it 'includes adult questions when requested' do
+      question1
+      game = create(:game, user: user,
+                           adult_content_permitted: true,
+                           max_rounds: 1,
+                           deck_ids: [deck1.id])
+      game.generate_rounds
+
+      expect(game.rounds.first.question).to eq(question1)
+    end
+
+    it 'includes questions from the specified decks' do
+      question1
+      question2
+      game = create(:game, user: user,
+                           adult_content_permitted: true,
+                           max_rounds: 2,
+                           deck_ids: [deck1.id, deck2.id])
+      game.generate_rounds
+      questions = game.rounds.map(&:question)
+
+      expect(questions).to include(question1)
+      expect(questions).to include(question2)
+    end
+
+    it 'excludes questions from all other decks' do
+      question1
+      question2
+      game = create(:game, user: user,
+                           adult_content_permitted: true,
+                           max_rounds: 2,
+                           deck_ids: [deck1.id])
+      game.generate_rounds
+      questions = game.rounds.map(&:question)
+
+      expect(questions).to include(question1)
+      expect(questions).to_not include(question2)
     end
   end
 
@@ -140,8 +215,11 @@ RSpec.describe Game, type: :model do
     end
 
     it 'returns the winning player object' do
-      game = create(:game)
-      create(:round, game: game)
+      user = create(:user)
+      game = create(:game, user: user)
+      deck = create(:deck, user: user)
+      question = create(:question, deck: deck)
+      create(:round, question: question, game: game)
       player1 = create(:player, game: game)
       player2 = create(:player, game: game)
       player3 = create(:player, game: game)

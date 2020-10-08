@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :question do
     deck
     sequence(:text) { |n| "question#{n}?" }
-    adult_rating { [true, false].sample }
+    adult_rating { false }
     archived { false }
   end
 end
