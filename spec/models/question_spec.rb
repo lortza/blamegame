@@ -12,8 +12,19 @@ RSpec.describe Question, type: :model do
   end
 
   describe 'self.search' do
-    let!(:question1) { create(:question, text: 'holy moly batman?') }
-    let!(:question2) { create(:question, text: 'do you like bat kitties?') }
+    let(:user) { create(:user) }
+    let(:deck) { create(:deck, user: user) }
+    let!(:question1) do
+      create(:question,
+             deck: deck,
+             text: 'holy moly batman?')
+    end
+
+    let!(:question2) do
+      create(:question,
+             deck: deck,
+             text: 'do you like bat kitties?')
+    end
 
     it 'returns all questions if no search terms are given' do
       results = Question.search(field: :text, terms: '')
@@ -39,8 +50,15 @@ RSpec.describe Question, type: :model do
   end
 
   describe 'self.without_adult_content' do
-    let!(:question1) { create(:question, adult_rating: true) }
-    let!(:question2) { create(:question, adult_rating: false) }
+    let(:user) { create(:user) }
+    let(:deck) { create(:deck, user: user) }
+    let!(:question1) do
+      create(:question, deck: deck, adult_rating: true)
+    end
+
+    let!(:question2) do
+      create(:question, deck: deck, adult_rating: false)
+    end
 
     it 'excludes any questions with adult content' do
       results = Question.without_adult_content
