@@ -80,6 +80,9 @@ class GamesController < ApplicationController
     redirect_to new_game_round_submission_url(@game, @game.rounds.first)
   end
 
+  def game_in_progress
+  end
+
   private
 
   def set_game

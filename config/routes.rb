@@ -16,11 +16,13 @@ Rails.application.routes.draw do
   post 'play', to: 'games#players_ready', as: 'players_ready'
 
   resources :games do
+    get 'in_progress', to: 'games#game_in_progress', as: 'in_progress'
     resources :players, only: [:index]
     resources :rounds, only: [:show] do
       resources :submissions, only: [:new, :create]
     end
   end
+
   resources :decks do
     resources :questions, only: [:index, :new, :create, :edit, :update ]
   end
