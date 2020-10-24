@@ -67,10 +67,11 @@ class Game < ApplicationRecord
   end
 
   def generate_rounds
-    round_numbers = (1..max_rounds).to_a
-    questions = generate_questions
+    available_questions = generate_questions
+    rounds_count = available_questions.length < max_rounds ? available_questions.length : max_rounds
+    round_numbers = (1..rounds_count).to_a
 
-    questions.each do |question|
+    available_questions.each do |question|
       rounds.create!(
         number: round_numbers.shift,
         question_id: question.id

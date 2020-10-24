@@ -133,18 +133,33 @@ RSpec.describe Game, type: :model do
     let(:question2) { create(:question, deck: deck2) }
     let(:question3) { create(:question, deck: deck2) }
 
-    it 'generates the max_rounds for a game' do
+    it 'does not create more rounds than there are available questions' do
       question1
       question2
-      question3
-      expected_rounds = 3
+      question_count = 2
+      game_max_rounds = 3
       game = create(:game,
                     user: user,
                     deck_ids: [deck1.id, deck2.id],
-                    max_rounds: expected_rounds)
+                    max_rounds: game_max_rounds)
       game.generate_rounds
 
-      expect(game.rounds.size).to eq(expected_rounds)
+      expect(game.rounds.size).to eq(question_count)
+    end
+
+    it "does not create more rounds than the game's max_rounds" do
+      question1
+      question2
+      question3
+      question_count = 3
+      game_max_rounds = 2
+      game = create(:game,
+                    user: user,
+                    deck_ids: [deck1.id, deck2.id],
+                    max_rounds: game_max_rounds)
+      game.generate_rounds
+
+      expect(game.rounds.size).to eq(game_max_rounds)
     end
 
     it 'excludes adult questions when requested' do
