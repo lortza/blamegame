@@ -30,7 +30,7 @@ class PlayersController < ApplicationController
   def create
     if @game.active? || @game.expired?
       redirect_to game_in_progress_url(@game)
-      return
+      nil
     else
       @player = Player.new(name: player_params[:name], game_id: @game&.id)
       if @player.save
