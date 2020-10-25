@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoundChannel < ApplicationCable::Channel
   def subscribed
     stream_for round

@@ -20,7 +20,7 @@
 #
 class Deck < ApplicationRecord
   belongs_to :user
-  has_many :questions
+  has_many :questions, dependent: :nullify
   has_many :game_decks, dependent: :destroy
   has_many :games, through: :game_decks
 

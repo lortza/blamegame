@@ -18,6 +18,7 @@ class SubmissionsController < ApplicationController
     #                           destination_url: request.env['PATH_INFO']
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
     submission = @round.submissions.new(submission_params)
     submission.voter_id = @player.id
@@ -34,6 +35,7 @@ class SubmissionsController < ApplicationController
       render :new
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
   private
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module StylesHelper
+  # rubocop:disable Rails/OutputSafety
+
   def table_classes
     'table is-striped is-hoverable is-fullwidth'
   end
@@ -34,4 +36,6 @@ module StylesHelper
     icon = value ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>'
     icon.html_safe
   end
+
+  # rubocop:enable Rails/OutputSafety
 end
