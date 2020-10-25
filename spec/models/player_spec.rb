@@ -44,7 +44,6 @@ RSpec.describe Player, type: :model do
       expect(player1.rounds_won).to eq(2)
       expect(player2.rounds_won).to eq(0)
     end
-
   end
 
   describe 'votes' do

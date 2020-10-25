@@ -170,6 +170,7 @@ RSpec.describe Game, type: :model do
       game.generate_rounds
 
       expect(game.rounds.size).to eq(question_count)
+      expect(game.rounds.size).to_not eq(game_max_rounds)
     end
 
     it "does not create more rounds than the game's max_rounds" do
@@ -185,6 +186,7 @@ RSpec.describe Game, type: :model do
       game.generate_rounds
 
       expect(game.rounds.size).to eq(game_max_rounds)
+      expect(game.rounds.size).to_not eq(question_count)
     end
 
     it 'excludes adult questions when requested' do

@@ -47,7 +47,7 @@ RSpec.describe Submission, type: :model do
       expect(candidate_submissions).to eq(0)
     end
 
-    it "includes votes across all rounds" do
+    it 'includes votes across all rounds' do
       create(:submission, round: round1, candidate_id: player1.id, voter_id: player1.id)
       create(:submission, round: round2, candidate_id: player1.id, voter_id: player2.id)
       create(:submission, round: round2, candidate_id: player2.id, voter_id: player3.id)
