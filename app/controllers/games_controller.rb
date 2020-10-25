@@ -69,8 +69,6 @@ class GamesController < ApplicationController
 
   def players_ready
     @game.update(players_ready: true)
-    round = @game.rounds
-
     GameChannel.broadcast_to @game,
                              game_code: @game.code,
                              player_name: 'undefined',

@@ -26,10 +26,11 @@ class PlayersController < ApplicationController
     render :new
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
     if @game.active? || @game.expired?
       redirect_to game_in_progress_url(@game)
-      return
+      nil
     else
       @player = Player.new(name: player_params[:name], game_id: @game&.id)
       if @player.save
@@ -47,6 +48,7 @@ class PlayersController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
   private
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module GamesHelper
+  # rubocop:disable Rails/OutputSafety
+
   def display_player_names(game)
     players = game.players
     return link_to 'Add Players', edit_game_path(game) if players.blank?
@@ -71,4 +73,6 @@ module GamesHelper
   def winner_intro(winner)
     winner ? "#{winner_icon} <strong>#{winner.name}</strong>" : "#{tie_icon} Tied"
   end
+
+  # rubocop:enable Rails/OutputSafety
 end
