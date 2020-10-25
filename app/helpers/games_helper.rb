@@ -40,6 +40,14 @@ module GamesHelper
     emojis
   end
 
+  def overall_votes_as_emojis(player)
+    emojis = ''
+    player.votes.times do |_vote|
+      emojis += '✅ '
+    end
+    emojis
+  end
+
   def winner_icon
     "<i class='fas fa-crown'></i>"
   end

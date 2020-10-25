@@ -32,4 +32,8 @@ class Submission < ApplicationRecord
   validates :voter, uniqueness: { scope: :round_id,
                                   message: 'you only get to vote once per round' }
   # rubocop:enable Rails/UniqueValidationWithoutIndex
+
+  def self.for_player(candidate)
+    where(candidate_id: candidate.id).length
+  end
 end

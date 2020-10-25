@@ -102,6 +102,11 @@ class Game < ApplicationRecord
     created_at <= 2.hours.ago
   end
 
+  def submissions
+    round_ids = rounds.pluck(:id)
+    Submission.where(round_id: round_ids)
+  end
+
   private
 
   def generate_code

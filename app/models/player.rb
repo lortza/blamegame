@@ -37,4 +37,8 @@ class Player < ApplicationRecord
     winning_rounds = game.rounds.select { |round| round.winner == self }
     winning_rounds.length
   end
+
+  def votes
+    game.submissions.for_player(self)
+  end
 end

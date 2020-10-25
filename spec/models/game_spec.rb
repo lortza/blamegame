@@ -21,9 +21,9 @@ RSpec.describe Game, type: :model do
   let(:deck) { create(:deck, user: user) }
   let(:question) { create(:question, deck: deck) }
   let(:round) { create(:round, game: game, question: question) }
-  let(:player1) { game.player.first }
-  let(:player2) { game.player.second }
-  let(:player3) { game.player.third }
+  let(:player1) { game.players.first }
+  let(:player2) { game.players.second }
+  let(:player3) { game.players.third }
 
   before :each do
     game
@@ -278,6 +278,34 @@ RSpec.describe Game, type: :model do
              voter_id: player3.id)
 
       expect(game.winner).to eq(player1)
+    end
+  end
+
+  describe 'submissions' do
+    it 'returns all submissions for a game' do
+      submission1 = create(:submission, round: round, candidate_id: player1.id, voter_id: player2.id)
+      submission2 = create(:submission, round: round, candidate_id: player2.id, voter_id: player1.id)
+
+      expect(game.submissions).to include(submission1)
+      expect(game.submissions).to include(submission2)
+    end
+
+    it 'excludes submissions that are not for this game' do
+      game2 = create(:game, user: user)
+      question2 = create(:question, deck: deck)
+      round_g2 = create(:round, game: game2, question: question2)
+      player1 = create(:player, game: game2)
+      player2 = create(:player, game: game2)
+
+      submission1 = create(:submission, round: round, candidate_id: player1.id, voter_id: player2.id)
+      submission2 = create(:submission, round: round, candidate_id: player2.id, voter_id: player1.id)
+      submission3 = create(:submission, round: round_g2, candidate_id: player1.id, voter_id: player2.id)
+      submission4 = create(:submission, round: round_g2, candidate_id: player2.id, voter_id: player1.id)
+
+      expect(game2.submissions).to_not include(submission1)
+      expect(game2.submissions).to_not include(submission2)
+      expect(game2.submissions).to include(submission3)
+      expect(game2.submissions).to include(submission4)
     end
   end
 end
