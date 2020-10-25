@@ -16,7 +16,7 @@ class PlayersController < ApplicationController
     cookies.delete(:player_id)
     game = Game.find_by(code: params[:game_code])
 
-    if game.present? && !game.activated?
+    if game.present? && !game.active?
       @player = Player.new(game: game)
     else
       redirect_to join_game_path

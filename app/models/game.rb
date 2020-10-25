@@ -58,8 +58,8 @@ class Game < ApplicationRecord
     end
   end
 
-  def activated?
     created_at.to_date >= Time.zone.now.to_date && players_ready?
+  def active?
   end
 
   def date

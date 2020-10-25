@@ -90,8 +90,33 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe 'activated?' do
-    xit '' do
+  describe 'active?' do
+    it 'returns true if players are ready and the game is not expired' do
+      game = create(:game, players_ready: true)
+      allow(game).to receive(:expired?).and_return(false)
+
+      expect(game.active?).to be(true)
+    end
+
+    it 'returns false if players are ready and the game is expired' do
+      game = create(:game, players_ready: true)
+      allow(game).to receive(:expired?).and_return(true)
+
+      expect(game.active?).to be(false)
+    end
+
+    it 'returns false if players are not ready and the game is not expired' do
+      game = create(:game, players_ready: false)
+      allow(game).to receive(:expired?).and_return(false)
+
+      expect(game.active?).to be(false)
+    end
+
+    it 'returns false if players are not ready and the game is expired' do
+      game = create(:game, players_ready: false)
+      allow(game).to receive(:expired?).and_return(true)
+
+      expect(game.active?).to be(false)
     end
   end
 
