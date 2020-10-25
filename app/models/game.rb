@@ -54,7 +54,7 @@ class Game < ApplicationRecord
     if complete?
       rounds.last.submissions.last.created_at < 30.minutes.ago
     else
-      created_at < 2.hours.ago
+      created_over_2_hours_ago?
     end
   end
 
@@ -96,6 +96,10 @@ class Game < ApplicationRecord
 
   def tied?
     winner.blank?
+  end
+
+  def created_over_2_hours_ago?
+    created_at <= 2.hours.ago
   end
 
   private
