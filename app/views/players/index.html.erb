@@ -6,8 +6,7 @@
     <% end %>
   </div>
 
-    <p class='mt-6'>Is everybody in?</p>
-    <%= link_to 'Start Game!', players_ready_path(id: @game.id), method: :post, class: button_classes %>
   <% unless @game.active? %>
+    <%= link_to 'Everybody is Ready! Start the Game!', players_ready_path(id: @game.id), method: :post, class: "mt-6 #{button_classes}" %>
   <% end %>
 </section>

@@ -2,4 +2,6 @@
   <h1 class='title is-h1'>😕</h1>
   <h1 class='title branded centered'>Sorry!<br>This game is no longer accepting players.</h1>
   <p>You'll have to wait for another game to start.</p>
+
+  <%= link_to ('<i class="fas fa-gamepad mr-2"></i>'.html_safe + 'Join Another Game'), join_game_path, class: "#{button_classes} mt-5" %><br>
 </section>
