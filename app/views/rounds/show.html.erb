@@ -1,7 +1,7 @@
 <div id='round-channel-id' data-round-id="<%= @round.id %>"></div>
 
 <div class='centered'>
-  <p>Question <%= @round.number %> of <%= @round.game.max_rounds %></p>
+  <p>Question <%= display_current_round_of_total(@round) %></p>
   <h2 class='title is-2'><%= @round.question.text %></h2>
 
   <!-- if we're waiting for results... -->

@@ -19,4 +19,8 @@ module RoundsHelper
   def hidden_class(round)
     'hidden' unless round.complete?
   end
+
+  def display_current_round_of_total(round)
+    "#{round.number} of #{round.game.total_rounds}"
+  end
 end

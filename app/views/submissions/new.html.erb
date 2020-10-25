@@ -1,6 +1,6 @@
 <div class='centered'>
   <h1 class='title branded'><%= @player&.name %>, cast your vote!</h1>
-  <p>Question <%= @round.number %> of <%= @game.max_rounds %></p>
+  <p>Question <%= display_current_round_of_total(@round) %></p>
   <h2 class='title is-2'><%= @round.question.text %></h2>
 
   <%= form_with(model: [@game, @round, @submission], local: true) do |form| %>
