@@ -49,6 +49,10 @@ class Round < ApplicationRecord
     results.sort_by { |_candidate, voters| -voters.count }
   end
 
+  def last?
+    number == game.total_rounds
+  end
+
   private
 
   def candidate_names(candidate_ids)

@@ -40,4 +40,8 @@ class Question < ApplicationRecord
   def self.without_adult_content
     active.where.not(adult_rating: true)
   end
+
+  def active?
+    archived == false
+  end
 end

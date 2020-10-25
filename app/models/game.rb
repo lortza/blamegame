@@ -54,12 +54,12 @@ class Game < ApplicationRecord
     if complete?
       rounds.last.submissions.last.created_at < 30.minutes.ago
     else
-      created_at < 2.hours.ago
+      created_over_2_hours_ago?
     end
   end
 
-  def activated?
-    created_at.to_date >= Time.zone.now.to_date && players_ready?
+  def active?
+    players_ready? && !expired?
   end
 
   def date
@@ -67,10 +67,11 @@ class Game < ApplicationRecord
   end
 
   def generate_rounds
-    round_numbers = (1..max_rounds).to_a
-    questions = generate_questions
+    available_questions = generate_questions
+    rounds_count = available_questions.length < max_rounds ? available_questions.length : max_rounds
+    round_numbers = (1..rounds_count).to_a
 
-    questions.each do |question|
+    available_questions.each do |question|
       rounds.create!(
         number: round_numbers.shift,
         question_id: question.id
@@ -95,6 +96,22 @@ class Game < ApplicationRecord
 
   def tied?
     winner.blank?
+  end
+
+  def created_over_2_hours_ago?
+    created_at <= 2.hours.ago
+  end
+
+  def submissions
+    round_ids = rounds.pluck(:id)
+    Submission.where(round_id: round_ids)
+  end
+
+  def total_rounds
+    # max_rounds becomes inaccurate if it has been overridden
+    # by a smaller number of available_questions.
+    # this only works if game is in-play.
+    rounds.length
   end
 
   private

@@ -1,7 +1,7 @@
 <div id='round-channel-id' data-round-id="<%= @round.id %>"></div>
 
 <div class='centered'>
-  <p>Question <%= @round.number %> of <%= @round.game.max_rounds %></p>
+  <p>Question <%= display_current_round_of_total(@round) %></p>
   <h2 class='title is-2'><%= @round.question.text %></h2>
 
   <!-- if we're waiting for results... -->
@@ -22,7 +22,7 @@
     <h1 class='branded round-winner-name' id='round-winner'><%= display_winner(@round) %></h1>
 
     <section class='mt-6'>
-      <% if @round.number == @round.game.max_rounds || @round.game.complete? %>
+      <% if @round.last? || @round.game.complete? %>
         <%= link_to "Let's see who won the game!", game_path(@round.game), class: button_classes %>
       <% else %>
         <%= link_to 'Next Question', next_round_submission(@round), class: button_classes %>

@@ -16,7 +16,7 @@ class PlayersController < ApplicationController
     cookies.delete(:player_id)
     game = Game.find_by(code: params[:game_code])
 
-    if game.present? && !game.activated?
+    if game.present? && !game.active?
       @player = Player.new(game: game)
     else
       redirect_to join_game_path
@@ -27,20 +27,24 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(name: player_params[:name], game_id: @game&.id)
-
-    if @player.save
-      cookies[:player_id] = { value: @player.id, expires: 1.day.from_now }
-      cookies[:game_id] = { value: @game.id, expires: 1.day.from_now }
-
-      GameChannel.broadcast_to @game,
-                               game_code: @game.code,
-                               player_name: @player.name,
-                               game_activated: @game.activated?
-
-      redirect_to game_players_url(@game)
+    if @game.active? || @game.expired?
+      redirect_to game_in_progress_url(@game)
+      return
     else
-      render :new
+      @player = Player.new(name: player_params[:name], game_id: @game&.id)
+      if @player.save
+        cookies[:player_id] = { value: @player.id, expires: 1.day.from_now }
+        cookies[:game_id] = { value: @game.id, expires: 1.day.from_now }
+
+        GameChannel.broadcast_to @game,
+                                 game_code: @game.code,
+                                 player_name: @player.name,
+                                 game_activated: @game.active?
+
+        redirect_to game_players_url(@game)
+      else
+        render :new
+      end
     end
   end
 

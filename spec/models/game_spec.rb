@@ -21,9 +21,9 @@ RSpec.describe Game, type: :model do
   let(:deck) { create(:deck, user: user) }
   let(:question) { create(:question, deck: deck) }
   let(:round) { create(:round, game: game, question: question) }
-  let(:player1) { game.player.first }
-  let(:player2) { game.player.second }
-  let(:player3) { game.player.third }
+  let(:player1) { game.players.first }
+  let(:player2) { game.players.second }
+  let(:player3) { game.players.third }
 
   before :each do
     game
@@ -90,8 +90,33 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe 'activated?' do
-    xit '' do
+  describe 'active?' do
+    it 'returns true if players are ready and the game is not expired' do
+      game = create(:game, players_ready: true)
+      allow(game).to receive(:expired?).and_return(false)
+
+      expect(game.active?).to be(true)
+    end
+
+    it 'returns false if players are ready and the game is expired' do
+      game = create(:game, players_ready: true)
+      allow(game).to receive(:expired?).and_return(true)
+
+      expect(game.active?).to be(false)
+    end
+
+    it 'returns false if players are not ready and the game is not expired' do
+      game = create(:game, players_ready: false)
+      allow(game).to receive(:expired?).and_return(false)
+
+      expect(game.active?).to be(false)
+    end
+
+    it 'returns false if players are not ready and the game is expired' do
+      game = create(:game, players_ready: false)
+      allow(game).to receive(:expired?).and_return(true)
+
+      expect(game.active?).to be(false)
     end
   end
 
@@ -133,18 +158,35 @@ RSpec.describe Game, type: :model do
     let(:question2) { create(:question, deck: deck2) }
     let(:question3) { create(:question, deck: deck2) }
 
-    it 'generates the max_rounds for a game' do
+    it 'does not create more rounds than there are available questions' do
       question1
       question2
-      question3
-      expected_rounds = 3
+      question_count = 2
+      game_max_rounds = 3
       game = create(:game,
                     user: user,
                     deck_ids: [deck1.id, deck2.id],
-                    max_rounds: expected_rounds)
+                    max_rounds: game_max_rounds)
       game.generate_rounds
 
-      expect(game.rounds.size).to eq(expected_rounds)
+      expect(game.rounds.size).to eq(question_count)
+      expect(game.rounds.size).to_not eq(game_max_rounds)
+    end
+
+    it "does not create more rounds than the game's max_rounds" do
+      question1
+      question2
+      question3
+      question_count = 3
+      game_max_rounds = 2
+      game = create(:game,
+                    user: user,
+                    deck_ids: [deck1.id, deck2.id],
+                    max_rounds: game_max_rounds)
+      game.generate_rounds
+
+      expect(game.rounds.size).to eq(game_max_rounds)
+      expect(game.rounds.size).to_not eq(question_count)
     end
 
     it 'excludes adult questions when requested' do
@@ -238,6 +280,39 @@ RSpec.describe Game, type: :model do
              voter_id: player3.id)
 
       expect(game.winner).to eq(player1)
+    end
+  end
+
+  describe 'submissions' do
+    it 'returns all submissions for a game' do
+      submission1 = create(:submission, round: round, candidate_id: player1.id, voter_id: player2.id)
+      submission2 = create(:submission, round: round, candidate_id: player2.id, voter_id: player1.id)
+
+      expect(game.submissions).to include(submission1)
+      expect(game.submissions).to include(submission2)
+    end
+
+    it 'excludes submissions that are not for this game' do
+      game2 = create(:game, user: user)
+      question2 = create(:question, deck: deck)
+      round_g2 = create(:round, game: game2, question: question2)
+      player1 = create(:player, game: game2)
+      player2 = create(:player, game: game2)
+
+      submission1 = create(:submission, round: round, candidate_id: player1.id, voter_id: player2.id)
+      submission2 = create(:submission, round: round, candidate_id: player2.id, voter_id: player1.id)
+      submission3 = create(:submission, round: round_g2, candidate_id: player1.id, voter_id: player2.id)
+      submission4 = create(:submission, round: round_g2, candidate_id: player2.id, voter_id: player1.id)
+
+      expect(game2.submissions).to_not include(submission1)
+      expect(game2.submissions).to_not include(submission2)
+      expect(game2.submissions).to include(submission3)
+      expect(game2.submissions).to include(submission4)
+    end
+  end
+
+  describe 'total_rounds' do
+    xit 'returns a count of rounds that are in-play for a game' do
     end
   end
 end

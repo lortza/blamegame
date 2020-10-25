@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DecksController < ApplicationController
   before_action :set_deck, only: %i[edit update destroy]
 

@@ -74,10 +74,13 @@ class GamesController < ApplicationController
     GameChannel.broadcast_to @game,
                              game_code: @game.code,
                              player_name: 'undefined',
-                             game_activated: @game.activated?,
+                             game_activated: @game.active?,
                              destination_url: new_game_round_submission_url(@game, @game.rounds.first)
 
     redirect_to new_game_round_submission_url(@game, @game.rounds.first)
+  end
+
+  def game_in_progress
   end
 
   private

@@ -120,4 +120,27 @@ RSpec.describe Round, type: :model do
       expect(round.results_by_candidate).to eq(expected_results)
     end
   end
+
+  describe 'last?' do
+    let(:user) { create(:user) }
+    let(:game) { create(:game, user: user) }
+    let(:deck) { create(:deck, user: user) }
+    let(:question1) { create(:question, deck: deck) }
+    let(:question2) { create(:question, deck: deck) }
+    let(:round1) { create(:round, game: game, question: question1, number: 1) }
+    let(:round2) { create(:round, game: game, question: question2, number: 2) }
+
+    before do
+      round1
+      round2
+    end
+
+    it 'returns true when it is the last round of the game' do
+      expect(round1.last?).to be(false)
+    end
+
+    it 'returns false when it is not the last round of the game' do
+      expect(round2.last?).to be(true)
+    end
+  end
 end

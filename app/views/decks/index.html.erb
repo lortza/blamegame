@@ -15,7 +15,7 @@
           <%= link_to "#{deck.name} Deck", deck_questions_path(deck) %>
         </p>
         <p class="subtitle">
-          Questions: <%= deck.questions.length %>
+          Questions: <%= deck.questions.active.length %>
         </p>
       </div>
       <footer class="card-footer">
