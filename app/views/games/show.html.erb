@@ -14,11 +14,17 @@
           <% unless @game.tied? %>
             Winning <%= @game.winner.rounds_won %> out of <%= pluralize(@game.rounds.length, 'round') %>,<br>
           <% end %>
-          the winner is...
+          the "winner" is...
         </h2>
         <h1 class="winner branded">
             👑💩 <%= display_winner(@game) %>! 🎊🎉
         </h1>
+
+        <% unless @game.tied? %>
+          <h2 class="subtitle branded mt-5">
+            😏Good job, <%= display_winner(@game) %>. You're a real winner. 😂
+          </h2>
+        <% end %>
       </div>
     </div>
   </center>
