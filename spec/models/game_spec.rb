@@ -308,4 +308,9 @@ RSpec.describe Game, type: :model do
       expect(game2.submissions).to include(submission4)
     end
   end
+
+  describe 'total_rounds' do
+    xit 'returns a count of rounds that are in-play for a game' do
+    end
+  end
 end

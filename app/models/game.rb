@@ -58,8 +58,8 @@ class Game < ApplicationRecord
     end
   end
 
-    created_at.to_date >= Time.zone.now.to_date && players_ready?
   def active?
+    players_ready? && !expired?
   end
 
   def date
@@ -105,6 +105,13 @@ class Game < ApplicationRecord
   def submissions
     round_ids = rounds.pluck(:id)
     Submission.where(round_id: round_ids)
+  end
+
+  def total_rounds
+    # max_rounds becomes inaccurate if it has been overridden
+    # by a smaller number of available_questions.
+    # this only works if game is in-play.
+    rounds.length
   end
 
   private
