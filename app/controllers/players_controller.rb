@@ -37,9 +37,9 @@ class PlayersController < ApplicationController
         cookies[:game_id] = { value: @game.id, expires: 1.day.from_now }
 
         GameChannel.broadcast_to @game,
-        game_code: @game.code,
-        player_name: @player.name,
-        game_activated: @game.active?
+                                 game_code: @game.code,
+                                 player_name: @player.name,
+                                 game_activated: @game.active?
 
         redirect_to game_players_url(@game)
       else
