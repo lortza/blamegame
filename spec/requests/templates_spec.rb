@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
-RSpec.describe 'Templates', type: :request do
+RSpec.describe 'Templates' do
   xdescribe 'Public access to templates' do
     let(:user) { create(:user) }
     let(:user_template) { create(:template, user: user) }

@@ -7,8 +7,13 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'pry'
+require 'devise'
+# require 'capybara/rails'
+# require 'capybara/rspec'
 require 'pundit/rspec'
+# require 'webdrivers'
 require 'support/factory_bot'
+# require 'support/capybara'
 require 'support/shoulda_matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -66,7 +71,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.infer_base_class_for_anonymous_controllers = false
-  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include ActiveSupport::Testing::TimeHelpers
+  config.include Devise::Test::IntegrationHelpers, type: :request  
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :feature

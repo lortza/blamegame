@@ -2,7 +2,6 @@
 
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: %i[index new create edit update]
-
   before_action :set_question, only: %i[edit update]
   before_action :set_deck, only: %i[index new create edit update]
 

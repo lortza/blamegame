@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :decks do
-    resources :questions, only: [:index, :new, :create, :edit, :update ]
+  resources :decks, only: [:index, :new, :create, :edit, :update] do
+    resources :questions, only: [:index, :new, :create, :edit, :update]
   end
 end

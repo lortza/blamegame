@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
-RSpec.describe Round, type: :model do
+RSpec.describe Round do
   context 'associations' do
     it { should belong_to(:game) }
     it { should belong_to(:question) }

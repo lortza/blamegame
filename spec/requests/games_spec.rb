@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
-RSpec.describe 'Games', type: :request do
+RSpec.describe 'Games' do
   describe 'Public access to games' do
     let(:user) { create(:user) }
     let(:user_game) { create(:game, user: user) }
