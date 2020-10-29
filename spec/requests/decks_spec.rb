@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Decks' do
-  describe 'Public access to decks' do
-    let(:user) { create(:user) }
-    let(:deck) { create(:deck, user: user) }
+  let(:user) { create(:user) }
+  let(:deck) { create(:deck, user_id: user.id) }
 
+  describe 'Public access to decks' do
     before :each do
       deck
     end
@@ -51,12 +51,9 @@ RSpec.describe 'Decks' do
   end
 
   describe 'Authenticated access to own decks' do
-    let(:user) { create(:user) }
-    let(:deck) { create(:deck, user: user) }
-
     before :each do
       deck
-      sign_in(user)
+      sign_in user
     end
 
     it 'renders decks#new' do
@@ -71,60 +68,47 @@ RSpec.describe 'Decks' do
 
       expect(response).to be_successful
       expect(response).to render_template(:edit)
+      expect(response.body).to include(deck.name)
     end
 
     it 'renders decks#create' do
-      starting_count = Deck.count
-      deck_attributes = build(:deck).attributes
-      post decks_path(deck, deck: deck_attributes)
+      deck_attributes = build(:deck, user: user).attributes
 
-      expect(Deck.count).to eq(starting_count + 1)
+      expect {
+        post decks_path(deck: deck_attributes)
+      }.to change(Deck, :count)
     end
 
     it 'renders decks#update' do
-      new_name = 'different name'
+      new_name = 'completely different name'
       patch deck_path(deck, deck: { name: new_name })
 
       expect(response).to redirect_to decks_url
     end
   end
 
-  xdescribe "Authenticated access to others' decks" do
-    let(:user) { create(:user) }
-    let(:deck) { create(:deck, user: user) }
+  describe "Authenticated access to another user's decks" do
+    let(:other_user) { create(:user) }
+    let(:others_deck) { create(:deck, user: other_user) }
 
-    before :each do
-      deck
-      sign_in(user)
+    before do
+      sign_in user
+      others_deck
     end
 
-    it 'renders decks#new' do
-      get new_deck_path
+    it 'denies access to decks#edit' do
+      get edit_deck_path(others_deck)
 
-      expect(response).to be_successful
-      expect(response).to render_template(:new)
+      expect(response).to_not be_successful
+      expect(response).to redirect_to new_user_session_path
     end
 
-    it 'renders decks#edit' do
-      get edit_deck_path(deck)
+    it 'denies access to decks#update' do
+      new_name = 'completely different name'
+      patch deck_path(others_deck, deck: { name: new_name })
 
-      expect(response).to be_successful
-      expect(response).to render_template(:edit)
-    end
-
-    it 'renders decks#create' do
-      starting_count = Deck.count
-      deck_attributes = build(:deck).attributes
-      post decks_path(deck, deck: deck_attributes)
-
-      expect(Deck.count).to eq(starting_count + 1)
-    end
-
-    it 'renders decks#update' do
-      new_name = 'different name'
-      patch deck_path(deck, deck: { name: new_name })
-
-      expect(response).to redirect_to decks_url(deck)
+      expect(response).to_not be_successful
+      expect(response).to redirect_to new_user_session_path
     end
   end
 end

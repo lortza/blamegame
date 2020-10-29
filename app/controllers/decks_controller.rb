@@ -13,10 +13,12 @@ class DecksController < ApplicationController
   end
 
   def edit
+    authorize(@deck)
   end
 
   def create
     @deck = current_user.decks.new(deck_params)
+    authorize(@deck)
 
     if @deck.save
       redirect_to deck_questions_url(@deck), notice: "#{@deck.name} Deck was created."
@@ -26,6 +28,7 @@ class DecksController < ApplicationController
   end
 
   def update
+    authorize(@deck)
     if @deck.update(deck_params)
       redirect_to decks_url, notice: "#{@deck.name} Deck was updated."
     else
