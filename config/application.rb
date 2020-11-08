@@ -33,7 +33,7 @@ module BlameGame
     config.generators.system_tests = nil
 
     Raven.configure do |config|
-      config.dsn = Rails.application.credentials.sentry_raven_dsn
+      config.dsn = Rails.application.credentials.sentry_dsn
       config.environments = %w[ production ]
     end
   end
