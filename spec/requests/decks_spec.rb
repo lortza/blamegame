@@ -100,7 +100,7 @@ RSpec.describe 'Decks' do
       get edit_deck_path(others_deck)
 
       expect(response).to_not be_successful
-      expect(response).to redirect_to new_user_session_path
+      expect(response).to redirect_to root_url
     end
 
     it 'denies access to decks#update' do
@@ -108,7 +108,7 @@ RSpec.describe 'Decks' do
       patch deck_path(others_deck, deck: { name: new_name })
 
       expect(response).to_not be_successful
-      expect(response).to redirect_to new_user_session_path
+      expect(response).to redirect_to root_url
     end
   end
 end

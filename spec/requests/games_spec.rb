@@ -24,7 +24,7 @@ RSpec.describe 'Games' do
     end
 
     it 'denies access to games#edit' do
-      get edit_game_path(user_game.id)
+      get edit_game_path(user_game)
 
       expect(response).to have_http_status(302)
       expect(response).to redirect_to new_user_session_path
@@ -73,7 +73,7 @@ RSpec.describe 'Games' do
     end
 
     it 'renders games#edit' do
-      get edit_game_path(user_game.id)
+      get edit_game_path(user_game)
 
       expect(response).to be_successful
       expect(response).to render_template(:edit)
@@ -102,18 +102,27 @@ RSpec.describe 'Games' do
     end
   end
 
-  xdescribe "Authenticated access to another user's games" do
+  describe "Authenticated access to another user's games" do
     let(:user1) { create(:user) }
+    let(:user1_game) { create(:game, user: user1) }
     let(:user2) { create(:user) }
     let(:user2_game) { create(:game, user: user2) }
 
     before :each do
-      user2_game
-      sign_in(user1)
+      user1_game
+      sign_in(user2)
+    end
+
+    it 'denies access to games#show' do
+      get game_path(user1_game)
+
+      expect(response).to_not be_successful
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to(root_url)
     end
 
     it 'denies access to games#edit' do
-      get edit_game_path(user2_game.id)
+      get edit_game_path(user1_game)
 
       expect(response).to_not be_successful
       expect(response).to have_http_status(302)
@@ -122,14 +131,14 @@ RSpec.describe 'Games' do
 
     it 'denies access to games#update' do
       new_name = 'completely different name'
-      patch game_path(user2_game, game: { name: new_name })
+      patch game_path(user1_game, game: { name: new_name })
 
       expect(response).to_not be_successful
       expect(response).to redirect_to root_url
     end
 
     it 'denies access to games#destroy' do
-      delete game_path(user2_game)
+      delete game_path(user1_game)
 
       expect(response).to_not be_successful
       expect(response).to have_http_status(302)
