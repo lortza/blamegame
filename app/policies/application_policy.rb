@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# The redirect to root_url is coming from the
+# user_not_authorized method in the ApplicationController
 class ApplicationPolicy
   attr_reader :user, :record
 

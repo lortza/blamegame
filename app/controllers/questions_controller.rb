@@ -17,10 +17,12 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    authorize(@question)
   end
 
   def create
     @question = @deck.questions.new(question_params)
+    authorize(@question)
 
     if @question.save
       redirect_to deck_questions_url(@deck)
@@ -30,6 +32,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    authorize(@question)
+
     if @question.update(question_params)
       redirect_to deck_questions_url(@deck)
     else
@@ -44,7 +48,7 @@ class QuestionsController < ApplicationController
   end
 
   def set_deck
-    @deck = current_user.decks.find(params[:deck_id])
+    @deck = Deck.find(params[:deck_id])
   end
 
   def question_params
