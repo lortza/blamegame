@@ -1,13 +1,15 @@
-<% content_for(:title, 'Questions') %>
+<% content_for(:title, 'Decks') %>
 
 <header class='level'>
-  <h1 class='title is-1 level-left'>Question Decks</h1>
+  <div>
+    <h1 class='title is-1 level-left'>Custom Decks</h1>
+    <p>You automatically have access to the default BlameGame decks. You can create additional custom decks and questions here.</p>
+  </div>
   <%= link_to '+ New Deck', new_deck_path, class: "level-right #{button_classes}" %>
 </header>
 
+
 <section class='section form-narrow'>
-
-
   <% @decks.order(:name).each do |deck| %>
     <div class="card mb-5">
       <div class="card-content">
