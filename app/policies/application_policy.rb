@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# The redirect to root_url is coming from the
+# user_not_authorized method in the ApplicationController
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -47,5 +49,17 @@ class ApplicationPolicy
     def resolve
       scope.all
     end
+  end
+
+  private
+
+  def user_is_admin?
+    # only allow action to run if the current_user is admin
+    user&.admin?
+  end
+
+  def user_is_owner_of_record_or_admin?
+    # only allow action to run if the current_user on their own recipe
+    (record.user_id == user&.id) || user&.admin?
   end
 end

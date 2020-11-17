@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: %i[index new create edit update destroy]
-  before_action :set_game, only: %i[show edit update destroy players_ready]
+  before_action :authenticate_user!, only: %i[index new create edit update]
+  before_action :set_game, only: %i[show edit update players_ready]
   before_action :redirect_to_play, only: %i[show]
 
   def index
@@ -24,6 +24,8 @@ class GamesController < ApplicationController
   end
 
   def show
+    authorize(@game)
+
     # Trying to get all browsers to go to the game#show when a single
     # player clicks the button. Causes infinite loop.
     # RoundChannel.broadcast_to @game.rounds.last,
@@ -34,7 +36,7 @@ class GamesController < ApplicationController
   end
 
   def edit
-    # authorize(@game)
+    authorize(@game)
 
     5.times { @game.players.build }
   end
@@ -52,19 +54,13 @@ class GamesController < ApplicationController
   end
 
   def update
+    authorize(@game)
+
     if @game.update(game_params)
       redirect_to games_url
     else
       render :edit
     end
-  end
-
-  def destroy
-    @game.destroy
-
-    delete_cookies
-    notice = "Game at #{@game.code} was successfully deleted."
-    redirect_to games_url, notice: notice
   end
 
   def players_ready

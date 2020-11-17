@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
-RSpec.describe Game, type: :model do
+RSpec.describe Game do
   context 'associations' do
     it { should belong_to(:user) }
     it { should have_many(:players) }

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
-RSpec.describe 'Submissions', type: :request do
+RSpec.describe 'Submissions' do
   xdescribe 'Public access to submissions' do
     let(:user) { create(:user) }
     let(:game) { create(:game, user: user) }

@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+RSpec.describe 'Questions' do
+  let(:user) { create(:user) }
+  let(:deck) { create(:deck, user: user) }
+  let(:question) { create(:question, deck: deck) }
 
-RSpec.describe 'Questions', type: :request do
   describe 'Public access to questions' do
-    let(:user) { create(:user) }
-    let(:deck) { create(:deck, user: user) }
-    let(:question) { create(:question, deck: deck) }
-
     before :each do
       question
     end
@@ -51,20 +49,9 @@ RSpec.describe 'Questions', type: :request do
       expect(response).to have_http_status(302)
       expect(response).to redirect_to new_user_session_path
     end
-
-    # it 'denies access to questions#destroy' do
-    #   delete deck_question_path(deck, question)
-    #
-    #   expect(response).to have_http_status(302)
-    #   expect(response).to redirect_to new_user_session_path
-    # end
   end
 
-  describe 'Authenticated access to questions' do
-    let(:user) { create(:user) }
-    let(:deck) { create(:deck, user: user) }
-    let(:question) { create(:question, deck: deck) }
-
+  describe 'Authenticated access to own questions' do
     before :each do
       question
       sign_in(user)
@@ -78,32 +65,54 @@ RSpec.describe 'Questions', type: :request do
     end
 
     it 'renders questions#edit' do
-      get edit_deck_question_path(deck, question.id)
+      get edit_deck_question_path(deck, question)
 
       expect(response).to be_successful
       expect(response).to render_template(:edit)
+      expect(response.body).to include(question.text)
     end
 
     it 'renders questions#create' do
-      starting_count = Question.count
-      question_attributes = build(:question).attributes
-      post deck_questions_path(deck, question: question_attributes)
+      question_attributes = build(:question, deck: deck).attributes
 
-      expect(Question.count).to eq(starting_count + 1)
+      expect {
+        post deck_questions_path(deck_id: deck.id, question: question_attributes)
+      }.to change(Question, :count)
+      expect(response).to have_http_status(302)
     end
 
     it 'renders questions#update' do
-      new_name = 'different name'
+      new_name = 'completely different name'
       patch deck_question_path(deck, question, question: { name: new_name })
 
-      expect(response).to redirect_to deck_questions_url(deck)
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to deck_questions_url
+    end
+  end
+
+  describe "Authenticated access to another user's questions" do
+    let(:other_user) { create(:user, admin: false) }
+    let(:others_deck) { create(:deck, user: other_user) }
+    let(:others_question) { create(:question, deck: others_deck) }
+
+    before do
+      sign_in(user)
+      others_question
     end
 
-    # it 'renders questions#destroy' do
-    #   delete deck_question_path(deck, question)
-    #
-    #   expect(response).to redirect_to(deck_questions_url(deck))
-    #   expect(response.body).to include(deck_questions_url(deck))
-    # end
+    it 'denies access to questions#edit' do
+      get edit_deck_question_path(others_deck, others_question)
+
+      expect(response).to_not be_successful
+      expect(response).to redirect_to root_url
+    end
+
+    it 'denies access to questions#update' do
+      new_name = 'completely different name'
+      patch deck_question_path(others_deck, others_question, question: { name: new_name })
+
+      expect(response).to_not be_successful
+      expect(response).to redirect_to root_url
+    end
   end
 end

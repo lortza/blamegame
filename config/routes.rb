@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'play/:game_code', to: 'players#new_with_code', as: 'join_game_with_code'
   post 'play', to: 'games#players_ready', as: 'players_ready'
 
-  resources :games do
+  resources :games, only: [:index, :new, :create, :show, :edit, :update] do
     get 'in_progress', to: 'games#game_in_progress', as: 'in_progress'
     resources :players, only: [:index]
     resources :rounds, only: [:show] do
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :decks do
-    resources :questions, only: [:index, :new, :create, :edit, :update ]
+  resources :decks, only: [:index, :new, :create, :edit, :update] do
+    resources :questions, only: [:index, :new, :create, :edit, :update]
   end
 end

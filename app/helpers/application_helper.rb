@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def session_links
     if current_user
-      link_to 'Sign Out',
+      link_to "Sign Out #{current_user.name}",
               destroy_user_session_path,
               method: :delete,
               class: 'button is-primary is-inverted'

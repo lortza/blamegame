@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
-RSpec.describe 'Players', type: :request do
+RSpec.describe 'Players' do
   describe 'Public access to players' do
     it 'renders players#new' do
       get new_player_path
