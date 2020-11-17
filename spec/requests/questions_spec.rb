@@ -54,7 +54,7 @@ RSpec.describe 'Questions' do
   describe 'Authenticated access to own questions' do
     before :each do
       question
-      sign_in user
+      sign_in(user)
     end
 
     it 'renders questions#new' do
@@ -96,7 +96,7 @@ RSpec.describe 'Questions' do
     let(:others_question) { create(:question, deck: others_deck) }
 
     before do
-      sign_in user
+      sign_in(user)
       others_question
     end
 

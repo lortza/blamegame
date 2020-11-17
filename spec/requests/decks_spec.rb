@@ -53,7 +53,7 @@ RSpec.describe 'Decks' do
   describe 'Authenticated access to own decks' do
     before :each do
       deck
-      sign_in user
+      sign_in(user)
     end
 
     it 'renders decks#new' do
@@ -92,7 +92,7 @@ RSpec.describe 'Decks' do
     let(:others_deck) { create(:deck, user: other_user) }
 
     before do
-      sign_in user
+      sign_in(user)
       others_deck
     end
 

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe GamePolicy, type: :policy do
   let(:user) { create(:user) }
   let(:game) { create(:game, user: user) }

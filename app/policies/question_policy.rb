@@ -26,7 +26,7 @@ class QuestionPolicy < ApplicationPolicy
   private
 
   def user_is_owner_of_record_or_admin?
-    # only allow action to run if the current_user on their own recipe
+    # only allow action to run if the current_user on their own record
     (record.deck.user_id == user&.id) || user&.admin?
   end
 end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe DeckPolicy, type: :policy do
   let(:user) { create(:user) }
   let(:deck) { create(:deck, user: user) }
