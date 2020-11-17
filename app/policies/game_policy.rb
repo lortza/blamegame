@@ -15,6 +15,10 @@ class GamePolicy < ApplicationPolicy
     end
   end
 
+  def new?
+    user_is_owner_of_record_or_admin?
+  end
+
   def create?
     user_is_owner_of_record_or_admin?
   end
@@ -28,10 +32,6 @@ class GamePolicy < ApplicationPolicy
   end
 
   def update?
-    user_is_owner_of_record_or_admin?
-  end
-
-  def destroy?
     user_is_owner_of_record_or_admin?
   end
 end
