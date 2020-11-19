@@ -30,6 +30,13 @@ RSpec.describe 'Games' do
       expect(response).to redirect_to new_user_session_path
     end
 
+    it 'permits access to games#show' do
+      get game_path(user_game)
+
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+
     it 'denies access to games#create' do
       game_attributes = build(:game, user: user).attributes
 
@@ -72,6 +79,13 @@ RSpec.describe 'Games' do
       expect(response).to render_template(:edit)
     end
 
+    it 'renders games#show' do
+      get game_path(user_game)
+
+      expect(response).to be_successful
+      expect(response).to render_template(:show)
+    end
+
     it 'renders games#create' do
       starting_count = Game.count
       game_attributes = build(:game, user: user).attributes
@@ -99,12 +113,11 @@ RSpec.describe 'Games' do
       sign_in(user2)
     end
 
-    it 'denies access to games#show' do
+    it 'permits access to games#show' do
       get game_path(user1_game)
 
-      expect(response).to_not be_successful
-      expect(response).to have_http_status(302)
-      expect(response).to redirect_to(root_url)
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
     end
 
     it 'denies access to games#edit' do
