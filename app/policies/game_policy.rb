@@ -24,7 +24,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def show?
-    user_is_owner_of_record_or_admin?
+    true
   end
 
   def edit?
