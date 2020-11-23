@@ -5,8 +5,6 @@ module GamesHelper
 
   def display_player_names(game)
     players = game.players
-    return link_to 'Add Players', edit_game_path(game) if players.blank?
-
     winner = game.winner
     output = "#{winner_intro(winner)}, "
     everyone_else = players - [winner]

@@ -18,14 +18,7 @@
     <div class="tile is-12">
       <div class="tile is-parent">
         <article class="tile is-child notification is-light">
-          <div class="level">
-            <p class="title level-left"><%= game.code %>: <%= game.date %></p>
-            <div class='level-right'>
-              <%= link_to 'Edit', edit_game_path(game), class: "mr-2 #{button_classes('is-info')}" %>
-              <%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'}, class: button_classes('is-danger') %>
-            </div>
-          </div>
-
+          <p class="title"><%= game.code %>: <%= game.date %></p>
           <div class="content">
             <p>Share Link: <%= link_to share_link(game), share_link(game) %></p>
             <p>
@@ -66,7 +59,6 @@
         <th>Players</th>
         <th>Players Ready?</th>
         <th>Game Complete?</th>
-        <th colspan='2'>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -78,8 +70,6 @@
         <td><%= display_player_names(game) %></td>
         <td><%= boolean_check_or_x(game.players_ready?) %></td>
         <td><%= boolean_check_or_x(game.complete?) %></td>
-        <td><%= link_to 'Edit', edit_game_path(game) %></td>
-        <td><%= link_to 'Delete', game, method: :delete, data: {confirm: 'are you sure?'} %></td>
       </tr>
       <% end %>
     </tbody>
