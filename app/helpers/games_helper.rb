@@ -5,6 +5,8 @@ module GamesHelper
 
   def display_player_names(game)
     players = game.players
+    return nil if players.blank?
+
     winner = game.winner
     output = "#{winner_intro(winner)}, "
     everyone_else = players - [winner]
@@ -16,8 +18,8 @@ module GamesHelper
     game.decks.map(&:name).join(', ')
   end
 
-  def display_only_custom_deck_names(game)
-    (game.decks - Deck.default_decks).map(&:name).join(', ')
+  def display_deck_names(game)
+    game.decks.map(&:name).join(', ')
   end
 
   def display_player_names_and_points(game)

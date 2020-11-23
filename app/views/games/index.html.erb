@@ -55,7 +55,7 @@
       <tr>
         <th>Date Played</th>
         <th>Game Code</th>
-        <th>Decks</th>
+        <th>Decks Used</th>
         <th>Players</th>
         <th>Players Ready?</th>
         <th>Game Complete?</th>
@@ -66,7 +66,7 @@
       <tr>
         <td><%= game.date %></td>
         <td><%= link_to game.code, game %></td>
-        <td><%= display_only_custom_deck_names(game) %></td>
+        <td><%= display_deck_names(game) %></td>
         <td><%= display_player_names(game) %></td>
         <td><%= boolean_check_or_x(game.players_ready?) %></td>
         <td><%= boolean_check_or_x(game.complete?) %></td>
