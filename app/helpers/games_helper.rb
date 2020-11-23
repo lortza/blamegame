@@ -18,10 +18,6 @@ module GamesHelper
     game.decks.map(&:name).join(', ')
   end
 
-  def display_deck_names(game)
-    game.decks.map(&:name).join(', ')
-  end
-
   def display_player_names_and_points(game)
     players = game.players
     return link_to 'Add Players', edit_game_path(game) if players.blank?
