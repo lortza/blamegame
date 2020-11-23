@@ -5,7 +5,7 @@ module GamesHelper
 
   def display_player_names(game)
     players = game.players
-    return link_to 'Add Players', edit_game_path(game) if players.blank?
+    return nil if players.blank?
 
     winner = game.winner
     output = "#{winner_intro(winner)}, "
@@ -16,10 +16,6 @@ module GamesHelper
 
   def display_deck_names(game)
     game.decks.map(&:name).join(', ')
-  end
-
-  def display_only_custom_deck_names(game)
-    (game.decks - Deck.default_decks).map(&:name).join(', ')
   end
 
   def display_player_names_and_points(game)

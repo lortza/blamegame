@@ -23,13 +23,6 @@ RSpec.describe 'Games' do
       expect(response).to redirect_to new_user_session_path
     end
 
-    it 'denies access to games#edit' do
-      get edit_game_path(user_game)
-
-      expect(response).to have_http_status(302)
-      expect(response).to redirect_to new_user_session_path
-    end
-
     it 'permits access to games#show' do
       get game_path(user_game)
 
@@ -118,14 +111,6 @@ RSpec.describe 'Games' do
 
       expect(response).to be_successful
       expect(response).to have_http_status(200)
-    end
-
-    it 'denies access to games#edit' do
-      get edit_game_path(user1_game)
-
-      expect(response).to_not be_successful
-      expect(response).to have_http_status(302)
-      expect(response).to redirect_to(root_url)
     end
 
     it 'denies access to games#update' do
