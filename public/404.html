@@ -15,6 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
 
     <style>
+      .error-emoji { font-size: 8em; }
+      .error-number { font-size: 10em; }
       a.nav-brand-name {
         font-family: 'Chewy', cursive;
         font-size: 2.5em;
@@ -53,12 +55,11 @@
       <!-- Hero content: will be in the middle -->
       <div class="hero-body">
         <div class="container has-text-centered">
-          <h1 class="title ">
-            💩 404 💩
-          </h1>
-          <h2 class="subtitle">
-            Oh snap! Something went wrong. The page you were looking for doesn't exist.
-          </h2>
+          <p class='error-emoji'>💩</p>
+          <h1 class="title error-number">404</h1>
+          <h2 class="subtitle">Oh snap! Something went wrong.</h2>
+          <p>The page you were looking for doesn't exist.</p>
+          <br>
           <a href='http://blamegame.herokuapp.com/' class='button is-primary'>Head on back to the BlameGame</a>
         </div>
       </div>
