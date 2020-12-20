@@ -45,6 +45,7 @@ class QuestionsController < ApplicationController
   def convert_from_suggestion
     @suggested_question = SuggestedQuestion.find(params[:suggested_question_id])
     @question = Question.new(text: @suggested_question.text)
+    authorize(@question)
 
     render :new_from_suggestion
   end
