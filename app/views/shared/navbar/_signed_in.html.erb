@@ -1,5 +1,6 @@
-<% if current_user %>
+<% if current_user.present? %>
   <%= link_to '+ New Game', new_game_path, class: 'navbar-item' %>
   <%= link_to 'Games', games_path, class: 'navbar-item' %>
   <%= link_to 'Custom Decks', decks_path, class: 'navbar-item' %>
+  <%= link_to 'Manage Suggested Questions', suggested_questions_path, class: 'navbar-item' if current_user.admin? %>
 <% end %>

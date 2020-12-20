@@ -25,6 +25,7 @@ class QuestionsController < ApplicationController
     authorize(@question)
 
     if @question.save
+      SuggestedQuestion.mark_as_processed(params[:suggested_question_id])
       redirect_to deck_questions_url(@deck)
     else
       render :new
@@ -41,6 +42,14 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def convert_from_suggestion
+    @suggested_question = SuggestedQuestion.find(params[:suggested_question_id])
+    @question = Question.new(text: @suggested_question.text)
+    authorize(@question)
+
+    render :new_from_suggestion
+  end
+
   private
 
   def set_question
@@ -48,7 +57,8 @@ class QuestionsController < ApplicationController
   end
 
   def set_deck
-    @deck = Deck.find(params[:deck_id])
+    deck_id = params[:deck_id] || params[:question][:deck_id]
+    @deck = Deck.find(deck_id)
   end
 
   def question_params
