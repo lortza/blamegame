@@ -11,4 +11,11 @@
 #  updated_at   :datetime         not null
 #
 class SuggestedQuestion < ApplicationRecord
+  validates :text, presence: true
+  
+  def self.mark_as_processed(id)
+    return nil unless id.present?
+
+    SuggestedQuestion.find(id).touch(:processed_at)
+  end
 end

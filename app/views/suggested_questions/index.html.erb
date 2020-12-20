@@ -22,7 +22,9 @@
         <td><%= suggested_question.created_at %></td>
         <td><%= suggested_question.processed_at %></td>
         <td>
-          <%#= link_to 'Add to Deck', '/' %>
+          <%= link_to 'Add to Deck',
+                      convert_from_suggestion_path(suggested_question_id: suggested_question.id),
+                      method: :get %>
 
         </td>
       </tr>
