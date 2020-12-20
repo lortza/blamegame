@@ -12,9 +12,9 @@
 #
 class SuggestedQuestion < ApplicationRecord
   validates :text, presence: true
-  
+
   def self.mark_as_processed(id)
-    return nil unless id.present?
+    return nil if id.blank?
 
     SuggestedQuestion.find(id).touch(:processed_at)
   end

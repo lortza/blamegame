@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SuggestedQuestion, type: :model do
@@ -16,9 +18,9 @@ RSpec.describe SuggestedQuestion, type: :model do
       suggested_question = create(:suggested_question)
       expect(suggested_question.processed_at).to be(nil)
 
-      result = SuggestedQuestion.mark_as_processed(suggested_question.id)
+      SuggestedQuestion.mark_as_processed(suggested_question.id)
       suggested_question.reload
-      
+
       expect(suggested_question.processed_at).to_not be(nil)
     end
   end

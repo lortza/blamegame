@@ -25,11 +25,12 @@ class SuggestedQuestionsController < ApplicationController
   end
 
   private
-    def set_suggested_question
-      @suggested_question = SuggestedQuestion.find(params[:id])
-    end
 
-    def suggested_question_params
-      params.require(:suggested_question).permit(:text, :processed_at)
-    end
+  def set_suggested_question
+    @suggested_question = SuggestedQuestion.find(params[:id])
+  end
+
+  def suggested_question_params
+    params.require(:suggested_question).permit(:text, :processed_at)
+  end
 end
