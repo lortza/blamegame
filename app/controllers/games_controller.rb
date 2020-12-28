@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: %i[index new create edit update]
-  before_action :set_game, only: %i[show edit update players_ready]
+  before_action :authenticate_user!, only: %i[index new create update]
+  before_action :set_game, only: %i[show update players_ready]
   before_action :redirect_to_play, only: %i[show]
 
   def index
@@ -33,12 +33,6 @@ class GamesController < ApplicationController
     #                          game_over: true,
     #                          destination_url: game_url(@game)
     delete_cookies
-  end
-
-  def edit
-    authorize(@game)
-
-    5.times { @game.players.build }
   end
 
   def create
