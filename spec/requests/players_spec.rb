@@ -54,7 +54,6 @@ RSpec.describe 'Players' do
     it 'renders players#index for players with cookies' do
       user = create(:user)
       game = create(:game, user: user)
-      player_attributes = build(:player, game_id: game.id).attributes
 
       allow_any_instance_of(PlayersController).to receive(:valid_player_present?).with(game).and_return(true)
       get game_players_path(game)

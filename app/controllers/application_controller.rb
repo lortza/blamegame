@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def valid_player_present?(game)
     player_id = cookies[:player_id].to_i
-    return false unless player_id.present?
+    return false if player_id.blank?
 
     game.players.pluck(:id).include?(player_id)
   end

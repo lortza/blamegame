@@ -23,7 +23,7 @@ class SubmissionsController < ApplicationController
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
     raise Pundit::NotAuthorizedError unless valid_player_present?(@game)
-    
+
     submission = @round.submissions.new(submission_params)
     submission.voter_id = @player.id
 
