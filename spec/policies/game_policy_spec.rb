@@ -7,14 +7,14 @@ RSpec.describe GamePolicy, type: :policy do
   subject { GamePolicy }
 
   permissions :show? do
-    it 'denies access to visitors' do
+    it 'permits access to visitors' do
       no_user = nil
-      expect(subject).not_to permit(no_user, game)
+      expect(subject).to permit(no_user, game)
     end
 
-    it 'denies access to non-author users' do
+    it 'permits access to non-author users' do
       different_user = create(:user)
-      expect(subject).not_to permit(different_user, game)
+      expect(subject).to permit(different_user, game)
     end
 
     it 'permits access to author users' do
