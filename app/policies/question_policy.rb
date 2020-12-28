@@ -23,6 +23,10 @@ class QuestionPolicy < ApplicationPolicy
     user_is_owner_of_record_or_admin?
   end
 
+  def convert_from_suggestion?
+    user&.admin?
+  end
+
   private
 
   def user_is_owner_of_record_or_admin?

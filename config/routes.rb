@@ -26,4 +26,7 @@ Rails.application.routes.draw do
   resources :decks, only: [:index, :new, :create, :edit, :update] do
     resources :questions, only: [:index, :new, :create, :edit, :update]
   end
+  resources :questions, only: [:create]
+  get '/convert_from_suggestion', to: 'questions#convert_from_suggestion'
+  resources :suggested_questions, only: [:new, :create, :index, :show]
 end

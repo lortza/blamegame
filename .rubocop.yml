@@ -23,6 +23,11 @@ AllCops:
     - 'vendor/**/*'
     # - '**/*.erb'
 
+Layout/LineLength:
+  Max: 120
+  Exclude:
+  - !ruby/regexp /.*_spec\.rb$/
+
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: false
 Layout/SpaceAroundMethodCallOperator:
@@ -41,11 +46,9 @@ Metrics/BlockLength:
     - 'lib/tasks/*'
 Metrics/ClassLength:
   Enabled: false
-  
-Layout/LineLength:
-  Max: 120
-  Exclude:
-  - !ruby/regexp /.*_spec\.rb$/
+
+Rails/SkipsModelValidations:
+  Enabled: false
 
 Style/BlockDelimiters:
   Exclude:

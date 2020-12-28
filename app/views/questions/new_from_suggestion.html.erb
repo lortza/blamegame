@@ -1,0 +1,38 @@
+<section class='section'>
+  <%= form_with(model: @question, local: true) do |form| %>
+  <%= render 'shared/errors', object: @question %>
+
+  <%= hidden_field_tag(:suggested_question_id, @suggested_question.id) %>
+
+  <div class='columns'>
+    <div class='field column is-half'>
+      <div class='control'>
+        <%= form.label 'Question' %>
+        <%= form.text_field :text, class: 'input' %>
+      </div>
+    </div>
+
+    <div class='field column is-one-quarter'>
+      <div class='control'>
+        <%= form.label 'Deck' %><br>
+        <div class='select'>
+          <%= form.collection_select :deck_id, current_user.decks, :id, :name, {}, class: 'select' %>
+        </div>
+      </div>
+    </div>
+
+    <div class='field column is-one-quarter'>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= form.check_box :adult_rating, class: 'checkbox' %>
+          Adult Rating
+        </label>
+      </div>
+    </div>
+  </div><!-- columns -->
+
+  <div class='mt-5 mb-5'>
+    <%= form.submit 'Submit', class: button_classes %>
+  </div>
+  <% end %>
+</section>

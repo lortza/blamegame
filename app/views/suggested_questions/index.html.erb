@@ -1,0 +1,33 @@
+<% content_for(:title, 'Suggested Questions') %>
+
+<header class='level'>
+  <h1 class='title is-1 level-left'>Suggested Questions</h1>
+  <%= link_to '+ New', new_suggested_question_path, class: "level-right #{button_classes}" %>
+</header>
+
+<table class='<%= table_classes %>'>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Submitted at</th>
+      <th>Processed at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @suggested_questions.each do |suggested_question| %>
+      <tr>
+        <td><%= suggested_question.text %></td>
+        <td><%= suggested_question.created_at %></td>
+        <td><%= suggested_question.processed_at %></td>
+        <td>
+          <%= link_to 'Add to Deck',
+                      convert_from_suggestion_path(suggested_question_id: suggested_question.id),
+                      method: :get %>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
