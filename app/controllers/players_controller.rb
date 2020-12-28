@@ -4,12 +4,14 @@ class PlayersController < ApplicationController
   before_action :set_game, only: %i[index create]
 
   def index
+    raise Pundit::NotAuthorizedError unless valid_player_present?(@game)
+
     @players = @game.players
   end
 
   def new
-    @player = Player.new
     cookies.delete(:player_id)
+    @player = Player.new
   end
 
   def new_with_code
@@ -28,6 +30,8 @@ class PlayersController < ApplicationController
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
+    raise Pundit::NotAuthorizedError unless @game.present?
+
     if @game.active? || @game.expired?
       redirect_to game_in_progress_url(@game)
       nil
@@ -55,6 +59,8 @@ class PlayersController < ApplicationController
   def set_game
     @game = if params[:game_id].present?
               Game.find_by(id: params[:game_id]&.upcase)
+            elsif player_params[:game_id].present?
+              Game.find(player_params[:game_id])
             else
               Game.find_by(code: player_params[:game_code]&.upcase)
             end
