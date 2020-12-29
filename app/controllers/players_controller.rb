@@ -18,7 +18,7 @@ class PlayersController < ApplicationController
     cookies.delete(:player_id)
 
     if @game.present? && !@game.active?
-      @player = Player.new(game: game)
+      @player = Player.new(game: @game)
     else
       redirect_to join_game_path
       return
@@ -56,12 +56,13 @@ class PlayersController < ApplicationController
   private
 
   def set_game
-    game_id = params[:game_id] || player_params[:game_id]
+    game_id = params[:player].present? ? player_params[:game_id] : params[:game_id]
+    game_code = params[:player].present? ? player_params[:game_code] : params[:game_code]
+
     @game = if game_id.present?
               Game.find_by(id: game_id)
             else
-              game_code = player_params[:game_code]&.upcase
-              Game.find_by(code: game_code)
+              Game.find_by(code: game_code&.upcase)
             end
   end
 

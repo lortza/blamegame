@@ -26,6 +26,9 @@ jobs:
           command: bundle -v
       - ruby/bundle-install
 
+      # Run tests!
+      - run: bundle exec rspec
+
       # Run linters
       - run: bundle exec rubocop
       # - run: bundle exec reek
@@ -35,6 +38,3 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:migrate
       - run: bundle exec rake db:seed
-
-      # Run tests!
-      - run: bundle exec rspec
