@@ -14,22 +14,22 @@
 }
 
 .environment-banner {
+  background-color: $medium-gray;
   color: $white;
   font-family: monospace;
   font-size: 1.25em;
   padding: .75em;
   text-align: center;
-  background-color: $medium-gray;
 }
 
 .hidden { visibility: hidden; }
 
 // Fonts
-a.nav-brand-name {
+.nav-brand-name {
   // font-family: 'Bungee Outline', cursive;
+  color: $white;
   font-family: 'Chewy', cursive;
   font-size: 2.5em;
-  color: $white;
   &:hover { color: $is-warning; };
 }
 
@@ -44,10 +44,11 @@ a { color: $link-color; }
 
 // Forms
 .form-narrow {
-  min-width: 300px;
-  max-width: 30%;
   margin: 0 auto;
+  max-width: 30%;
+  min-width: 300px;
 }
+
 .field {
   label {
     font-weight: 600;
@@ -71,12 +72,11 @@ a { color: $link-color; }
   font-size: 90%;
   margin-bottom: 2em;
   text-align: center;
+
   a {
     color: $is-primary;
     &:hover { color: $is-warning; }
   }
 }
 
-.brand-image {
-  height: 60px;
-}
+.brand-image { height: 60px; }
