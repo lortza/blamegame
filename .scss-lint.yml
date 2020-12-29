@@ -1,0 +1,10 @@
+# https://github.com/sds/scss-lint
+scss_files: 'app/assets/stylesheets/**.scss'
+
+exclude: 'app/assets/stylesheets/bulma_overrides.scss'
+
+linters:
+  ColorVariable:
+    enabled: false
+  QualifyingElement:
+    enabled: false

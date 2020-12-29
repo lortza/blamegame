@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :game do
     user
     sequence(:code) { |n| "code#{n}" }
-    players_ready { true }
+    players_ready { false }
     max_rounds { 3 }
     adult_content_permitted { true }
 

@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   # Allow users to sign up and automatically populate categories and post types
   # devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :players, only: [:new, :create]
+  post 'play', to: 'games#players_ready', as: 'players_ready'
   get 'play', to: 'players#new', as: 'join_game'
   get 'play/:game_code', to: 'players#new_with_code', as: 'join_game_with_code'
-  post 'play', to: 'games#players_ready', as: 'players_ready'
 
+  resources :players, only: [:new, :create]
   resources :games, only: [:index, :new, :create, :show, :update] do
     get 'in_progress', to: 'games#game_in_progress', as: 'in_progress'
     resources :players, only: [:index]

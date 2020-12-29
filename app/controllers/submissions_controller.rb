@@ -8,6 +8,8 @@ class SubmissionsController < ApplicationController
   before_action :redirect_to_round, only: %i[new create]
 
   def new
+    raise Pundit::NotAuthorizedError unless valid_player_present?(@game)
+
     @submission = @round.submissions.new
 
     # Trying to get all browsers to go to the next question when a single
@@ -20,6 +22,8 @@ class SubmissionsController < ApplicationController
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
+    raise Pundit::NotAuthorizedError unless valid_player_present?(@game)
+
     submission = @round.submissions.new(submission_params)
     submission.voter_id = @player.id
 

@@ -58,18 +58,18 @@ RSpec.describe 'Games' do
       sign_in(user)
     end
 
+    it 'renders games#index' do
+      get games_path
+
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+
     it 'renders games#new' do
       get new_game_path
 
       expect(response).to be_successful
       expect(response).to render_template(:new)
-    end
-
-    it 'renders games#edit' do
-      get edit_game_path(user_game)
-
-      expect(response).to be_successful
-      expect(response).to render_template(:edit)
     end
 
     it 'renders games#show' do
