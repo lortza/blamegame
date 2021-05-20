@@ -10,7 +10,7 @@ gem 'sentry-raven'              # Error reporting in sentry
 gem 'devise'                    # User authentication
 gem 'jbuilder', '~> 2.7'        # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'pg', '>= 0.18', '< 2.0'    # Use postgresql as the database for Active Record
-gem 'puma', '~> 4.1'            # Use Puma as the app server
+gem 'puma', '~> 4.3'            # Use Puma as the app server
 gem 'pundit'                    # Authorization
 gem 'rails-controller-testing'
 gem 'sass-rails', '>= 6'        # Use SCSS for stylesheets
