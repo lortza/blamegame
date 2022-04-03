@@ -7,7 +7,7 @@ Style/Documentation:
 Rails:
   Enabled: true
 AllCops:
-  NewCops: enable
+  NewCops: disable
   DefaultFormatter: progress
   Exclude:
     - 'Gemfile'
