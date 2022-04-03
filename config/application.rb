@@ -32,7 +32,7 @@ module BlameGame
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    Raven.configure do |config|
+    Sentry.configure do |config|
       config.dsn = Rails.application.credentials.sentry_dsn
       config.environments = %w[ production ]
     end
