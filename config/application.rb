@@ -31,10 +31,5 @@ module BlameGame
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
-    Sentry.init do |config|
-      config.dsn = Rails.application.credentials.sentry_dsn
-      config.enabled_environments = %w[ production ]
-    end
   end
 end
