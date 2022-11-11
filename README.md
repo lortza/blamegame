@@ -4,13 +4,18 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/639f9dda118f72314481/maintainability)](https://codeclimate.com/github/lortza/blamegame/maintainability)
 
-Live on heroku as http://blamegame.herokuapp.com/
+~Live on heroku as http://blamegame.herokuapp.com/~ Was enjoyed while it lasted on the Heroku free tier. Will find another home soon.
 
-Side project online version of a game where players vote for their teammate who is most likely to match the prompt. For example, which of your teammates is most likely to have been valedictorian in high school?
+The BlameGame is a Rails side project to make an online version of a card game where players vote for their teammate who is most likely to match the prompt. For example, which of your teammates is most likely to have been valedictorian in high school? I made it during the initial COVID-19 lockdown so my coworkers, friendds, and family I could still play games like this together remotely.
 
 ## Features
 * an account-holding user can create new games, decide how many rounds to play, and choose whether to include adult content
+* when a question pops up, all players vote for another player (or themselves)
+* all players must submit an answer for gameplay to continue -- this prevents people from skirting the tricky questions and ends up making a lot of laughs
 * players receive instant vote feedback via ActionCable
+* all players' votes are tallied through the game so we can see a grand winner at the end
+* uses some ridiculous css gradients and throwback scrolling marquee just for fun
+* has a neon 80s vibe to it with the help of Bluma themes
 
 ## Getting Started
 
